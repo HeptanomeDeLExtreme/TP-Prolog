@@ -1,0 +1,56 @@
+Jeu à 2 joueurs (exceptionnelement 1) au tour par tour avec exploration
+d'un arbre de possibilités.
+
+Interface graphique : pas obligé mais bonus.
+
+Programme :
+-Rpz du jeu par un ensemble de faits et règles
+-Prédicat "game over"
+-Prédicat "afficher état jeu"
+
+Bien regarder les prédicats prédéfinis dans swi-prolog, #gainDeTemps.
+(ex : between pour boucler, repeat pour choix random avec contraintes, ...)
+(cut "!", arrête tout quand ce qui précède est faux)
+
+tirer(N)=-repeat, N is random(4), N<2, !
+
+===============================================================================
+
+Forme du programme :
+
+Prédicat "jouer". But : prouver ce prédicat.
+Un fait "plateau", égal à une liste vide.
+play :- finjeu,!
+play :- plateau(X),
+     	afficher(X),
+	ia(X,N),
+	jouerCoup(X,Xnew,N),
+	jouerEnMémoire(X,Xnew),
+	jouer,
+	retract(plateau(X)),
+	assert(plateau(Y)).
+
+
+finjeu :- plateau(X), (condition d'arrêt ...)
+
+Trouver une manière de changer de joueur (ex deux prédicats, un paramètre
+dans le prédicat ...).
+
+===============================================================================
+
+Propositions :
+-Reverso
+-Morpion évolué
+-Puissance 4
+-Bataille navale
+
+Sujet choisi : Puissance 4
+
+===============================================================================
+
+Partage des taches :
+-afficher : bonf
+-finjeu : marion
+-ia : charles + romain
+-jouerCoup : cédric + ophélie
+-cadre : moi
