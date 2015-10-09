@@ -5,15 +5,8 @@
 
 
 
-% Un fait plateau, initialisé à un plateau vide
-% Init manuelle pour pouvoir jouer des cas particuliers si besoin 
-plateau(X=([0,0,0,0,0,0],
-	   [0,0,0,0,0,0],
-	   [0,0,0,0,0,0],
- 	   [0,0,0,0,0,0],
-	   [0,0,0,0,0,0],
-	   [0,0,0,0,0,0],
-	   [0,0,0,0,0,0])).
+% On fait un plateau à base de cellules (cell)
+%TODO ajouter le jeu de base, initialiser ni nécessaire
 
 % Le jeu continue tant qu'il n'est pas fini (un gagnant ou plateau plein)
 jouer :- finjeu, !.
