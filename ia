@@ -1,0 +1,3 @@
+ia(N):- repeat, N is random(7), peutJouer(N),!.
+
+peutJouer(N):- \+ pion(N, 6, _).
