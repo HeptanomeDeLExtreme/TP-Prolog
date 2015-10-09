@@ -54,3 +54,9 @@ Partage des taches :
 -ia : charles + romain
 -jouerCoup : cédric + ophélie
 -cadre : moi
+
+Reste à faire en fin de séance 1 :
+Finir affichage (Bonfante)
+Finir jouerCoup (Cédic + Ophélie)
+Finir finPartie (Marion)
+Tout recoller (fixer réunion)
