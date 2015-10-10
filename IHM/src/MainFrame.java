@@ -1,7 +1,6 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Shape;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Map;
 import java.util.Random;
 
 import javax.swing.BoxLayout;
@@ -23,16 +22,65 @@ public  class MainFrame extends JFrame{
 	private JButton button6;
 	private JButton button7;
 	private Panel panel;
-	
+		
 	public MainFrame(){
 		
 		button1 = new JButton("1");
+		button1.addActionListener(new ActionListener()
+		{
+		  public void actionPerformed(ActionEvent e)
+		  {
+			  handlerButton(1);
+		  }
+		});
 		button2 = new JButton("2");
+		button2.addActionListener(new ActionListener()
+		{
+		  public void actionPerformed(ActionEvent e)
+		  {
+			  handlerButton(2);
+		  }
+		});
 		button3 = new JButton("3");
+		button3.addActionListener(new ActionListener()
+		{
+		  public void actionPerformed(ActionEvent e)
+		  {
+			  handlerButton(3);
+		  }
+		});
 		button4 = new JButton("4");
+		button4.addActionListener(new ActionListener()
+		{
+		  public void actionPerformed(ActionEvent e)
+		  {
+			  handlerButton(4);
+		  }
+		});
 		button5 = new JButton("5");
+		button5.addActionListener(new ActionListener()
+		{
+		  public void actionPerformed(ActionEvent e)
+		  {
+			  handlerButton(5);
+		  }
+		});
 		button6 = new JButton("6");
+		button6.addActionListener(new ActionListener()
+		{
+		  public void actionPerformed(ActionEvent e)
+		  {
+			  handlerButton(6);
+		  }
+		});
 		button7 = new JButton("7");
+		button7.addActionListener(new ActionListener()
+		{
+		  public void actionPerformed(ActionEvent e)
+		  {
+			  handlerButton(7);
+		  }
+		});
 		panel = new Panel();
 		
 		this.setTitle("Box Layout");
@@ -61,7 +109,7 @@ public  class MainFrame extends JFrame{
 			
 	    this.getContentPane().add(b4);
 	    this.setVisible(true);
-//	    
+	    
 //	    for(int k = 1;k<7;k++){
 //	    	for(int l = 1;l<8;l++){
 //	    		Random rand = new Random();
@@ -76,21 +124,69 @@ public  class MainFrame extends JFrame{
 //	    	}
 //	    }
 
-		// Instanciate the query
-		Query q;
-		// Load the file
-		q = new Query("consult('foo.pl')");
-		System.err.println(q.hasSolution());
-		q = new Query("print");
-		System.err.println(q.hasSolution());
+	    //this.print();
+	}
+	
+	public void handlerButton(int no){
+		int numberElementInColon;
+		try{
+			System.out.println("Number : " +no);
+			Querifier.q = new Query("pion("+no+",LIGNE,JOUEUR)");
+			System.err.println(Querifier.q.hasSolution());
+			Map<String, Term>[] result = Querifier.q.allSolutions();
+			numberElementInColon = result.length;
+			System.out.println("numberElementInColon : "+numberElementInColon);
+		}
+		catch(Exception e){
+			numberElementInColon = 0;
+		}
+		
+		if(numberElementInColon>5){
+			System.out.println("IMPOSSIBLE AJOUT");
+		}
+		else{
+			String temp = "coupJoueur("+no+","+(numberElementInColon+1)+",1)";
+			System.out.println(temp);
+			Querifier.q = new Query(temp);
+			System.err.println(Querifier.q.hasSolution());
+			this.print();
+		}
 	}
 	
 	public void print(){
-		System.out.println("Coucou");
+		
+		for(int j = 1; j<7;j++){
+			// Query for the j-line
+			Querifier.q = new Query("pion(COLONNE,"+j+",JOUEUR)");
+			System.err.println(Querifier.q.hasSolution());
+			 
+			// Print the j-line
+			System.out.println("Ligne "+j+" :");
+			Map<String, Term>[] result = Querifier.q.allSolutions();
+			for(int i = 0;i<result.length;i++){
+				int c = result[i].get("COLONNE").intValue();
+				int jo = result[i].get("JOUEUR").intValue();
+				System.out.println(c+" "+j);
+				panel.ajoutePion(new Pion(c,j,jo));
+			}
+			
+		}
+
+	}
+	
+	public void echec(){
+		System.out.println("Ben alors on pue la merde ?");
+		panel.echec();
 	}
 
+	public void victoire(){
+		System.out.println("YOUHOUCH !");
+		panel.victoire();
+	}
+	
 	public static void main(String[] ars){
 		new MainFrame();
 	}
+	
 }
 

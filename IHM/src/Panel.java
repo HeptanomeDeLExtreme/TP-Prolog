@@ -1,16 +1,18 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Panel extends JPanel {
 
 	private List<Pion> mesPions;
+	private boolean victoire = false;
+	private boolean echec = false;
 	
 	public Panel(){
 		mesPions = new ArrayList<Pion>();
@@ -18,8 +20,26 @@ public class Panel extends JPanel {
 	}
 	
    public void paint(Graphics g) {
-      Image img = createImageWithText();
-      g.drawImage(img, 0,0,this);
+	   if(victoire){
+		   g.setColor(Color.LIGHT_GRAY);
+		   g.fillRect(0,0,900,770);
+		   g.setColor(Color.RED);
+		   Font fnt1 = new Font("Arial", Font.BOLD, 40);
+		   g.setFont(fnt1);
+		   g.drawString("YOUHOUCH !",350,390);
+	   }
+	   else if(echec){
+		   g.setColor(Color.LIGHT_GRAY);
+		   g.fillRect(0,0,900,770);
+		   g.setColor(Color.RED);
+		   Font fnt1 = new Font("Arial", Font.BOLD, 40);
+		   g.setFont(fnt1);
+		   g.drawString("Ben alors ? On pue la merde ?",100,390);
+	   }
+	   else{
+		   	Image img = createImageWithText();
+			g.drawImage(img, 0,0,this);
+	   }
    }
 
    private Image createImageWithText(){
@@ -51,6 +71,16 @@ public class Panel extends JPanel {
 	   mesPions.add(p);
 	   this.repaint();
 	   System.err.println("AJOUTE PION");
+   }
+
+   public void echec(){
+	   echec = true;
+	   this.repaint();
+   }
+   
+   public void victoire(){
+	   victoire = true;
+	   this.repaint();
    }
    
 }
