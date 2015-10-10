@@ -1,0 +1,96 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.util.Random;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import org.jpl7.Query;
+import org.jpl7.Term;
+
+
+public  class MainFrame extends JFrame{
+
+	private JButton button1;
+	private JButton button2;
+	private JButton button3;
+	private JButton button4;
+	private JButton button5;
+	private JButton button6;
+	private JButton button7;
+	private Panel panel;
+	
+	public MainFrame(){
+		
+		button1 = new JButton("1");
+		button2 = new JButton("2");
+		button3 = new JButton("3");
+		button4 = new JButton("4");
+		button5 = new JButton("5");
+		button6 = new JButton("6");
+		button7 = new JButton("7");
+		panel = new Panel();
+		
+		this.setTitle("Box Layout");
+	    this.setSize(900, 820);
+	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    this.setLocationRelativeTo(null);
+
+	    JPanel b1 = new JPanel();
+	    b1.setLayout(new BoxLayout(b1, BoxLayout.LINE_AXIS));
+	    b1.add(panel);
+
+	    JPanel b2 = new JPanel();
+	    b2.setLayout(new BoxLayout(b2, BoxLayout.LINE_AXIS));
+	    b2.add(button1);
+	    b2.add(button2);
+	    b2.add(button3);
+	    b2.add(button4);
+	    b2.add(button5);
+	    b2.add(button6);
+	    b2.add(button7);
+
+	    JPanel b4 = new JPanel();
+	    b4.setLayout(new BoxLayout(b4, BoxLayout.PAGE_AXIS));
+	    b4.add(b1);
+	    b4.add(b2);
+			
+	    this.getContentPane().add(b4);
+	    this.setVisible(true);
+//	    
+//	    for(int k = 1;k<7;k++){
+//	    	for(int l = 1;l<8;l++){
+//	    		Random rand = new Random();
+//	    		int  n = rand.nextInt(2) + 1;
+//	    		panel.ajoutePion(new Pion(l,k,n));
+//	    		try {
+//					Thread.sleep(1000);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//	    	}
+//	    }
+
+		// Instanciate the query
+		Query q;
+		// Load the file
+		q = new Query("consult('foo.pl')");
+		System.err.println(q.hasSolution());
+		q = new Query("print");
+		System.err.println(q.hasSolution());
+	}
+	
+	public void print(){
+		System.out.println("Coucou");
+	}
+
+	public static void main(String[] ars){
+		new MainFrame();
+	}
+}
+
