@@ -84,7 +84,7 @@ public  class MainFrame extends JFrame{
 		panel = new Panel();
 		
 		this.setTitle("Box Layout");
-	    this.setSize(900, 820);
+	    this.setSize(900/Querifier.coef, 870/Querifier.coef);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setLocationRelativeTo(null);
 

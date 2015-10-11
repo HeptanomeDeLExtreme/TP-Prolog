@@ -16,25 +16,25 @@ public class Panel extends JPanel {
 	
 	public Panel(){
 		mesPions = new ArrayList<Pion>();
-		super.setSize(800, 600);
+		super.setSize(800/Querifier.coef, 600/Querifier.coef);
 	}
 	
    public void paint(Graphics g) {
 	   if(victoire){
 		   g.setColor(Color.LIGHT_GRAY);
-		   g.fillRect(0,0,900,770);
+		   g.fillRect(0,0,900/Querifier.coef,770/Querifier.coef);
 		   g.setColor(Color.RED);
-		   Font fnt1 = new Font("Arial", Font.BOLD, 40);
+		   Font fnt1 = new Font("Arial", Font.BOLD, 40/Querifier.coef);
 		   g.setFont(fnt1);
-		   g.drawString("YOUHOUCH !",350,390);
+		   g.drawString("YOUHOUCH !",350/Querifier.coef,390/Querifier.coef);
 	   }
 	   else if(echec){
 		   g.setColor(Color.LIGHT_GRAY);
-		   g.fillRect(0,0,900,770);
+		   g.fillRect(0,0,900/Querifier.coef,770/Querifier.coef);
 		   g.setColor(Color.RED);
-		   Font fnt1 = new Font("Arial", Font.BOLD, 40);
+		   Font fnt1 = new Font("Arial", Font.BOLD, 40/Querifier.coef);
 		   g.setFont(fnt1);
-		   g.drawString("Ben alors ? On pue la merde ?",100,390);
+		   g.drawString("Ben alors ? On pue la merde ?",100/Querifier.coef,390/Querifier.coef);
 	   }
 	   else{
 		   	Image img = createImageWithText();
@@ -43,11 +43,11 @@ public class Panel extends JPanel {
    }
 
    private Image createImageWithText(){
-      BufferedImage bufferedImage = new BufferedImage(900,770,BufferedImage.TYPE_INT_RGB);
+      BufferedImage bufferedImage = new BufferedImage(900/Querifier.coef,770/Querifier.coef,BufferedImage.TYPE_INT_RGB);
       Graphics g = bufferedImage.getGraphics();
       
       g.setColor(Color.LIGHT_GRAY);
-      g.fillRect(0,0,900,770);
+      g.fillRect(0,0,900/Querifier.coef,770/Querifier.coef);
       
       for(int i = 0;i<mesPions.size();i++){
     	  Pion current = mesPions.get(i);
@@ -59,9 +59,9 @@ public class Panel extends JPanel {
     		  color = Color.YELLOW;
     	  }
     	  g.setColor(color);
-    	  int posX = 130*(current.getColonne()-1)+5;
-    	  int posY = 130*(5-current.getLigne()+1)+5;
-    	  g.fillOval(posX,posY, 100, 100);
+    	  int posX = (130*(current.getColonne()-1)+5)/Querifier.coef;
+    	  int posY = (130*(5-current.getLigne()+1)+5)/Querifier.coef;
+    	  g.fillOval(posX,posY, 100/Querifier.coef, 100/Querifier.coef);
       }
       System.err.println("CREATE IMAGE");
       return bufferedImage;
