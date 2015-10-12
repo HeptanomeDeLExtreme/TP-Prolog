@@ -108,6 +108,8 @@ public  class MainFrame extends JFrame{
 	    b4.add(b2);
 			
 	    this.getContentPane().add(b4);
+	    
+	    this.setResizable(false);
 	    this.setVisible(true);
 	    
 //	    for(int k = 1;k<7;k++){
@@ -172,6 +174,10 @@ public  class MainFrame extends JFrame{
 			
 		}
 
+	}
+	
+	public void verifIa(int a){
+		System.out.println("IA : "+a);
 	}
 	
 	public void echec(){

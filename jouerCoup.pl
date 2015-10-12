@@ -1,14 +1,10 @@
 /* Declarer les predicats dynamiques */
-:- dynamic
+%%:- dynamic
     pion/3.
     
 /* Base de faits :
 pion(Colonne, Ligne, {1|2}). */
 
-pion(1, 1, 1).
-pion(1, 2, 1).
-pion(1, 3, 2).
-pion(1, 4, 2).
     
 /* IsolerColonne permet de prendre uniquement la colonne
 que le joueur/IA aura joue */
