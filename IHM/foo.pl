@@ -1,10 +1,10 @@
 % Le jeu continue tant qu'il n'est pas fini (un gagnant ou plateau plein)
 %%jouer :- finPartie, !.
 
-caribou :- finjeu,!, 
+caribou :- testFinJeu,!, 
 		ia(N),
-		jouerCoup([N,2]),
-		finjeu,!.
+		jouerCoup([N,2]).
+		%%finjeu,!.
 
 /* ----------- IHM ----------- */
 init :- jpl_new( 'MainFrame', [], F),nb_setval('FENETRE',F).
@@ -20,6 +20,12 @@ victoire :- nb_getval('FENETRE',F),jpl_call( F, victoire, [], _).
 
 %% Predicat a appeler en cas d'echec
 echec :- nb_getval('FENETRE',F),jpl_call( F, echec, [], _).
+
+isolerColonneIJoueurX(I,X, Colonne) :- findall(pion(I, Y, X), pion(I, Y, X), Colonne).
+    
+cheminColonne(I,X) :- isolerColonneIJoueurX(I,X, Colonne),length(Colonne,T),write(T),( T == 4 -> victoire;echec). 
+
+testFinJeu :- cheminColonne(1,1).
 
 /* ----------- Ophelie et Cedric ----------- */
 isolerColonne(NumeroColonne, Colonne) :-
