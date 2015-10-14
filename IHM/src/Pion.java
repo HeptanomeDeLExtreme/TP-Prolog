@@ -1,4 +1,3 @@
-
 public class Pion {
 
 	private int colonne;

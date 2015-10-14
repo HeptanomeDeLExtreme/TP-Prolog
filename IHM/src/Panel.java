@@ -63,14 +63,12 @@ public class Panel extends JPanel {
     	  int posY = (130*(5-current.getLigne()+1)+5)/Querifier.coef;
     	  g.fillOval(posX,posY, 100/Querifier.coef, 100/Querifier.coef);
       }
-      System.err.println("CREATE IMAGE");
       return bufferedImage;
    }
    
    public void ajoutePion(Pion p){
 	   mesPions.add(p);
 	   this.repaint();
-	   System.err.println("AJOUTE PION");
    }
 
    public void echec(){

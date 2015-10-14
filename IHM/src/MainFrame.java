@@ -112,32 +112,15 @@ public  class MainFrame extends JFrame{
 	    this.setResizable(false);
 	    this.setVisible(true);
 	    
-//	    for(int k = 1;k<7;k++){
-//	    	for(int l = 1;l<8;l++){
-//	    		Random rand = new Random();
-//	    		int  n = rand.nextInt(2) + 1;
-//	    		panel.ajoutePion(new Pion(l,k,n));
-//	    		try {
-//					Thread.sleep(1000);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//	    	}
-//	    }
-
-	    //this.print();
 	}
 	
 	public void handlerButton(int no){
 		int numberElementInColon;
 		try{
-			System.out.println("Number : " +no);
 			Querifier.q = new Query("pion("+no+",LIGNE,JOUEUR)");
-			System.err.println(Querifier.q.hasSolution());
+			Querifier.q.hasSolution();
 			Map<String, Term>[] result = Querifier.q.allSolutions();
 			numberElementInColon = result.length;
-			System.out.println("numberElementInColon : "+numberElementInColon);
 		}
 		catch(Exception e){
 			numberElementInColon = 0;
@@ -148,9 +131,8 @@ public  class MainFrame extends JFrame{
 		}
 		else{
 			String temp = "coupJoueur("+no+","+(numberElementInColon+1)+",1)";
-			System.out.println(temp);
 			Querifier.q = new Query(temp);
-			System.err.println(Querifier.q.hasSolution());
+			Querifier.q.hasSolution();
 			this.print();
 		}
 	}
@@ -160,15 +142,13 @@ public  class MainFrame extends JFrame{
 		for(int j = 1; j<7;j++){
 			// Query for the j-line
 			Querifier.q = new Query("pion(COLONNE,"+j+",JOUEUR)");
-			System.err.println(Querifier.q.hasSolution());
+			Querifier.q.hasSolution();
 			 
 			// Print the j-line
-			System.out.println("Ligne "+j+" :");
 			Map<String, Term>[] result = Querifier.q.allSolutions();
 			for(int i = 0;i<result.length;i++){
 				int c = result[i].get("COLONNE").intValue();
 				int jo = result[i].get("JOUEUR").intValue();
-				System.out.println(c+" "+j);
 				panel.ajoutePion(new Pion(c,j,jo));
 			}
 			
