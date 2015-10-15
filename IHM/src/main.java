@@ -8,6 +8,9 @@ public class main {
 		
 		Querifier.q = new Query("init");
 		Querifier.q.hasSolution();
+		
+		Querifier.q = new Query("combatIA");
+		Querifier.q.hasSolution();
 	}
 
 	public static void debug(String s){
@@ -24,6 +27,14 @@ public class main {
 	
 	public static void victoire(){
 		Querifier.maFenetre.victoire();
+	}
+	
+	public static void print(){
+		Querifier.maFenetre.print();
+	}
+	
+	public static void printMessage(String s){
+		Querifier.maFenetre.printMessage(s);
 	}
 
 }

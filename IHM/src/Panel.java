@@ -13,6 +13,7 @@ public class Panel extends JPanel {
 	private List<Pion> mesPions;
 	private boolean victoire = false;
 	private boolean echec = false;
+	private String toPrint="";
 	
 	public Panel(){
 		mesPions = new ArrayList<Pion>();
@@ -34,8 +35,15 @@ public class Panel extends JPanel {
 		   g.setFont(fnt1);
 		   g.drawString("PERDU",370/Querifier.coef,390/Querifier.coef);
 	   }
+	   g.setColor(Color.BLACK);
+	   g.drawString(toPrint,350/Querifier.coef,390/Querifier.coef);
+	   toPrint="";
    }
 
+   public void changeToPrint(String s){
+	   toPrint = s;
+   }
+   
    private Image createImageWithText(){
       BufferedImage bufferedImage = new BufferedImage(900/Querifier.coef,770/Querifier.coef,BufferedImage.TYPE_INT_RGB);
       Graphics g = bufferedImage.getGraphics();

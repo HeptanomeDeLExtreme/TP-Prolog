@@ -170,9 +170,15 @@ public  class MainFrame extends JFrame{
 		panel.victoire();
 	}
 	
+	public void printMessage(String s){
+		panel.changeToPrint(s);
+		//System.out.println(s);
+	}
+	
 	public static void main(String[] ars){
 		new MainFrame();
 	}
+	
 	
 }
 

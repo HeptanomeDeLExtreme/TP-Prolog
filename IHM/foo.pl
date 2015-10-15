@@ -1,3 +1,5 @@
+:- dynamic pion/3.
+pion(-10,-10,-10).
 /* ----------- IHM ----------- */
 init :- jpl_new( 'MainFrame', [], F),nb_setval('FENETRE',F),jpl_call('main',init,[F],_).
 
@@ -11,12 +13,34 @@ testIA(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(gagne(N,NumeroLigne,2)->echec;finTour).
 		
+testIA1(N) :- isolerColonne(N, Colonne),
+		indexDernierPion(Colonne, NumeroLigne),
+		(gagne(N,NumeroLigne,1)->debug('J1 gagne');tourIA2).
+		
+testIA2(N) :- isolerColonne(N, Colonne),
+		indexDernierPion(Colonne, NumeroLigne),
+		(gagne(N,NumeroLigne,2)->debug('J2 gagne');tourIA1).
+		
+tourIA1 :-	ia(N),
+			jouerCoup([N,1]),
+			print,
+			testIA1(N).
+			
+tourIA2 :-	ia(M),
+			jouerCoup([M,2]),
+			print,
+			testIA2(M).  
+
+combatIA :- tourIA1.
+
+envoieMessageIA(S) :- jpl_call('main',printMessage,[S],_).
+
 finTour :- jpl_call('main',debug,['finTour'],_).
 
 debug(S) :- jpl_call('main',debug,[S],_).
 
 %% Predicat a appeler lorsqu'on veut rafraichir le plateau
-print :- nb_getval('FENETRE',F),jpl_call( F, print, [], _).
+print :- jpl_call( 'main', print, [], _).
 
 %% Predicat a appeler en cas de victoire 
 victoire :- jpl_call( 'main', victoire, [], _).
