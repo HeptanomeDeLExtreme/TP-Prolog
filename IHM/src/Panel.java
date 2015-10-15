@@ -21,23 +21,22 @@ public class Panel extends JPanel {
 	}
 	
    public void paint(Graphics g) {
+	   Font fnt1 = new Font("Arial", Font.BOLD, 40/Querifier.coef);
 		Image img = createImageWithText();
 		g.drawImage(img, 0,0,this);
 	   if(victoire){
 		   g.setColor(Color.BLACK);
-		   Font fnt1 = new Font("Arial", Font.BOLD, 40/Querifier.coef);
 		   g.setFont(fnt1);
 		   g.drawString("YOUHOUCH !",350/Querifier.coef,390/Querifier.coef);
 	   }
 	   else if(echec){
 		   g.setColor(Color.BLACK);
-		   Font fnt1 = new Font("Arial", Font.BOLD, 40/Querifier.coef);
 		   g.setFont(fnt1);
 		   g.drawString("PERDU",370/Querifier.coef,390/Querifier.coef);
 	   }
 	   g.setColor(Color.BLACK);
+	   g.setFont(fnt1);
 	   g.drawString(toPrint,350/Querifier.coef,390/Querifier.coef);
-	   toPrint="";
    }
 
    public void changeToPrint(String s){

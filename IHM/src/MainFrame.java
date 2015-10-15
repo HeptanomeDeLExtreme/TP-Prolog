@@ -172,7 +172,8 @@ public  class MainFrame extends JFrame{
 	
 	public void printMessage(String s){
 		panel.changeToPrint(s);
-		//System.out.println(s);
+		System.out.println(s);
+		panel.repaint();
 	}
 	
 	public static void main(String[] ars){

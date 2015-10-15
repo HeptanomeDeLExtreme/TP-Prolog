@@ -15,11 +15,11 @@ testIA(N) :- isolerColonne(N, Colonne),
 		
 testIA1(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
-		(gagne(N,NumeroLigne,1)->debug('J1 gagne');tourIA2).
+		(gagne(N,NumeroLigne,1)->envoieMessageIA('J1 gagne');tourIA2).
 		
 testIA2(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
-		(gagne(N,NumeroLigne,2)->debug('J2 gagne');tourIA1).
+		(gagne(N,NumeroLigne,2)->envoieMessageIA('J2 gagne');tourIA1).
 		
 tourIA1 :-	ia(N),
 			jouerCoup([N,1]),
