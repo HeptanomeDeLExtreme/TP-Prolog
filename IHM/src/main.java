@@ -3,11 +3,9 @@ import org.jpl7.Query;
 public class main {
 	
 	public static void main(String[] args){
-		System.out.println("OPENING FILE");
 		Querifier.q = new Query("consult('foo.pl')");
 		Querifier.q.hasSolution();
 		
-		System.out.println("INITIALISATION");
 		Querifier.q = new Query("init");
 		Querifier.q.hasSolution();
 	}

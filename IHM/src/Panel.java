@@ -20,25 +20,19 @@ public class Panel extends JPanel {
 	}
 	
    public void paint(Graphics g) {
+		Image img = createImageWithText();
+		g.drawImage(img, 0,0,this);
 	   if(victoire){
-		   g.setColor(Color.LIGHT_GRAY);
-		   g.fillRect(0,0,900/Querifier.coef,770/Querifier.coef);
-		   g.setColor(Color.RED);
+		   g.setColor(Color.BLACK);
 		   Font fnt1 = new Font("Arial", Font.BOLD, 40/Querifier.coef);
 		   g.setFont(fnt1);
 		   g.drawString("YOUHOUCH !",350/Querifier.coef,390/Querifier.coef);
 	   }
 	   else if(echec){
-		   g.setColor(Color.LIGHT_GRAY);
-		   g.fillRect(0,0,900/Querifier.coef,770/Querifier.coef);
-		   g.setColor(Color.RED);
+		   g.setColor(Color.BLACK);
 		   Font fnt1 = new Font("Arial", Font.BOLD, 40/Querifier.coef);
 		   g.setFont(fnt1);
-		   g.drawString("Ben alors ? On pue la merde ?",100/Querifier.coef,390/Querifier.coef);
-	   }
-	   else{
-		   	Image img = createImageWithText();
-			g.drawImage(img, 0,0,this);
+		   g.drawString("PERDU",100/Querifier.coef,390/Querifier.coef);
 	   }
    }
 

@@ -161,7 +161,7 @@ public  class MainFrame extends JFrame{
 	}
 	
 	public void echec(){
-		System.out.println("Ben alors on pue la merde ?");
+		System.out.println("PERDU");
 		panel.echec();
 	}
 
