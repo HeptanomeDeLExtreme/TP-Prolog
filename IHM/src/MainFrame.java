@@ -163,17 +163,30 @@ public  class MainFrame extends JFrame{
 	public void echec(){
 		System.out.println("PERDU");
 		panel.echec();
+		this.disableButton();
 	}
 
+	public void disableButton(){
+		button1.setEnabled(false);
+		button2.setEnabled(false);
+		button3.setEnabled(false);
+		button4.setEnabled(false);
+		button5.setEnabled(false);
+		button6.setEnabled(false);
+		button7.setEnabled(false);
+	}
+	
 	public void victoire(){
 		System.out.println("YOUHOUCH !");
 		panel.victoire();
+		this.disableButton();
 	}
 	
 	public void printMessage(String s){
 		panel.changeToPrint(s);
 		System.out.println(s);
 		panel.repaint();
+		this.disableButton();
 	}
 	
 	public static void main(String[] ars){
