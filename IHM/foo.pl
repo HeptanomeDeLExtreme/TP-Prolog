@@ -2,14 +2,14 @@
 init :- jpl_new( 'MainFrame', [], F),nb_setval('FENETRE',F),jpl_call('main',init,[F],_).
 
 coupJoueur(X,Y,Z) :- ajouterPion(X,Y,Z),
-					(gagne(X,Y,Z)-> echec;coupIA).
+					(gagne(X,Y,Z)-> victoire;coupIA).
 coupIA :- ia(N),
-		jouerCoup([N,2]).
-		%%testIA(N).
+		jouerCoup([N,2]),
+		testIA(N).
 		
 testIA(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
-		gagne(N,NumeroLigne,2).
+		(gagne(N,NumeroLigne,2)->echec;finTour).
 		
 finTour :- jpl_call('main',debug,['finTour'],_).
 
@@ -29,50 +29,50 @@ isolerColonneIJoueurX(I,X, Colonne) :- findall(pion(I, Y, X), pion(I, Y, X), Col
 cheminColonne(I,X) :- isolerColonneIJoueurX(I,X, Colonne),length(Colonne,T),write(T),( T == 4 -> victoire;echec). 
 
 /* -------- Fin Jeu ------------*/
-incr(X,X1):- X1 is X+1.
-decr(X,X1):- X1 is X-1.
+incrementeX(X,X1):- X1 is X+1.
+decrementeX(X,X1):- X1 is X-1.
 caseVide(X,Y) :- nonvar(X),nonvar(Y),not(case(X,Y,_)).
 
-gagne(X,Y,J) :- gagneColonne(X,Y,J),jpl_call('main',debug,['GAGNE'],_).
-gagne(X,Y,J) :- gagneLigne(X,Y,J),jpl_call('main',debug,['GAGNE'],_).
-gagne(X,Y,J) :- gagneDiag1(X,Y,J),jpl_call('main',debug,['GAGNE'],_).
-gagne(X,Y,J) :- gagneDiag2(X,Y,J),jpl_call('main',debug,['GAGNE'],_).
+gagne(X,Y,J) :- victoireColonne(X,Y,J),jpl_call('main',debug,['GAGNE'],_).
+gagne(X,Y,J) :- victoireLigne(X,Y,J),jpl_call('main',debug,['GAGNE'],_).
+gagne(X,Y,J) :- victoireDiagGauche(X,Y,J),jpl_call('main',debug,['GAGNE'],_).
+gagne(X,Y,J) :- victoireDiagDroite(X,Y,J),jpl_call('main',debug,['GAGNE'],_).
 
-%%% Colonne %%%
-gagneColonne(X,Y,J) :- pion(X,Y,J), decr(Y,Y1), pion(X,Y1,J), decr(Y1,Y2), pion(X,Y2,J), decr(Y2,Y3), pion(X,Y3,J). %ligne en bas
+%% Colonne %%
+victoireColonne(X,Y,J) :- pion(X,Y,J), decrementeX(Y,Y1), pion(X,Y1,J), decrementeX(Y1,Y2), pion(X,Y2,J), decrementeX(Y2,Y3), pion(X,Y3,J). %ligne en bas
 
-%%% Ligne %%%
-gagneLigne(X,Y,J) :- gaucheVerif(X,Y,J,Rg), droiteVerif(X,Y,J,Rd),!, Rf is Rg+Rd, Rf>4.
+%% Ligne %%
+victoireLigne(X,Y,J) :- verifieGauche(X,Y,J,Rg), verifieDroite(X,Y,J,Rd),!, Rf is Rg+Rd, Rf>4.
 
-gaucheVerif(X,Y,J,Rg):- gauche(X,Y,J,0,Rg).
-gauche(X,Y,J,R,R) :- not(pion(X,Y,J)). %Jusqu'à la pion non J
-gauche(X,Y,J,R,Rg) :- decr(X,X1), incr(R,R1), gauche(X1,Y,J,R1,Rg).
+verifieGauche(X,Y,J,G):- gauche(X,Y,J,0,G).
+gauche(X,Y,J,R,R) :- not(pion(X,Y,J)). 
+gauche(X,Y,J,R,G) :- decrementeX(X,X1), incrementeX(R,R1), gauche(X1,Y,J,R1,G).
 
-droiteVerif(X,Y,J,Rg):- droite(X,Y,J,0,Rg).
-droite(X,Y,J,R,R) :- not(pion(X,Y,J)). %Jusqu'à la pion non J
-droite(X,Y,J,R,Rg) :- incr(X,X1), incr(R,R1), droite(X1,Y,J,R1,Rg).
+verifieDroite(X,Y,J,D):- droite(X,Y,J,0,D).
+droite(X,Y,J,R,R) :- not(pion(X,Y,J)). 
+droite(X,Y,J,R,D) :- incrementeX(X,X1), incrementeX(R,R1), droite(X1,Y,J,R1,D).
 
-%%% Diagonale \ %%%
-gagneDiag1(X,Y,J) :- gaucheHautVerif(X,Y,J,Rg), droiteBasVerif(X,Y,J,Rd),!, Rf is Rg+Rd, Rf>4.
+%% Diagonale Gauche %%
+victoireDiagGauche(X,Y,J) :- verifieGaucheHaut(X,Y,J,Rg), verifieDroiteBas(X,Y,J,Rd),!, Rf is Rg+Rd, Rf>4.
 
-gaucheHautVerif(X,Y,J,Rg):- gaucheHaut(X,Y,J,0,Rg).
-gaucheHaut(X,Y,J,R,R) :- not(pion(X,Y,J)). %Jusqu'au pion non J
-gaucheHaut(X,Y,J,R,Rg) :- incr(Y,Y1), decr(X,X1), incr(R,R1), gaucheHaut(X1,Y1,J,R1,Rg).
+verifieGaucheHaut(X,Y,J,G):- gaucheHaut(X,Y,J,0,G).
+gaucheHaut(X,Y,J,R,R) :- not(pion(X,Y,J)).
+gaucheHaut(X,Y,J,R,G) :- incrementeX(Y,Y1), decrementeX(X,X1), incrementeX(R,R1), gaucheHaut(X1,Y1,J,R1,G).
 
-droiteBasVerif(X,Y,J,Rg):- droiteBas(X,Y,J,0,Rg).
-droiteBas(X,Y,J,R,R) :- not(pion(X,Y,J)). %Jusqu'au pion non J
-droiteBas(X,Y,J,R,Rg) :- decr(Y,Y1), incr(X,X1), incr(R,R1), droiteBas(X1,Y1,J,R1,Rg).
+verifieDroiteBas(X,Y,J,D):- droiteBas(X,Y,J,0,D).
+droiteBas(X,Y,J,R,R) :- not(pion(X,Y,J)). 
+droiteBas(X,Y,J,R,D) :- decrementeX(Y,Y1), incrementeX(X,X1), incrementeX(R,R1), droiteBas(X1,Y1,J,R1,D).
 
-%%% Diagonale / %%%
-gagneDiag2(X,Y,J) :- gaucheBasVerif(X,Y,J,Rg), droiteHautVerif(X,Y,J,Rd),!, Rf is Rg+Rd, Rf>4.
+%% Diagonale Droite %%
+victoireDiagDroite(X,Y,J) :- verifieGaucheBas(X,Y,J,Rg), verifieDroiteHaut(X,Y,J,Rd),!, Rf is Rg+Rd, Rf>4.
 
-gaucheBasVerif(X,Y,J,Rg):- gaucheBas(X,Y,J,0,Rg).
-gaucheBas(X,Y,J,R,R) :- not(pion(X,Y,J)). %Jusqu'au pion non J
-gaucheBas(X,Y,J,R,Rg) :- decr(Y,Y1), decr(X,X1), incr(R,R1), gaucheBas(X1,Y1,J,R1,Rg).
+verifieGaucheBas(X,Y,J,G):- gaucheBas(X,Y,J,0,G).
+gaucheBas(X,Y,J,R,R) :- not(pion(X,Y,J)). 
+gaucheBas(X,Y,J,R,G) :- decrementeX(Y,Y1), decrementeX(X,X1), incrementeX(R,R1), gaucheBas(X1,Y1,J,R1,G).
 
-droiteHautVerif(X,Y,J,Rg):- droiteHaut(X,Y,J,0,Rg).
-droiteHaut(X,Y,J,R,R) :- not(pion(X,Y,J)). %Jusqu'au pion non J
-droiteHaut(X,Y,J,R,Rg) :- incr(Y,Y1), incr(X,X1), incr(R,R1), droiteHaut(X1,Y1,J,R1,Rg).
+verifieDroiteHaut(X,Y,J,D):- droiteHaut(X,Y,J,0,D).
+droiteHaut(X,Y,J,R,R) :- not(pion(X,Y,J)). 
+droiteHaut(X,Y,J,R,D) :- incrementeX(Y,Y1), incrementeX(X,X1), incrementeX(R,R1), droiteHaut(X1,Y1,J,R1,D).
 
 /* ----------- Ophelie et Cedric ----------- */
 isolerColonne(NumeroColonne, Colonne) :-

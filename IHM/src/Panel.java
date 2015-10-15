@@ -32,7 +32,7 @@ public class Panel extends JPanel {
 		   g.setColor(Color.BLACK);
 		   Font fnt1 = new Font("Arial", Font.BOLD, 40/Querifier.coef);
 		   g.setFont(fnt1);
-		   g.drawString("PERDU",100/Querifier.coef,390/Querifier.coef);
+		   g.drawString("PERDU",370/Querifier.coef,390/Querifier.coef);
 	   }
    }
 
