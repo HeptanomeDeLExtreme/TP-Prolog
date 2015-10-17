@@ -1,3 +1,67 @@
+% Voir : http://www.emse.fr/~picard/cours/ai/minimax/
+% Ça représente quoi un putain d'Etat ? pas encore sûr
+
 ia(N):- repeat, N is random(7), peutJouer(N),!.
 
 peutJouer(N):- \+ pion(N, 6, _).
+
+
+%%%%%% MINIMAX %%%%%
+% liste tous les successeurs et cherche les meilleurs
+
+minimax(Etat, MeilleurEtatSuivant, Score, Niveau) :-
+    bagof(EtatSuivant, jouerCoup(Etat, EtatSuivant), ListeEtatsSuivants),
+    meilleur(ListeEtatsSuivants, MeilleurEtatSuivant, Score, Niveau), !.
+% sortie si Etat n'a pas de successeurs
+minimax(Etat, _, Score, _) :-
+    calculScore(Etat, Score).
+
+minimax(_, _, _, 0) :-
+
+
+%%%%% MEILLEUR %%%%%
+% trouve le meilleur Etat
+
+% sortie si Etat est seul
+meilleur([Etat], Etat, Score, Niveau) :-
+    minimax(Etat, _, Score, Niveau - 1), !.
+
+meilleur(_, _, _, 0).
+
+% Etat2 est évalué et comparé à Etat1, l'actuel meilleur Etat de ListeEtats
+meilleur([Etat1 | ListeEtats], MeilleurEtat, MeilleurScore, Niveau) :-
+    minimax(Etat1, _, Score1, Niveau - 1),
+    meilleur(ListeEtats, Etat2, Score2, Niveau),
+    meilleureBranche(Etat1, Score1, Etat2, Score2, MeilleurEtat, MeilleurScore).
+
+
+%%%%% MEILLEURE BRANCHE %%%%%
+% compare deux Etats grâce au Score associée
+
+% Etat1 meilleur + mon tour -> choisir MAX
+meilleureBranche(Etat1, Score1, _, Score2, Etat1, Score1) :-
+    mon_tour(Etat1),
+    Score1 > Score2, !.
+% Etat1 meilleur + son tour -> choisir MIN
+meilleureBranche(Etat1, Score1, _, Score2, Etat1, Score1) :-
+    son_tour(Etat1),
+    Score1 < Score2, !.
+% Etat2 meilleur
+meilleureBranche(_, _, Etat2, Score2, Etat2, Score2).
+
+
+%%%%% Quel joueur joue ? %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TODO
+mon_tour(Etat).
+son_tour(Etat).
+
+
+%%%%% calcul du score %%%%%
+% parcours du plateau, détection des pions alignés
+% genre, +1 pour deux pions alignés, 3 pour 3 pions, (et infini pour victoire - à faire)
+calculScore(Etat, Score) :- 
+    Score is length(findall(pion(X, Y, Joueur), deuxPions(X, Y, Joueur))) + 3 * length(findall(pion(X, Y, joueur), troisPions(X, Y, Joueur))).
+
+deuxPions(X, Y, Joueur) :- 
+
+
