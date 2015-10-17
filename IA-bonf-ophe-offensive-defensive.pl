@@ -229,18 +229,18 @@ iaDefensive(NumeroJoueurEnFace, Colonne) :-
     % TODO : testListesVides.
     parcoursListeColonne(ListeColonne, NumeroJoueurEnFace),
     parcoursListeLigne(ListeLigne, NumeroJoueurEnFace).
-iaOffensive(NumeroJoueurEnFace) :-
+iaDefensive(NumeroJoueurEnFace) :-
     % Trouver les chemins de longueur 2
     findAllPath2(NumeroJoueurEnFace, ListeColonne, ListeLigne),
     % TODO : testListesVides.
     parcoursListeColonne(ListeColonne, NumeroJoueurEnFace),
     parcoursListeLigne(ListeLigne, NumeroJoueurEnFace).
-iaOffensive(NumeroJoueurEnFace) :-
+iaDefensive(NumeroJoueurEnFace) :-
     % Trouver les chemins de longueur 1
     findAllPath1(NumeroJoueurEnFace, ListeColonne, ListeLigne)
     % TODO : testListesVides.
     parcoursListeColonne(ListeColonne, NumeroJoueurEnFace),
     parcoursListeLigne(ListeLigne, NumeroJoueurEnFace).
-iaOffensive(NumeroJoueurEnFace) :-
+iaDefensive(NumeroJoueurEnFace) :-
     % TODO : Faire un coup random avec l'IA random si aucun chemin n'existe.
     .
