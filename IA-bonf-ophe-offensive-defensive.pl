@@ -148,12 +148,12 @@ findCheminsLigne2(Joueur, ListeLigne) :-
 % TODO : findCheminsLigne1
 
 %% Diag Droite %%
-findAll3PathDiagGauche(J,L) :- findall([X,Y,X2,Y2],(pion(X,Y,J), decrementeX(Y,Y1),incrementeX(X,X1), pion(X1,Y1,J), incrementeX(X1,X2),decrementeX(Y1,Y2), pion(X2,Y2,J)),L),write(L).
-findAll2PathDiagGauche(J,L) :- findall([X,Y,X1,Y1],(pion(X,Y,J), decrementeX(Y,Y1),incrementeX(X,X1), pion(X1,Y1,J)),L),write(L).
+findAll3PathDiagGauche(Joueur,L) :- findall([X,Y,X2,Y2],(pion(X,Y,Joueur), decrementeX(Y,Y1),incrementeX(X,X1), pion(X1,Y1,Joueur), incrementeX(X1,X2),decrementeX(Y1,Y2), pion(X2,Y2,Joueur)),L),write(L).
+findAll2PathDiagGauche(Joueur,L) :- findall([X,Y,X1,Y1],(pion(X,Y,Joueur), decrementeX(Y,Y1),incrementeX(X,X1), pion(X1,Y1,Joueur)),L),write(L).
 
 %% Diag Gauche %%
-findAll3PathDiagDroite(J,L) :- findall([X,Y,X2,Y2],(pion(X,Y,J), incrementeX(Y,Y1),incrementeX(X,X1), pion(X1,Y1,J), incrementeX(X1,X2),incrementeX(Y1,Y2), pion(X2,Y2,J)),L),write(L).
-findAll2PathDiagDroite(J,L) :- findall([X,Y,X1,Y1],(pion(X,Y,J), incrementeX(Y,Y1),incrementeX(X,X1), pion(X1,Y1,J)),L),write(L).
+findAll3PathDiagDroite(Joueur,L) :- findall([X,Y,X2,Y2],(pion(X,Y,Joueur), incrementeX(Y,Y1),incrementeX(X,X1), pion(X1,Y1,Joueur), incrementeX(X1,X2),incrementeX(Y1,Y2), pion(X2,Y2,Joueur)),L),write(L).
+findAll2PathDiagDroite(Joueur,L) :- findall([X,Y,X1,Y1],(pion(X,Y,Joueur), incrementeX(Y,Y1),incrementeX(X,X1), pion(X1,Y1,Joueur)),L),write(L).
 
 % Trouver tous les chemins de longueur 3 (Colonnes + Lignes + Diagonales)
 findAllPath3(Joueur, ListeColonne, ListeLigne) :-
