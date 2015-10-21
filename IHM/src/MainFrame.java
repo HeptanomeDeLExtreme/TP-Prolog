@@ -126,11 +126,11 @@ public  class MainFrame extends JFrame{
 			numberElementInColon = 0;
 		}
 		
-		if(numberElementInColon>5){
+		if(numberElementInColon>6){
 			System.out.println("IMPOSSIBLE AJOUT");
 		}
 		else{
-			String temp = "coupJoueur("+no+","+(numberElementInColon+1)+",1)";
+			String temp = "coupJoueur("+no+","+(numberElementInColon)+",1)";
 			Querifier.q = new Query(temp);
 			Querifier.q.hasSolution();
 			this.print();
