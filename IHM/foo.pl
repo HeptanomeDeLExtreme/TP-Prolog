@@ -301,10 +301,15 @@ tenteAjoutDiagGauche([[X1,Y1,X2,Y2]|Q],J,N) :- incrementeX(X2, X22),
 						   parcoursListeDiagGauche(Q,J,N)
  					       ).
   					 
-
+pion(1,1,1).
+pion(2,2,1).
+pion(3,3,1).
 %% DIAG DROITE %%
-findAll3PathDiagDroite(J,L) :- findall([X,Y,X2,Y2],(pion(X,Y,J), incrementeX(Y,Y1),incrementeX(X,X1), pion(X1,Y1,J), incrementeX(X1,X2),incrementeX(Y1,Y2), pion(X2,Y2,J)),L),write(L).
-findAll2PathDiagDroite(J,L) :- findall([X,Y,X1,Y1],(pion(X,Y,J), incrementeX(Y,Y1),incrementeX(X,X1), pion(X1,Y1,J)),L),write(L).
+doubleInc(X,Y,X1,Y1) :- X1 is X+1,Y1 is Y+1.
+findAll3PathDiagDroite(J,L) :- findall([X,Y,X2,Y2],(pion(X,Y,J), doubleInc(X,Y,X1,Y1), pion(X1,Y1,J),doubleInc(X1,X2,Y1,Y2), pion(X2,Y2,J)),L).
+%findAll2PathDiagDroite(J,L) :- findall([X,Y,X1,Y1],(pion(X,Y,J), incrementeX(Y,Y1),incrementeX(X,X1),pion(X1,Y1,J)),L).
+findAll2PathDiagDroite(J,L) :- findall([X,Y,X1,Y1],(pion(X,Y,J), doubleInc(X,Y,X1,Y1),pion(X1,Y1,J)),L).
+
 
 parcoursListeDiagDroite([],J,N) :- false.
 parcoursListeDiagDroite([[X1,Y1,X2,Y2]|Q],J,N) :- decrementeX(Xgauche, X1),
