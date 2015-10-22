@@ -10,7 +10,7 @@ public class main {
 		Querifier.q.hasSolution();
 		
 		Querifier.q = new Query("combatIA");
-		//Querifier.q.hasSolution();
+		Querifier.q.hasSolution();
 	}
 
 	public static void debug(String s){

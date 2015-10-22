@@ -6,6 +6,7 @@ init :- jpl_new( 'MainFrame', [], F),nb_setval('FENETRE',F),jpl_call('main',init
 coupJoueur(X,Y,Z) :- ajouterPion(X,Y,Z),
 					(gagne(X,Y,Z)-> victoire;coupIA).
 coupIA :- %%ia(N),
+		%iADefensive(1,N),
 		iAOffensive(2,N),
 		jouerCoup([N,2]),
 		testIA(N).
@@ -22,14 +23,18 @@ testIA2(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(gagne(N,NumeroLigne,2)->envoieMessageIA('J2 gagne');tourIA1).
 		
-tourIA1 :-	ia(N),
+tourIA1 :-	%ia(N),
+			iAOffensive(1,N),
 			jouerCoup([N,1]),
 			print,
+			sleep(1),
 			testIA1(N).
 			
-tourIA2 :-	ia(M),
+tourIA2 :-	%ia(M),
+			iADefensive(1,M),
 			jouerCoup([M,2]),
 			print,
+			sleep(1),
 			testIA2(M).  
 
 combatIA :- tourIA1.
@@ -160,17 +165,22 @@ pion(7,0,-10).
 %% pion(3,3,1).
 
 %% DIAG GAUCHE
-%% pion(7,1,1).
-%% pion(6,2,1).
-%% pion(5,3,1).
+%% pion(7,1,2).
+%% pion(6,2,2).
+%% pion(5,3,2).
+%% pion(3,1,2).
+%% pion(2,2,2).
+%% pion(1,3,2).
 
 %% TEST COMPLET
 %% pion(1,1,2).
-%% pion(2,1,1).
-%% pion(3,1,1).
-%% pion(4,1,1).
+%% pion(1,2,2).
+%% pion(2,2,1).
+%% pion(3,2,1).
+%% pion(4,2,1).
 %% pion(5,1,2).
-%pion(6,1,1).
+%% pion(5,2,2).
+%% pion(6,1,1).
 %pion(7,1,1).
 %pion(1,2,1).
 %pion(1,1,2).
@@ -194,34 +204,52 @@ ajouterPion(NumeroColonne, NumeroLigneSuivant, Joueur) :-
     
 %% PARTIE LOGIQUE
 stop :- true.
-zbla(N) :- ia(N).
+zbla(N) :- ia(N),write('zbla').
 iAOffensive(J,N) :- (testInsertion3C(J,N)->stop ; 
-		     %testInsertion3L(J,N)->stop ;
+		     testInsertion3L(J,N)->stop ;
+		     %testInsertion3DG(J,N)->stop ;
 		     testInsertion2C(J,N)->stop ;
-		     %testInsertion2L(J,N)->stop ;
+		     testInsertion2L(J,N)->stop ;
+		     %testInsertion2DG(J,N)->stop ;
 		     zbla(N)
 		    ).
+
+iADefensive(J,N) :- (testInsertion3C(J,N)->stop ; 
+		     testInsertion3L(J,N)->stop ;
+		     %testInsertion3DG(J,N)->stop ;
+		     testInsertion2C(J,N)->stop ;
+		     testInsertion2L(J,N)->stop ;
+		     %testInsertion2DG(J,N)->stop ;
+		     zbla(N)
+		    ).
+
 %% on regarde sur les 3 colonnes, si on peut => on renvoit colonne
 testInsertion3C(J,N) :- findAll3PathColonne(J,L),parcoursListeColonne(L,J,N).
 %% sinon on regarde sur 3 lignes, si on peut => on renvoit colonne
 testInsertion3L(J,N) :- findAll3PathLigne(J,L),parcoursListeLigne(L,J,N).
 %% sinon on regarde sur 3 diagDroit, si on peut => on renvoit colonne
-%testInsertion(J,N) :- findAll3PathDiagGauche(J,L),parcoursListeDiagGauche(L,J).
+testInsertion3DG(J,N) :- findAll3PathDiagGauche(J,L),parcoursListeDiagGauche(L,J,N).
 %% sinon on regarde sur 3 diagGauche, si on peut => on renvoit colonne
-%%testInsertion(J,N) :- findAll3PathDiagDroite(J,L),parcoursListeDiagDroite(L,J).
+testInsertion3DD(J,N) :- findAll3PathDiagDroite(J,L),parcoursListeDiagDroite(L,J,N).
 
 %% on regarde sur les 2 colonnes, si on peut => on renvoit colonne
 testInsertion2C(J,N) :- findAll2PathColonne(J,L),parcoursListeColonne(L,J,N).
 %% sinon on regarde sur 2 lignes, si on peut => on renvoit colonne
 testInsertion2L(J,N) :- findAll2PathLigne(J,L),parcoursListeLigne(L,J,N).
 %% sinon on regarde sur 2 diagDroit, si on peut => on renvoit colonne
-%%testInsertion(J,N) :- findAll2PathDiagGauche(J,L),parcoursListeDiagGauche(L,J).
+testInsertion2DG(J,N) :- findAll2PathDiagGauche(J,L),parcoursListeDiagGauche(L,J,N).
 %% sinon on regarde sur 2 diagGauche, si on peut => on renvoit colonne
-%%testInsertion(J,N) :- findAll2PathDiagDroite(J,L),parcoursListeDiagDroite(L,J).
+testInsertion2DD(J,N) :- findAll2PathDiagDroite(J,L),parcoursListeDiagDroite(L,J,N).
 
 %% sinon on regarde pour les pions seuls, si on peut => on renvoit colonne
 
 %% sinon iaAleatoire.
+
+
+%% PION %%
+findAllPion(J,L) :- findall([X,Y],pion(X,Y,J),L).
+parcoursListePion([],J,N) :- false.
+
 
 
 %% COLONNE %%
@@ -238,47 +266,57 @@ parcoursListeColonne([[X,Y]|Q],J,N) :- incrementeX(Y,Y1),(not(pion(X,Y1,_)),Y1<7
 findAll3PathLigne(J,L) :- findall([Y,X2,X],(pion(X,Y,J), decrementeX(X,X1), pion(X1,Y,J), decrementeX(X1,X2), pion(X2,Y,J)),L).
 findAll2PathLigne(J,L) :- findall([Y,X1,X],(pion(X,Y,J), decrementeX(X,X1), pion(X1,Y,J)),L).
 
-%% parcoursListeLigne([],J,N) :- false.
-%% parcoursListeLigne([[Ligne, Xgauche, Xdroite]|Q],J,N) :- decrementeX(Xgauche, X1),
-%% 							 decrementeX(Ligne,L1),
-%% 							 (
-%% 							     not(pion(Ligne, X1,_)),pion(L1,X1,_),X1>0 -> N is X1 ;
-%% 							     tenteAjoutADroite([[Ligne, Xgauche, Xdroite]|Q],J,N)
-%% 							 ).
-%% tenteAjoutADroite([[Ligne, Xgauche, Xdroite]|Q],J,N) :- incrementeX(Xdroite, X1),
-%% 							decrementeX(Ligne,L1),
-%% 							(
-%% 							    not(pion(Ligne, X1,_)),pion(L1,X1,_),X1<8 -> N is X1 ;
-%% 							    parcoursListeLigne(Q,J,N)
-%%  							).
-  
-isFull(X,Y) :- pion(X,Y,_),!.
-isEmpty(X,Y) :- not(pion(X,Y,_)),!.
-
 parcoursListeLigne([],J,N) :- false.
 parcoursListeLigne([[Ligne, Xgauche, Xdroite]|Q],J,N) :- decrementeX(Xgauche, X1),
 							 decrementeX(Ligne,L1),
-							 isEmpty(Ligne, X1),
-							 %isFull(L1,X1),
-							 X1>0,
-							 N is X1,!.
-parcoursListeLigne([[Ligne, Xgauche, Xdroite]|Q],J,N) :- incrementeX(Xdroite, X1),
-							 decrementeX(Ligne,L1),
-							 isEmpty(Ligne, X1),
-							 %isFull(L1,X1),
-							 X1<8,
-							 N is X1,!.
-parcoursListeLigne([[Ligne, Xgauche, Xdroite]|Q],J,N) :- parcoursListeLigne(Q,J,N).
-							 
+							 (
+							     not(pion(X1, Ligne,_)),pion(X1,L1,_),X1>0 -> N is X1 ;
+							     tenteAjoutADroite([[Ligne, Xgauche, Xdroite]|Q],J,N)
+							 ).
+tenteAjoutADroite([[Ligne, Xgauche, Xdroite]|Q],J,N) :- incrementeX(Xdroite, X1),
+							decrementeX(Ligne,L1),
+							(
+							    not(pion(X1, Ligne,_)),pion(X1,L1,_),X1<8 -> N is X1 ;
+							    parcoursListeLigne(Q,J,N)
+ 							).
+  					 
 
-%% DIAG DROITE %%
+%% DIAG GAUCHE %%
 findAll3PathDiagGauche(J,L) :- findall([X,Y,X2,Y2],(pion(X,Y,J), decrementeX(Y,Y1),incrementeX(X,X1), pion(X1,Y1,J), incrementeX(X1,X2),decrementeX(Y1,Y2), pion(X2,Y2,J)),L),write(L).
 findAll2PathDiagGauche(J,L) :- findall([X,Y,X1,Y1],(pion(X,Y,J), decrementeX(Y,Y1),incrementeX(X,X1), pion(X1,Y1,J)),L),write(L).
 
 
+parcoursListeDiagGauche([],J,N) :- false.
+parcoursListeDiagGauche([[X1,Y1,X2,Y2]|Q],J,N) :- decrementeX(X1, X11),
+						  incrementeX(Y1,Y11),
+						  (
+						      not(pion(X11, Y11,_)),pion(X11,Y1,_),X11>0,Y11<7 -> N is X11 ;
+						      tenteAjoutDiagGauche([[X1,Y1,X2,Y2]|Q],J,N)
+						  ). 
+tenteAjoutDiagGauche([[X1,Y1,X2,Y2]|Q],J,N) :- incrementeX(X2, X22),
+					       decrementeX(Y2,Y22),
+					       decrementeX(Y22,Y222),
+					       (
+						   not(pion(X22,Y22,_)),pion(X22,Y222,_),X22<8,Y22>0 -> N is X22 ;
+						   parcoursListeDiagGauche(Q,J,N)
+ 					       ).
+  					 
 
-
-%% DIAD GAUCHE %%
+%% DIAG DROITE %%
 findAll3PathDiagDroite(J,L) :- findall([X,Y,X2,Y2],(pion(X,Y,J), incrementeX(Y,Y1),incrementeX(X,X1), pion(X1,Y1,J), incrementeX(X1,X2),incrementeX(Y1,Y2), pion(X2,Y2,J)),L),write(L).
 findAll2PathDiagDroite(J,L) :- findall([X,Y,X1,Y1],(pion(X,Y,J), incrementeX(Y,Y1),incrementeX(X,X1), pion(X1,Y1,J)),L),write(L).
 
+parcoursListeDiagDroite([],J,N) :- false.
+parcoursListeDiagDroite([[X1,Y1,X2,Y2]|Q],J,N) :- decrementeX(Xgauche, X1),
+						  decrementeX(Ligne,L1),
+						  (
+						      not(pion(X1, Ligne,_)),pion(X1,L1,_),X1>0 -> N is X1 ;
+						      tenteAjoutDiagDroite([[Ligne, Xgauche, Xdroite]|Q],J,N)
+						  ). 
+tenteAjoutDiagDroite([[X1,Y1,X2,Y2]|Q],J,N) :- incrementeX(Xdroite, X1),
+					       decrementeX(Ligne,L1),
+					       (
+						   not(pion(X1, Ligne,_)),pion(X1,L1,_),X1<8 -> N is X1 ;
+						   parcoursListeDiagDroite(Q,J,N)
+ 					       ).
+  					 
