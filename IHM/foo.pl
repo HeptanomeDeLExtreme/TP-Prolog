@@ -59,9 +59,7 @@ isolerColonneIJoueurX(I,X, Colonne) :- findall(pion(I, Y, X), pion(I, Y, X), Col
 cheminColonne(I,X) :- isolerColonneIJoueurX(I,X, Colonne),length(Colonne,T),write(T),( T == 4 -> victoire;echec). 
 
 /* -------- Fin Jeu ------------*/
-incrementeX(X,X1):- X1 is X+1.
-decrementeX(X,X1):- X1 is X-1.
-caseVide(X,Y) :- nonvar(X),nonvar(Y),not(case(X,Y,_)).
+caseVide(X,Y) :- nonvar(X),nonvar(Y),not(pion(X,Y,_)). % Changement : case -> pion
 
 gagne(X,Y,J) :- victoireColonne(X,Y,J),jpl_call('main',debug,['GAGNE'],_).
 gagne(X,Y,J) :- victoireLigne(X,Y,J),jpl_call('main',debug,['GAGNE'],_).
@@ -282,8 +280,8 @@ tenteAjoutADroite([[Ligne, Xgauche, Xdroite]|Q],J,N) :- incrementeX(Xdroite, X1)
   					 
 
 %% DIAG GAUCHE %%
-findAll3PathDiagGauche(J,L) :- findall([X,Y,X2,Y2],(pion(X,Y,J), decrementeX(Y,Y1),incrementeX(X,X1), pion(X1,Y1,J), incrementeX(X1,X2),decrementeX(Y1,Y2), pion(X2,Y2,J)),L),write(L).
-findAll2PathDiagGauche(J,L) :- findall([X,Y,X1,Y1],(pion(X,Y,J), decrementeX(Y,Y1),incrementeX(X,X1), pion(X1,Y1,J)),L),write(L).
+findAll3PathDiagGauche(J,L) :- findall([X,Y,X2,Y2],(pion(X,Y,J), decrementeX(X,X1),incrementeX(Y,Y1), pion(X1,Y1,J), incrementeX(Y1,Y2),decrementeX(X1,X2), pion(X2,Y2,J)),L),write(L).
+findAll2PathDiagGauche(J,L) :- findall([X,Y,X1,Y1],(pion(X,Y,J), decrementeX(X,X1),incrementeX(Y,Y1), pion(X1,Y1,J)),L),write(L).
 
 
 parcoursListeDiagGauche([],J,N) :- false.
@@ -306,9 +304,10 @@ pion(2,2,1).
 pion(3,3,1).
 %% DIAG DROITE %%
 doubleInc(X,Y,X1,Y1) :- X1 is X+1,Y1 is Y+1.
-findAll3PathDiagDroite(J,L) :- findall([X,Y,X2,Y2],(pion(X,Y,J), doubleInc(X,Y,X1,Y1), pion(X1,Y1,J),doubleInc(X1,X2,Y1,Y2), pion(X2,Y2,J)),L).
+findAll3PathDiagDroite(J,L) :- findall([X,Y,X2,Y2],(pion(X,Y,J), doubleInc(X,Y,X1,Y1), pion(X1,Y1,J),doubleInc(X1,Y1,X2,Y2), pion(X2,Y2,J)),L).
 %findAll2PathDiagDroite(J,L) :- findall([X,Y,X1,Y1],(pion(X,Y,J), incrementeX(Y,Y1),incrementeX(X,X1),pion(X1,Y1,J)),L).
 findAll2PathDiagDroite(J,L) :- findall([X,Y,X1,Y1],(pion(X,Y,J), doubleInc(X,Y,X1,Y1),pion(X1,Y1,J)),L).
+
 
 
 parcoursListeDiagDroite([],J,N) :- false.
@@ -324,4 +323,3 @@ tenteAjoutDiagDroite([[X1,Y1,X2,Y2]|Q],J,N) :- incrementeX(Xdroite, X1),
 						   not(pion(X1, Ligne,_)),pion(X1,L1,_),X1<8 -> N is X1 ;
 						   parcoursListeDiagDroite(Q,J,N)
  					       ).
-  					 
