@@ -6,6 +6,7 @@
 :- include('IHM.pl').
 :- include('jouerCoup.pl').
 :- include('debug.pl').
+:- include('evaluation.pl').
 
 combatIA :- tourIA1.
 

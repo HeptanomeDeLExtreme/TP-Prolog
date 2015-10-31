@@ -1,10 +1,10 @@
 /* -------- Fin Jeu ------------*/
 caseVide(X,Y) :- nonvar(X),nonvar(Y),not(pion(X,Y,_)). 
 
-gagne(X,Y,J) :- victoireColonne(X,Y,J),jpl_call('main',debug,['GAGNE'],_).
-gagne(X,Y,J) :- victoireLigne(X,Y,J),jpl_call('main',debug,['GAGNE'],_).
-gagne(X,Y,J) :- victoireDiagGauche(X,Y,J),jpl_call('main',debug,['GAGNE'],_).
-gagne(X,Y,J) :- victoireDiagDroite(X,Y,J),jpl_call('main',debug,['GAGNE'],_).
+gagne(X,Y,J) :- victoireColonne(X,Y,J).%,jpl_call('main',debug,['GAGNE'],_).
+gagne(X,Y,J) :- victoireLigne(X,Y,J).%,jpl_call('main',debug,['GAGNE'],_).
+gagne(X,Y,J) :- victoireDiagGauche(X,Y,J).%,jpl_call('main',debug,['GAGNE'],_).
+gagne(X,Y,J) :- victoireDiagDroite(X,Y,J).%,jpl_call('main',debug,['GAGNE'],_).
 
 %% Colonne %%
 victoireColonne(X,Y,J) :- pion(X,Y,J), decrementeX(Y,Y1), pion(X,Y1,J), decrementeX(Y1,Y2), pion(X,Y2,J), decrementeX(Y2,Y3), pion(X,Y3,J). %ligne en bas

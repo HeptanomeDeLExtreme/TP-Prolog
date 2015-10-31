@@ -1,4 +1,4 @@
-zbla(N) :- ia(N),write('zbla').
+zbla(N) :- ia(N).
 
 stop :- true.
 
@@ -48,7 +48,7 @@ testInsertion2DG(J,N) :- findAll2PathDiagGauche(J,L),parcoursListeDiagGauche(L,J
 testInsertion2DD(J,N) :- findAll2PathDiagDroite(J,L),parcoursListeDiagDroite(L,J,N).
 
 %% sinon on regarde pour les pions seuls, si on peut => on renvoit colonne
-testInsertionPion(J,N) :- findAllPion(J,L),write(L),parcoursListePion(L,J,N).
+testInsertionPion(J,N) :- findAllPion(J,L),parcoursListePion(L,J,N).
 
 %% sinon iaAleatoire.
 
