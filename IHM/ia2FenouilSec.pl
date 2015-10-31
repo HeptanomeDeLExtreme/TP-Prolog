@@ -1,12 +1,9 @@
-
-%Pion qui pèse
-pion(-10,-10,-10).
-
-%Pions de test
-pion(1,1,1).
-pion(1,2,1).
-pion(1,3,1).
-pion(2,1,2).
+:- include('finDeJeu.pl').
+:- include('iaAleatoire.pl').
+:- include('iaDefOff.pl').
+:- include('jouerCoup.pl').
+:- include('debug.pl').
+:- include('evaluation.pl')
 
 % IA Fenouil Sec
 % Recherche du coup le plus pertinent dans l'immédiat
@@ -20,7 +17,9 @@ pion(2,1,2).
 
 
 %%%%%%%%%%%%%%%%%%%% Prog principal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+zbla(N) :- ia(N).
 
 % peutGagner est vrai si ce pion entraine la victoire de nous
 % (Le repeat est géré dans "peutGagner")
@@ -30,12 +29,33 @@ iaFS(Col) :- peutGagner(pion(Col,Li,2)), var(Col).
 % entraine la victoire adverse
 iaFS(Col) :- peutPerdre(pion(Col,Li,2)), var(Col).
 
-% peutRallongChemin est vrai si ce pion rallonge un chemin de nous
-iaFS(Col) :- peutRallongChemin(pion(Col,Li,2)), var(Col).
+iaFS(Col) :- 	    (testInsertion3C(2,Col)->stop ; 
+		     testInsertion3L(2,Col)->stop ;
+		     testInsertion3DG(2,Col)->stop ;
+		     testInsertion3C(1,Col)->stop ; 
+		     testInsertion3L(1,Col)->stop ;
+		     testInsertion3DG(1,Col)->stop ;
+		     testInsertion2C(2,Col)->stop ;
+		     testInsertion2L(2,Col)->stop ;
+		     testInsertion2DG(2,Col)->stop ;
+		     testInsertion2C(1,Col)->stop ;
+		     testInsertion2L(1,N)->stop ;
+		     testInsertion2DG(1,Col)->stop ;
+		     testInsertionPion(2,Col)->stop ;
+		testInsertionPion(1,Col)->stop ;
+		zbla(Col)).
 
-% peutBloqChemin est vrai si ce pion, de l'autre couleur,
-% rallonge un chemin adverse
-iaFS(Col) :- peutBloqChemin(pion(Col,Li,2)), var(Col).
+%%%%%%%%%%%%%%%%%%%% Sous-prédicats %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% coupAlea renvoie un coup aléatoire, si les 4 prédicats précédents sont faux
-iaFS(Col) :- repeat, N is random(7),M is N+1, peutJouer(M),!.
+%retirerPion
+retirerPion(Col) :- isolerColonne(Col, Colonne),indexDernierPion(Colonne, NumeroLigne), retract(pion(Col,NumeroLigne,_)).
+
+%peutJouer est vrai si il est possible de jouer sur la col N (col non pleine)
+peutJouer(N):- \+ pion(N, 6, _).
+
+%peutGagner
+peutGagner(pion(Col,Li,Joueur)) :- between(1,7,ColCour),jouerCoup([ColCour,Joueur]),isolerColonne(ColCour, Colonne),indexDernierPion(Colonne, NumeroLigne),(gagneTest(X,NumeroLigne,Joueur) -> Col=ColCour,retirerPion(Col),!;retirerPion(Col)),nonvar(Col).
+
+%peutPerdre 
+peutPerdre(pion(Col,Li,Joueur)) :- between(1,7,ColCour),JoueurAdvs is 3-Joueur,jouerCoup([ColCour,JoueurAdvs]),isolerColonne(ColCour, Colonne),indexDernierPion(Colonne, NumeroLigne),(gagneTest(X,NumeroLigne,JoueurAdvs) -> Col=ColCour,retirerPion(Col),!;retirerPion(Col)), nonvar(Col).

@@ -2,8 +2,9 @@
 init :- jpl_new( 'MainFrame', [], F),nb_setval('FENETRE',F),jpl_call('main',init,[F],_).
 
 coupIA :- %ia(N),
-		iADefensive(1,N),
+		%iADefensive(1,N),
 		%iAOffensive(2,N),
+		iaFS(N),
 		jouerCoup([N,2]),
 		testIA(N).
 		
@@ -20,14 +21,16 @@ testIA2(N) :- isolerColonne(N, Colonne),
 		(gagne(N,NumeroLigne,2)->envoieMessageIA('J2 gagne');tourIA1).
 		
 tourIA1 :-	%ia(N),
-			iAOffensive(1,N),
+			%iAOffensive(1,N),
+			iaFS(N),
 			jouerCoup([N,1]),
 			print,
 			sleep(1),
 			testIA1(N).
 			
 tourIA2 :-	%ia(M),
-			iADefensive(1,M),
+			%iADefensive(1,M),
+			iaFS(N),
 			jouerCoup([M,2]),
 			print,
 			sleep(1),
