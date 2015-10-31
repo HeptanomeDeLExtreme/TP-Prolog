@@ -1,3 +1,21 @@
+%%%%%%%%%%%%%%%%%
+%%%% OBSOLETE %%%
+%%%%%%%%%%%%%%%%%
+
+
+%%Juste pour les tests %%%%%%%%%%%%%
+%% :- include('finDeJeu.pl').
+%% :- include('iaAleatoire.pl').
+%% :- include('iaDefOff.pl').
+%% :- include('util.pl').
+%% :- include('pionsFictifs.pl').
+%% :- include('IHM.pl').
+%% :- include('jouerCoup.pl').
+%% :- include('debug.pl').
+%% :- include('evaluation.pl').
+%%Juste pour les tests %%%%%%%%%%%%%
+
+
 :- dynamic pion/3.
 pion(-10,-10,-10).
 
