@@ -29,21 +29,23 @@ iaFS(Col) :- peutGagner(pion(Col,Li,2)), var(Col).
 % entraine la victoire adverse
 iaFS(Col) :- peutPerdre(pion(Col,Li,2)), var(Col).
 
-iaFS(Col) :- 	    (testInsertion3C(2,Col)->stop ; 
-		     testInsertion3L(2,Col)->stop ;
-		     testInsertion3DG(2,Col)->stop ;
-		     testInsertion3C(1,Col)->stop ; 
-		     testInsertion3L(1,Col)->stop ;
-		     testInsertion3DG(1,Col)->stop ;
-		     testInsertion2C(2,Col)->stop ;
-		     testInsertion2L(2,Col)->stop ;
-		     testInsertion2DG(2,Col)->stop ;
-		     testInsertion2C(1,Col)->stop ;
-		     testInsertion2L(1,N)->stop ;
-		     testInsertion2DG(1,Col)->stop ;
-		     testInsertionPion(2,Col)->stop ;
-		testInsertionPion(1,Col)->stop ;
-		zbla(Col)).
+% tente de rallonger un chemin à lui
+% rajouter [stop :- true.] mais je sais pas où
+iaFS(Col) :-(testInsertion3C(2,Col)->stop ; 
+	     testInsertion3L(2,Col)->stop ;
+	     testInsertion3DG(2,Col)->stop ;
+	     testInsertion3C(1,Col)->stop ; 
+	     testInsertion3L(1,Col)->stop ;
+	     testInsertion3DG(1,Col)->stop ;
+	     testInsertion2C(2,Col)->stop ;
+	     testInsertion2L(2,Col)->stop ;
+	     testInsertion2DG(2,Col)->stop ;
+	     testInsertion2C(1,Col)->stop ;
+	     testInsertion2L(1,N)->stop ;
+	     testInsertion2DG(1,Col)->stop ;
+	     testInsertionPion(2,Col)->stop ;
+	     testInsertionPion(1,Col)->stop ;
+	     zbla(Col)).
 
 %%%%%%%%%%%%%%%%%%%% Sous-prédicats %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
