@@ -8,26 +8,27 @@ combatIAEval1 :- tourIA1Eval1.
 testIA1Eval1(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
-		gagne(N,NumeroLigne,1) -> nb_getval('AVSO',X),incrementeX(X,X1),nb_setval('AVSO',X1),write('aleatoire');
+		gagne(N,NumeroLigne,1) -> nb_getval('AVSO',X),incrementeX(X,X1),nb_setval('AVSO',X1),write('J1\n');
 		tourIA2Eval1
 		).
 		
 testIA2Eval1(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
-		gagne(N,NumeroLigne,2) -> write('offensive');
+		gagne(N,NumeroLigne,2) -> write('J2\n');
 		tourIA1Eval1
 		).
 		
-tourIA1Eval1 :-	write('tour1'),
-			ia(N),
+tourIA1Eval1 :-	write('tour1\n'),
+			%ia(N),
+			iADefensive(1,N),
 			jouerCoup([N,1]),
-			testIA1Eval1(N).
+			testIA1Eval1(N),!.
 			
-tourIA2Eval1 :-	write('tour2'),
+tourIA2Eval1 :-	write('tour2\n'),
 			iAOffensive(2,M),
 			jouerCoup([M,2]),
-			testIA2Eval1(M).  
+			testIA2Eval1(M),!.  
 
 
 % aléatoire vs defensive
