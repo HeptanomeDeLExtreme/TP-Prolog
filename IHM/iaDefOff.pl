@@ -48,7 +48,7 @@ testInsertion2DG(J,N) :- findAll2PathDiagGauche(J,L),parcoursListeDiagGauche(L,J
 testInsertion2DD(J,N) :- findAll2PathDiagDroite(J,L),parcoursListeDiagDroite(L,J,N).
 
 %% sinon on regarde pour les pions seuls, si on peut => on renvoit colonne
-testInsertionPion(J,N) :- findAllPion(J,L),parcoursListePion(L,J,N).
+testInsertionPion(J,N) :- findAllPion(J,L),write(L),parcoursListePion(L,J,N).
 
 %% sinon iaAleatoire.
 
@@ -62,38 +62,38 @@ parcoursListePion([[X,Y]|Q],J,N) :- incrementeX(X,X1),
 							decrementeX(Y1,Y11),
 							(
 							not(pion(X1,Y1,_)),pion(X1,Y11,_), X1<8 , Y1>0 -> N is X1;
-							tenteAjoutHD([X,Y]|Q],J,N)
+							tenteAjoutD([[X,Y]|Q],J,N),
 							).
-tenteAjoutD([X,Y]|Q],J,N) :- incrementeX(X,X1),
+tenteAjoutD([[X,Y]|Q],J,N) :- incrementeX(X,X1),
 							decrementeX(Y,Y1),
 							(
 							not(pion(X1,Y,_)),pion(X1,Y1,_), X1<8 ,Y>0 -> N is X1;
-							tenteAjoutHD([X,Y]|Q],J,N)
+							tenteAjoutHD([[X,Y]|Q],J,N),
 							).
-tenteAjoutHD([X,Y]|Q],J,N) :- incrementeX(X,X1),
+tenteAjoutHD([[X,Y]|Q],J,N) :- incrementeX(X,X1),
 							incrementeX(Y,Y1),
 							(
 							not(pion(X1,Y1,_)),pion(X1,Y,_),X1<8, Y1<7-> N is X1;
-							tenteAjoutHD([X,Y]|Q],J,N)
+							tenteAjoutH([[X,Y]|Q],J,N)
 							).
-tenteAjoutH([X,Y]|Q],J,N) :- incrementeX(Y,Y1),
+tenteAjoutH([[X,Y]|Q],J,N) :- incrementeX(Y,Y1),
 							(
 							not(pion(X,Y1,_)), Y1<7 -> N is X;
-							tenteAjoutHD([X,Y]|Q],J,N)
+							tenteAjoutHG([[X,Y]|Q],J,N)
 							).
-tenteAjoutHG([X,Y]|Q],J,N) :- decrementeX(X,X1),
+tenteAjoutHG([[X,Y]|Q],J,N) :- decrementeX(X,X1),
 							incrementeX(Y,Y1),
 							(
 							not(pion(X1,Y1,_)),pion(X1,Y,_),X1>0,Y1<7 -> N is X1;
-							tenteAjoutHD([X,Y]|Q],J,N)
+							tenteAjoutG([[X,Y]|Q],J,N)
 							).
-tenteAjoutG([X,Y]|Q],J,N) :- decrementeX(X,X1),
+tenteAjoutG([[X,Y]|Q],J,N) :- decrementeX(X,X1),
 							decrementeX(Y,Y1),
 							(
 							not(pion(X1,Y,_)),pion(X1,Y1,_),X1>0,Y>0 -> N is X1;
-							tenteAjoutHD([X,Y]|Q],J,N)
+							tenteAjoutBG([[X,Y]|Q],J,N)
 							).
-tenteAjoutBG([X,Y]|Q],J,N) :- decrementeX(X,X1),
+tenteAjoutBG([[X,Y]|Q],J,N) :- decrementeX(X,X1),
 							decrementeX(Y,Y1),
 							decrementeX(Y1,Y11),
 							(
