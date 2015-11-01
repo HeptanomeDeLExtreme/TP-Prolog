@@ -131,7 +131,7 @@ public  class MainFrame extends JFrame{
 			System.out.println("IMPOSSIBLE AJOUT");
 		}
 		else{
-			String temp = "coupJoueur("+no+","+(numberElementInColon)+",1)";
+			String temp = "coupJoueur("+no+","+(numberElementInColon-1)+",1)";
 			Querifier.q = new Query(temp);
 			Querifier.q.hasSolution();
 			this.print();
@@ -151,6 +151,7 @@ public  class MainFrame extends JFrame{
 				int c = result[i].get("COLONNE").intValue();
 				int jo = result[i].get("JOUEUR").intValue();
 				panel.ajoutePion(new Pion(c,j,jo));
+				System.out.println("Ajout pion : "+c+' '+j+' '+jo);
 			}
 			
 		}

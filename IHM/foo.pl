@@ -7,6 +7,7 @@
 :- include('jouerCoup.pl').
 :- include('debug.pl').
 :- include('evaluation.pl').
+:- include('ia2FenouilSec').
 
 combatIA :- tourIA1.
 

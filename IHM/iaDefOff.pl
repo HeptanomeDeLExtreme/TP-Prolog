@@ -5,9 +5,11 @@ stop :- true.
 iAOffensive(J,N) :- (testInsertion3C(J,N)->stop ; 
 		     testInsertion3L(J,N)->stop ;
 		     testInsertion3DG(J,N)->stop ;
+		     testInsertion3DD(J,N)->stop ;
 		     testInsertion2C(J,N)->stop ;
 		     testInsertion2L(J,N)->stop ;
 		     testInsertion2DG(J,N)->stop ;
+		     testInsertion2DD(J,N)->stop ;
 		     testInsertionPion(J,N)->stop ;
 		     zbla(N)
 		    ).
@@ -15,9 +17,11 @@ iAOffensive(J,N) :- (testInsertion3C(J,N)->stop ;
 iADefensive(J,N) :- (testInsertion3C(J,N)->stop ; 
 		     testInsertion3L(J,N)->stop ;
 		     testInsertion3DG(J,N)->stop ;
+		     testInsertion3DD(J,N)->stop ;
 		     testInsertion2C(J,N)->stop ;
 		     testInsertion2L(J,N)->stop ;
 		     testInsertion2DG(J,N)->stop ;
+		     testInsertion2DD(J,N)->stop ;
 		     testInsertionPion(J,N)->stop ;
 		     zbla(N)
 		    ).

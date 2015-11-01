@@ -10,3 +10,5 @@ ajouterPion(NumeroColonne, NumeroLigneSuivant, Joueur) :-
     assert(pion(NumeroColonne, NumeroLigneSuivant, Joueur)).
 
 viderPlateau :- retract(pion(_,_,1)),retract(pion(_,_,2)).
+
+debug(S) :- jpl_call('main',debug,[S],_).

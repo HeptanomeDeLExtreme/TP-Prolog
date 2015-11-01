@@ -21,15 +21,6 @@
 %%%%%%%%%%%%%%%%%%%% Prog principal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Base de faits de tests, à enlever par la suite
-pion(1,1,1).
-pion(1,2,1).
-pion(7,1,1).
-%pion(1,2,2).
-
-
-
-
 % peutGagner est vrai si ce pion entraine la victoire de nous
 % (Le repeat est géré dans "peutGagner")
 iaFS(Col,J) :- peutGagner(Col,J).
