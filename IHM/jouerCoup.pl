@@ -8,11 +8,6 @@ indexDernierPion(Colonne, NumeroLigne) :-
 calculProchainepion(NumeroLigne, NumeroLigneSuivant) :-
     NumeroLigneSuivant is NumeroLigne + 1.
     
-ajouterPion(NumeroColonne, NumeroLigneSuivant, Joueur) :-
-    assert(pion(NumeroColonne, NumeroLigneSuivant, Joueur)),
-    retract(dernpion(_,_,_)),
-    assert(dernpion(NumeroColonne, NumeroLigneSuivant, Joueur)).
-ajouterPion(NumeroColonne, NumeroLigneSuivant, Joueur) :- assert(dernpion(NumeroColonne, NumeroLigneSuivant, Joueur)).
     
 jouerCoup([NumeroColonne, Joueur]) :-
     isolerColonne(NumeroColonne, Colonne),
