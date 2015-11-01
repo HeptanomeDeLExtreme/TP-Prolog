@@ -30,7 +30,7 @@ tourIA1 :-	%ia(N),
 			
 tourIA2 :-	%ia(M),
 			%iADefensive(1,M),
-			iaFS(N),
+			iaFS(M),
 			jouerCoup([M,2]),
 			print,
 			sleep(1),
