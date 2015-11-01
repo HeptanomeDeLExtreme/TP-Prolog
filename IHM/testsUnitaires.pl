@@ -22,7 +22,7 @@
 
 :- begin_tests(util).
 
-test(incrementeX, [true(Reponse =:= 2)]) :-
+test('du predicat incrementeX', [true(Reponse =:= 2)]) :-
 	incrementeX(1, Reponse).
 
 :- end_tests(util).
@@ -30,14 +30,16 @@ test(incrementeX, [true(Reponse =:= 2)]) :-
 :- begin_tests(finDeJeu).
 
 % Ajoute un pion à un endroit et regarde si la case est vide
-% à cette endroit. Ce test doit échouer.	
-test(caseVide, [ cleanup(viderPlateau), fail ]):-
+% à cet endroit. Ce test doit échouer.	
+test('du predicat caseVide sur une case pleine',
+    [ cleanup(viderPlateau), fail ]):-
 	assert(pion(1, 1, 1)),
 	caseVide(1, 1).
 	
 % Ajout un pion à un endroit et regarde ailleurs si la case
 % est vide. Ce test doit réussir.
-test(caseVide, [ cleanup(viderPlateau) ]):-
+test('du predicat caseVide sur une case vide', 
+	[ cleanup(viderPlateau) ]):-
 	assert(pion(1, 1, 1)),
 	caseVide(1, 2).
 	
