@@ -20,6 +20,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 zbla(N) :- ia(N).
+stop:-true.
 
 % peutGagner est vrai si ce pion entraine la victoire de nous
 % (Le repeat est géré dans "peutGagner")
@@ -29,19 +30,14 @@ iaFS(Col) :- peutGagner(pion(Col,Li,2)), var(Col).
 % entraine la victoire adverse
 iaFS(Col) :- peutPerdre(pion(Col,Li,2)), var(Col).
 
-% tente de rallonger un chemin à lui
-% rajouter [stop :- true.] mais je sais pas où
-%% iaFS(Col) :-(testInsertion3C(2,Col)->stop ; 
-%% 	     testInsertion3L(2,Col)->stop ;
-%% 	     testInsertion3DG(2,Col)->stop ;
-%% 	     testInsertion3C(1,Col)->stop ; 
-%% 	     testInsertion3L(1,Col)->stop ;
-%% 	     testInsertion3DG(1,Col)->stop ;
+% tente de rallonger un de ses chemins de 2 si possible, puis de bloquer un chemin de 2 de l'adversaire, et idem avec les pions unitaires.
+% 
+%% iaFS(Col) :-(
 %% 	     testInsertion2C(2,Col)->stop ;
 %% 	     testInsertion2L(2,Col)->stop ;
 %% 	     testInsertion2DG(2,Col)->stop ;
 %% 	     testInsertion2C(1,Col)->stop ;
-%% 	     testInsertion2L(1,N)->stop ;
+%% 	     testInsertion2L(1,Col)->stop ;
 %% 	     testInsertion2DG(1,Col)->stop ;
 %% 	     testInsertionPion(2,Col)->stop ;
 %% 	     testInsertionPion(1,Col)->stop ;
@@ -54,10 +50,10 @@ iaFS(Col) :- peutPerdre(pion(Col,Li,2)), var(Col).
 retirerPion(Col) :- isolerColonne(Col, Colonne),indexDernierPion(Colonne, NumeroLigne), retract(pion(Col,NumeroLigne,_)).
 
 %peutJouer est vrai si il est possible de jouer sur la col N (col non pleine)
-%%peutJouer(N):- \+ pion(N, 6, 1).
+peutJouer(N):- \+ pion(N, 6, 1).
 
 %peutGagner
-%%peutGagner(pion(Col,Li,Joueur)) :- between(1,7,ColCour),jouerCoup([ColCour,Joueur]),isolerColonne(ColCour, Colonne),indexDernierPion(Colonne, NumeroLigne),(gagneTest(X,NumeroLigne,Joueur) -> Col=ColCour,retirerPion(Col),!;retirerPion(Col)),nonvar(Col).
+peutGagner(pion(Col,Li,Joueur)) :- between(1,7,ColCour),jouerCoup([ColCour,Joueur]),isolerColonne(ColCour, Colonne),indexDernierPion(Colonne, NumeroLigne),(gagneTest(X,NumeroLigne,Joueur) -> Col=ColCour,retirerPion(Col),!;retirerPion(Col)),nonvar(Col).
 
 %peutPerdre 
-%%peutPerdre(pion(Col,Li,Joueur)) :- between(1,7,ColCour),JoueurAdvs is 3-Joueur,jouerCoup([ColCour,JoueurAdvs]),isolerColonne(ColCour, Colonne),indexDernierPion(Colonne, NumeroLigne),(gagneTest(X,NumeroLigne,JoueurAdvs) -> Col=ColCour,retirerPion(Col),!;retirerPion(Col)), nonvar(Col).
+peutPerdre(pion(Col,Li,Joueur)) :- between(1,7,ColCour),JoueurAdvs is 3-Joueur,jouerCoup([ColCour,JoueurAdvs]),isolerColonne(ColCour, Colonne),indexDernierPion(Colonne, NumeroLigne),(gagneTest(X,NumeroLigne,JoueurAdvs) -> Col=ColCour,retirerPion(Col),!;retirerPion(Col)), nonvar(Col).
