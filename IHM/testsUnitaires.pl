@@ -6,12 +6,6 @@
 :- include('jouerCoup.pl').
 :- include('debug.pl').
 :- include('evaluation.pl').
-
-/*affichageDebut(NomPredicat, SortieAttendue, Objectif) :-
-	nl,
-	writeln(['### Test du precidat ', NomPredicat, ' ###']),
-	writeln(Objectif),
-	writeln(['Sortie attendue : ', SortieAttendue]).*/
 	
 % setup : permet d'effetuer des opérations avant que le test soit
 %         lancé (exemple, remplir le plateau avec initialiserPlateau.
@@ -22,26 +16,42 @@
 
 :- begin_tests(util).
 
-test('du predicat incrementeX', [true(Reponse =:= 2)]) :-
+test('du predicat incrementeX', [ true(Reponse =:= 2) ]) :-
 	incrementeX(1, Reponse).
+	
+test('du predicat decrementeX', [ true(Reponse =:= 2) ]) :-
+	decrementeX(3, Reponse).
+	
+test('du predicat doubleInc pour incrementer deux variables', 
+	[all(Reponse == [3, 4])]) :-
+	doubleInc(2, 3, NewColonne, NewLigne),
+	(Reponse = NewColonne ; Reponse = NewLigne).
 
+% Apres avoir ajoute quelques pions, test si le plateau se vide
+% correctement en appelant viderPlateau. Ce test doit echouer.
+test('du predicat viderPlateau', [ fail ]) :-
+	assert(pion(1, 1, 1)),
+	assert(pion(1, 2, 2)),
+	viderPlateau,
+	pion(Colonne, Ligne, Joueur).
+	
+% Test si il existe un pion a l'endroit ou ajouterPion doit avoir
+% ajoute un pion. Ce test doit reussir.
+test('du predicat ajouterPion',
+	[ cleanup(viderPlateau) ]) :-
+	ajouterPion(1, 1, 1),
+	pion(1, 1, _).
+	
+% Test si le plateau s initialise correctement 
+test('du predicat initialiserPlateau',
+	[ cleanup(viderPlateau),
+	  all(Reponse == [1, 0, -10, 2, 0, -10, 3, 0, -10, 4, 0, -10, 5, 0, -10, 6, 0, -10, 7, 0, -10, -10, -10, -10])]) :-
+	initialiserPlateau,
+	pion(Colonne, Ligne, Joueur),
+	(Reponse = Colonne ; Reponse = Ligne ; Reponse = Joueur).
+	
 :- end_tests(util).
 
 :- begin_tests(finDeJeu).
-
-% Ajoute un pion à un endroit et regarde si la case est vide
-% à cet endroit. Ce test doit échouer.	
-test('du predicat caseVide sur une case pleine',
-    [ cleanup(viderPlateau), fail ]):-
-	assert(pion(1, 1, 1)),
-	caseVide(1, 1).
-	
-% Ajout un pion à un endroit et regarde ailleurs si la case
-% est vide. Ce test doit réussir.
-test('du predicat caseVide sur une case vide', 
-	[ cleanup(viderPlateau) ]):-
-	assert(pion(1, 1, 1)),
-	caseVide(1, 2).
 	
 :- end_tests(finDeJeu). 
-	
