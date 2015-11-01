@@ -3,7 +3,7 @@
 :- include('iaDefOff.pl').
 :- include('jouerCoup.pl').
 :- include('debug.pl').
-:- include('evaluation.pl')
+:- include('evaluation.pl').
 
 % IA Fenouil Sec
 % Recherche du coup le plus pertinent dans l'immédiat
@@ -17,31 +17,33 @@
 
 
 %%%%%%%%%%%%%%%%%%%% Prog principal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 zbla(N) :- ia(N).
-stop:-true.
+
+stop :- true.
+
 
 % peutGagner est vrai si ce pion entraine la victoire de nous
 % (Le repeat est géré dans "peutGagner")
-iaFS(Col) :- peutGagner(pion(Col,Li,2)), var(Col).
+%iaFS(Col) :- peutGagner(pion(Col,Li,2)), var(Col).
 
 % peutPerdre est vrai si ce pion, de l'autre couleur,
 % entraine la victoire adverse
-iaFS(Col) :- peutPerdre(pion(Col,Li,2)), var(Col).
+%iaFS(Col) :- peutPerdre(pion(Col,Li,2)), var(Col).
 
 % tente de rallonger un de ses chemins de 2 si possible, puis de bloquer un chemin de 2 de l'adversaire, et idem avec les pions unitaires.
-% 
-%% iaFS(Col) :-(
-%% 	     testInsertion2C(2,Col)->stop ;
-%% 	     testInsertion2L(2,Col)->stop ;
-%% 	     testInsertion2DG(2,Col)->stop ;
-%% 	     testInsertion2C(1,Col)->stop ;
-%% 	     testInsertion2L(1,Col)->stop ;
-%% 	     testInsertion2DG(1,Col)->stop ;
-%% 	     testInsertionPion(2,Col)->stop ;
-%% 	     testInsertionPion(1,Col)->stop ;
-%% 	     zbla(Col)).
+ 
+ iaFS(Col) :-(
+ 	     testInsertion2C(2,Col)->stop ;
+ 	     testInsertion2L(2,Col)->stop ;
+ 	     testInsertion2DG(2,Col)->stop ;
+ 	     testInsertion2C(1,Col)->stop ;
+ 	     testInsertion2L(1,Col)->stop ;
+ 	     testInsertion2DG(1,Col)->stop ;
+ 	     testInsertionPion(2,Col)->stop ;
+ 	     testInsertionPion(1,Col)->stop ;
+ 	     zbla(Col)).
 
 %%%%%%%%%%%%%%%%%%%% Sous-prédicats %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
