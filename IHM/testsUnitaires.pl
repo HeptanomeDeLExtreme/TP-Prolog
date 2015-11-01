@@ -53,5 +53,23 @@ test('du predicat initialiserPlateau',
 :- end_tests(util).
 
 :- begin_tests(finDeJeu).
+
+% Le joueur 1 gagne sur la colonne 1
+test('du predicat victoireColonne') :-
+	ajouterPion(1, 1, 1),
+	ajouterPion(1, 2, 1),
+	ajouterPion(1, 3, 1),
+	ajouterPion(1, 4, 1),
+	victoireColonne(1, 4, 1).
 	
+% On insère un pion à gauche et on vérifie que le predicat
+% gauche le détecte bien.
+% A FINIR
+test('du predicat gauche') :-
+	ajouterPion(1, 1, 1),
+	gauche(2, 1, 1, R, G).
+	
+% FAIRE LE TEST POUR LE PREDICAT droite
+
+
 :- end_tests(finDeJeu). 
