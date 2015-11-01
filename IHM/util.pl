@@ -9,4 +9,4 @@ doubleInc(X,Y,X1,Y1) :- X1 is X+1,Y1 is Y+1.
 ajouterPion(NumeroColonne, NumeroLigneSuivant, Joueur) :-
     assert(pion(NumeroColonne, NumeroLigneSuivant, Joueur)).
 
-viderPlateau :- retract(pion(X,Y,1)),retract(pion(U,V,2)).
+viderPlateau :- retract(pion(_,_,1)),retract(pion(_,_,2)).
