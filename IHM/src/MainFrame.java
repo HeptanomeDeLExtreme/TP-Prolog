@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -25,7 +26,7 @@ public  class MainFrame extends JFrame{
 		
 	public MainFrame(){
 		
-		button1 = new JButton("1");
+		button1 = new JButton("   1   ");
 		button1.addActionListener(new ActionListener()
 		{
 		  public void actionPerformed(ActionEvent e)
@@ -33,7 +34,7 @@ public  class MainFrame extends JFrame{
 			  handlerButton(1);
 		  }
 		});
-		button2 = new JButton("2");
+		button2 = new JButton("   2   ");
 		button2.addActionListener(new ActionListener()
 		{
 		  public void actionPerformed(ActionEvent e)
@@ -41,7 +42,7 @@ public  class MainFrame extends JFrame{
 			  handlerButton(2);
 		  }
 		});
-		button3 = new JButton("3");
+		button3 = new JButton("   3   ");
 		button3.addActionListener(new ActionListener()
 		{
 		  public void actionPerformed(ActionEvent e)
@@ -49,7 +50,7 @@ public  class MainFrame extends JFrame{
 			  handlerButton(3);
 		  }
 		});
-		button4 = new JButton("4");
+		button4 = new JButton("   4   ");
 		button4.addActionListener(new ActionListener()
 		{
 		  public void actionPerformed(ActionEvent e)
@@ -57,7 +58,7 @@ public  class MainFrame extends JFrame{
 			  handlerButton(4);
 		  }
 		});
-		button5 = new JButton("5");
+		button5 = new JButton("   5   ");
 		button5.addActionListener(new ActionListener()
 		{
 		  public void actionPerformed(ActionEvent e)
@@ -65,7 +66,7 @@ public  class MainFrame extends JFrame{
 			  handlerButton(5);
 		  }
 		});
-		button6 = new JButton("6");
+		button6 = new JButton("   6   ");
 		button6.addActionListener(new ActionListener()
 		{
 		  public void actionPerformed(ActionEvent e)
@@ -73,7 +74,7 @@ public  class MainFrame extends JFrame{
 			  handlerButton(6);
 		  }
 		});
-		button7 = new JButton("7");
+		button7 = new JButton("   7   ");
 		button7.addActionListener(new ActionListener()
 		{
 		  public void actionPerformed(ActionEvent e)
