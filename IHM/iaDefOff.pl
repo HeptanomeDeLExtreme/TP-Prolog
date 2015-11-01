@@ -62,13 +62,13 @@ parcoursListePion([[X,Y]|Q],J,N) :- incrementeX(X,X1),
 							decrementeX(Y1,Y11),
 							(
 							not(pion(X1,Y1,_)),pion(X1,Y11,_), X1<8 , Y1>0 -> N is X1;
-							tenteAjoutD([[X,Y]|Q],J,N),
+							tenteAjoutD([[X,Y]|Q],J,N)
 							).
 tenteAjoutD([[X,Y]|Q],J,N) :- incrementeX(X,X1),
 							decrementeX(Y,Y1),
 							(
 							not(pion(X1,Y,_)),pion(X1,Y1,_), X1<8 ,Y>0 -> N is X1;
-							tenteAjoutHD([[X,Y]|Q],J,N),
+							tenteAjoutHD([[X,Y]|Q],J,N)
 							).
 tenteAjoutHD([[X,Y]|Q],J,N) :- incrementeX(X,X1),
 							incrementeX(Y,Y1),
