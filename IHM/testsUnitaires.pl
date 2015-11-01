@@ -6,7 +6,96 @@
 :- include('jouerCoup.pl').
 :- include('debug.pl').
 :- include('evaluation.pl').
+
+%% Affichage dans la console
+
+afficherDebut(NomPredicat,SortieAttendue, Objectif) :- 
+	writeln(['### Test du precidat ', NomPredicat, ' ###']),
+	writeln(Objectif),
+	writeln(['Sortie attendue : ', SortieAttendue]).
 	
+afficherFin(NomPredicat, Sortie, FailOrNot) :-
+	writeln(['Sortie obtenue : ', Sortie]),
+	writeln(FailOrNot),
+	writeln(['### FIN - Test du precidat ', NomPredicat, ' ###']),
+	nl.
+	
+afficherNomTest(NomTest) :-
+	nl,
+	writeln('** ** ** ** ** ** ** ** ** ** **'),
+	writeln(NomTest),
+	writeln('** ** ** ** ** ** ** ** ** ** **'),
+	nl.
+	
+afficherTestsUnitaires :-
+	nl,
+	writeln('** ** ** ** ** ** ** ** ** ** **'),
+	writeln('** ** ** ** ** ** ** ** ** ** **'),
+	nl,
+	writeln('TESTS UNITAIRES'),
+	nl,
+	writeln('** ** ** ** ** ** ** ** ** ** **'),
+	writeln('** ** ** ** ** ** ** ** ** ** **'),
+	nl.
+	
+afficherTestsFonctionnels :-
+	nl,
+	writeln('** ** ** ** ** ** ** ** ** ** **'),
+	writeln('** ** ** ** ** ** ** ** ** ** **'),
+	nl,
+	writeln('TESTS FONCTIONNELS'),
+	nl,
+	writeln('** ** ** ** ** ** ** ** ** ** **'),
+	writeln('** ** ** ** ** ** ** ** ** ** **'),
+	nl.
+	
+%% Tests du fichier util.pl
+
+test1 :-
+	afficherDebut('incrementeX', true, 'Incrementation d une variable'),
+	incrementeX(1, Reponse),
+	(Reponse =:= 2 -> afficherFin('incrementeX', true, 'TEST REUSSI');
+	afficherFin('incrementeX', false, 'TEST ECHOUE')).
+	
+test2 :-
+	afficherDebut('decrementeX', true, 'Decrementation d une variable'),
+	decrementeX(3, Reponse),
+	(Reponse =:= 2 -> afficherFin('decrementeX', true, 'TEST REUSSI');
+	afficherFin('decrementeX', false, 'TEST ECHOUE')).
+	
+test3 :-
+	afficherDebut('doubleInc', true, 'Incrementation de deux variables'),
+	doubleInc(2, 3, NewColonne, NewLigne),
+	( (NewColonne =:= 3, NewLigne =:= 4) -> afficherFin('doubleInc', true, 'TEST REUSSI');
+	afficherFin('doubleInc', false, 'TEST ECHOUE')).
+	
+test4 :-
+	afficherDebut('viderPlateau', false, 'Verifie que le plateau se vide correctement apres l insertion de plusieurs pions'),
+	assert(pion(1, 1, 1)),
+	assert(pion(1, 2, 2)),
+	not(viderPlateau), % viderPlateau retourne tjrs false
+	( pion(Colonne, Ligne, Joueur) -> afficherFin('viderPlateau', true, 'TEST ECHOUE');
+	afficherFin('viderPlateau', false, 'TEST REUSSI')).
+
+test5 :-
+	afficherDebut('ajouterPion', true, 'Verifie qu un pion a bien ete ajoute'),
+	assert(pion(1, 1, 1)),
+	( pion(1, 1, _) -> afficherFin('ajouterPion', true, 'TEST REUSSI');
+	afficherFin('ajouterPion', false, 'TEST ECHOUE')),
+	not(viderPlateau).
+	
+%% Appel des tests
+
+tests :-
+	afficherTestsUnitaires,
+	afficherNomTest('Fichier : util.pl'),
+	test1,
+	test2,
+	test3,
+	test4,
+	test5,
+	afficherTestsFonctionnels.
+/*
 % setup : permet d'effetuer des opérations avant que le test soit
 %         lancé (exemple, remplir le plateau avec initialiserPlateau.
 % cleanup : permet d'effetuer des opérations après que le test se soit
@@ -101,4 +190,4 @@ test('du predicat victoireLigne. Pas de victoire du joueur 1 sur la ligne',
 	ajouterPion(4, 2, 1),
 	victoireLigne(4, 2, 1).
 	
-:- end_tests(finDeJeu). 
+:- end_tests(finDeJeu). */
