@@ -6,6 +6,7 @@
 :- include('jouerCoup.pl').
 :- include('debug.pl').
 :- include('evaluation.pl').
+:- use_module(library(lists)).
 
 %% Affichage dans la console
 
@@ -84,6 +85,15 @@ test5 :-
 	afficherFin('ajouterPion', false, 'TEST ECHOUE')),
 	not(viderPlateau).
 	
+test6 :-
+	afficherDebut('initialiserPlateau', true, 'Verifie que les pions de initialiserPlateau sont bien ajoutes a la base de faits'),
+	initialiserPlateau,
+	findall([X, Y, J],pion(X, Y, J), L),
+	%writeln(['Liste trouvee :', L] ),
+	( list_to_set(L, [[1, 0, -10], [2, 0, -10], [3, 0, -10], [4, 0, -10], [5, 0, -10], [6, 0, -10], [7, 0, -10], [-10, -10, -10]]) -> afficherFin('initialiserPlateau', true, 'TEST REUSSI');
+	afficherFin('initialiserPlateau', false, 'TEST ECHOUE')),
+	not(viderPlateau).
+	
 %% Appel des tests
 
 tests :-
@@ -94,6 +104,8 @@ tests :-
 	test3,
 	test4,
 	test5,
+	test6,
+	afficherNomTest('Fichier : finDeJeu.pl'),
 	afficherTestsFonctionnels.
 /*
 % setup : permet d'effetuer des opérations avant que le test soit
