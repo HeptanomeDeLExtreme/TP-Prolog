@@ -9,6 +9,7 @@
 :- include('evaluation.pl').
 :- include('ia2FenouilSec').
 
+
 combatIA :- tourIA1.
 
 coupJoueur(X,Y,Z) :- ajouterPion(X,Y,Z),

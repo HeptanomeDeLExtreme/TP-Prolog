@@ -1,11 +1,3 @@
-:- include('finDeJeu.pl').
-:- include('iaAleatoire.pl').
-:- include('iaDefOff.pl').
-:- include('jouerCoup.pl').
-:- include('debug.pl').
-:- include('evaluation.pl').
-:- include('pionsFictifs.pl').
-
 % IA Fenouil Sec
 % Recherche du coup le plus pertinent dans l'immédiat
 % H4203
