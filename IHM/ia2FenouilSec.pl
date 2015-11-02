@@ -4,7 +4,6 @@
 :- include('jouerCoup.pl').
 :- include('debug.pl').
 :- include('evaluation.pl').
-:- include('util.pl').
 :- include('pionsFictifs.pl').
 
 % IA Fenouil Sec
