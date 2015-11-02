@@ -14,17 +14,17 @@
 
 % peutGagner est vrai si ce pion entraine la victoire de nous
 % (Le repeat est géré dans "peutGagner")
-iaFS(Col,J) :- peutGagner(Col,J).
+iaFS(J,Col) :- peutGagner(Col,J).
 
 % peutPerdre est vrai si ce pion, de l'autre couleur,
 % entraine la victoire adverse
-iaFS(Col,J) :- peutPerdre(Col,J).
+iaFS(J,Col) :- peutPerdre(Col,J).
 
 % Partie 2 de l'IA, si on ne peut ni gagner ni empêcher l'autre de gagner au
 % tour suivant 
 % Tente de rallonger un de ses chemins de 2 si possible, puis de bloquer un
 % chemin de 2 de l'adversaire, et idem avec les pions unitaires. 
-iaFS(Col,J) :- (
+iaFS(J,Col) :- (
  		  testInsertion2C(J,Col)->stop ;
  		  testInsertion2L(J,Col)->stop ;
  		  testInsertion2DG(J,Col)->stop ;
