@@ -94,7 +94,7 @@ peutGagnerSurCol(Col) :- jouerCoup([Col,1]),
 	    isolerColonne(Col,P),
 	    indexDernierPion(P,L),
 	    (gagne(Col,L,1) -> retirerPion(Col) ;
-            retirerPion(Col),false).
+            retirerPion(Col),!,false).
 
 heyJpeuxGagner(Col,J) :- peutGagnerSurCol(1), Col is 1.
 heyJpeuxGagner(Col,J) :- peutGagnerSurCol(2), Col is 2.
