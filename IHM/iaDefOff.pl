@@ -16,8 +16,8 @@ iAOffensive(J,N) :- (testInsertion3C(J,N)->stop ;
 
 iADefensive(J,N) :- (testInsertion3C(J,N)->stop ; 
 		     testInsertion3L(J,N)->stop ;
-		     testInsertion3DG(J,N)->stop ;
-		     testInsertion3DD(J,N)->stop ;
+		     %testInsertion3DG(J,N)->stop ;
+		     %testInsertion3DD(J,N)->stop ;
 		     testInsertion2C(J,N)->stop ;
 		     testInsertion2L(J,N)->stop ;
 		     testInsertion2DG(J,N)->stop ;

@@ -11,11 +11,8 @@ calculProchainepion(NumeroLigne, NumeroLigneSuivant) :-
     
 jouerCoup([NumeroColonne, Joueur]) :-
     isolerColonne(NumeroColonne, Colonne),
-    
     indexDernierPion(Colonne, NumeroLigne),
-
     calculProchainepion(NumeroLigne, NumeroLigneSuivant),
-    
     ajouterPion(NumeroColonne, NumeroLigneSuivant, Joueur).
     
 
