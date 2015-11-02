@@ -131,7 +131,7 @@ public  class MainFrame extends JFrame{
 			System.out.println("IMPOSSIBLE AJOUT");
 		}
 		else{
-			String temp = "coupJoueur("+no+","+(numberElementInColon-1)+",1)";
+			String temp = "coupJoueur("+no+","+(numberElementInColon)+",1)";
 			Querifier.q = new Query(temp);
 			Querifier.q.hasSolution();
 			this.print();
