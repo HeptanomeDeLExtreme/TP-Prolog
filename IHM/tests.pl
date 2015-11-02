@@ -50,50 +50,68 @@ afficherTestsFonctionnels :-
 	writeln('** ** ** ** ** ** ** ** ** ** **'),
 	nl.
 	
+afficherNumeroTest(N) :-
+	writeln(['Test n :', N]).
+	
 %% Tests du fichier util.pl
 
 test1 :-
+	afficherNumeroTest(1),
 	afficherDebut('incrementeX', true, 'Incrementation d une variable'),
 	incrementeX(1, Reponse),
 	(Reponse =:= 2 -> afficherFin('incrementeX', true, 'TEST REUSSI');
 	afficherFin('incrementeX', false, 'TEST ECHOUE')).
 	
 test2 :-
+	afficherNumeroTest(2),
 	afficherDebut('decrementeX', true, 'Decrementation d une variable'),
 	decrementeX(3, Reponse),
 	(Reponse =:= 2 -> afficherFin('decrementeX', true, 'TEST REUSSI');
 	afficherFin('decrementeX', false, 'TEST ECHOUE')).
 	
 test3 :-
+	afficherNumeroTest(3),
 	afficherDebut('doubleInc', true, 'Incrementation de deux variables'),
 	doubleInc(2, 3, NewColonne, NewLigne),
 	( (NewColonne =:= 3, NewLigne =:= 4) -> afficherFin('doubleInc', true, 'TEST REUSSI');
 	afficherFin('doubleInc', false, 'TEST ECHOUE')).
 	
 test4 :-
-	afficherDebut('viderPlateau', false, 'Verifie que le plateau se vide correctement apres l insertion de plusieurs pions'),
+	afficherNumeroTest(4),
+	afficherDebut('testVidePlateau', false, 'Verifie que le plateau se vide correctement apres l insertion de plusieurs pions'),
 	assert(pion(1, 1, 1)),
 	assert(pion(1, 2, 2)),
-	not(viderPlateau), % viderPlateau retourne tjrs false
-	( pion(Colonne, Ligne, Joueur) -> afficherFin('viderPlateau', true, 'TEST ECHOUE');
-	afficherFin('viderPlateau', false, 'TEST REUSSI')).
+	testVidePlateau,
+	( pion(Colonne, Ligne, Joueur) -> afficherFin('testVidePlateau', true, 'TEST ECHOUE');
+	afficherFin('testVidePlateau', false, 'TEST REUSSI')).
 
 test5 :-
+	afficherNumeroTest(5),
 	afficherDebut('ajouterPion', true, 'Verifie qu un pion a bien ete ajoute'),
 	assert(pion(1, 1, 1)),
 	( pion(1, 1, _) -> afficherFin('ajouterPion', true, 'TEST REUSSI');
 	afficherFin('ajouterPion', false, 'TEST ECHOUE')),
-	not(viderPlateau).
+	testVidePlateau.
 	
+%% Tests du fichier iaDefOff.pl
+
 test6 :-
-	afficherDebut('initialiserPlateau', true, 'Verifie que les pions de initialiserPlateau sont bien ajoutes a la base de faits'),
-	initialiserPlateau,
-	findall([X, Y, J],pion(X, Y, J), L),
-	%writeln(['Liste trouvee :', L] ),
-	( list_to_set(L, [[1, 0, -10], [2, 0, -10], [3, 0, -10], [4, 0, -10], [5, 0, -10], [6, 0, -10], [7, 0, -10], [-10, -10, -10]]) -> afficherFin('initialiserPlateau', true, 'TEST REUSSI');
-	afficherFin('initialiserPlateau', false, 'TEST ECHOUE')),
-	not(viderPlateau).
-	
+	afficherNumeroTest(6),
+	afficherDebut('findAll3PathColonne', true, 'Verifie que le predicat trouve tous les chemins de taille 3 en colonne du plateau'),
+	% Chemin sur la colonne 1, retour de findAll3PathColonne : [ColonneConcernee, SommetColonne]
+	% ColonneConcernee = colonne ; SommetColonne = ligne
+	ajouterPion(1, 1, 1),
+	ajouterPion(1, 2, 1),
+	ajouterPion(1, 3, 1),
+	ajouterPion(2, 1, 1),
+	ajouterPion(3, 1, 1),
+	ajouterPion(5, 1, 1),
+	findAll3PathColonne(1, ListeJoueur1),
+	%writeln(['Liste trouvee :', ListeJoueur1] ),
+	( list_to_set(ListeJoueur1, [[1, 3]]) -> afficherFin('findAll3PathColonne', true, 'TEST REUSSI');
+	afficherFin('findAll3PathColonne', false, 'TEST ECHOUE')),
+	testVidePlateau.
+
 %% Appel des tests
 
 tests :-
@@ -104,14 +122,14 @@ tests :-
 	test3,
 	test4,
 	test5,
+	afficherNomTest('Fichier : iaDefOff.pl'),
 	test6,
-	afficherNomTest('Fichier : finDeJeu.pl'),
 	afficherTestsFonctionnels.
 /*
 % setup : permet d'effetuer des opérations avant que le test soit
 %         lancé (exemple, remplir le plateau avec initialiserPlateau.
 % cleanup : permet d'effetuer des opérations après que le test se soit
-%           lancé (exemple, vider le plateau de jeu avec viderPlateau.
+%           lancé (exemple, vider le plateau de jeu avec testVidePlateau.
 
 % Tests unitaires
 
@@ -130,29 +148,29 @@ test('du predicat doubleInc pour incrementer deux variables',
 	(Reponse = NewColonne ; Reponse = NewLigne).
 
 % Apres avoir ajoute quelques pions, test si le plateau se vide
-% correctement en appelant viderPlateau. Ce test doit echouer.
-test('du predicat viderPlateau', 
+% correctement en appelant testVidePlateau. Ce test doit echouer.
+test('du predicat testVidePlateau', 
 	[ all(Reponse == []),
-	  cleanup(viderPlateau) ]) :-
+	  cleanup(testVidePlateau) ]) :-
 	assert(pion(1, 1, 1)),
 	assert(pion(1, 2, 2)),
-	viderPlateau,
+	testVidePlateau,
 	pion(Colonne, Ligne, Joueur),
 	(Reponse = Colonne ; Reponse = Ligne ; Reponse = Joueur). 
 	
 % Test si il existe un pion a l'endroit ou ajouterPion doit avoir
 % ajoute un pion. Ce test doit reussir.
 test('du predicat ajouterPion',
-	[ cleanup(viderPlateau) ]) :-
+	[ cleanup(testVidePlateau) ]) :-
 	ajouterPion(1, 1, 1),
 	pion(1, 1, _).
 	
 % Test si le plateau s initialise correctement 
 test('du predicat initialiserPlateau',
-	[ cleanup(viderPlateau),
+	[ cleanup(testVidePlateau),
 	  all(Reponse == [1, 0, -10, 2, 0, -10, 3, 0, -10, 4, 0, -10, 5, 0, -10, 6, 0, -10, 7, 0, -10, -10, -10, -10])]) :-
 	initialiserPlateau,
-	%viderPlateau,
+	%testVidePlateau,
 	pion(Colonne, Ligne, Joueur),
 	(Reponse = Colonne ; Reponse = Ligne ; Reponse = Joueur).
 	
@@ -162,7 +180,7 @@ test('du predicat initialiserPlateau',
 
 % Le joueur 1 gagne sur la colonne 1
 test('du predicat victoireColonne. Victoire du joueur 1 sur la colonne',
-	[ cleanup(viderPlateau) ]) :-
+	[ cleanup(testVidePlateau) ]) :-
 	ajouterPion(1, 1, 1),
 	ajouterPion(1, 2, 1),
 	ajouterPion(1, 3, 1),
@@ -171,7 +189,7 @@ test('du predicat victoireColonne. Victoire du joueur 1 sur la colonne',
 	
 % Le joueur 2 ne gagne pas sur la colonne 1
 test('du predicat victoireColonne. Pas de victoire sur la colonne pour le joueur 2',
-	[ cleanup(viderPlateau), fail ])
+	[ cleanup(testVidePlateau), fail ])
 	ajouterPion(1, 1, 1),
 	ajouterPion(1, 2, 1),
 	ajouterPion(1, 3, 1),
@@ -186,7 +204,7 @@ test('du predicat victoireColonne. Pas de victoire sur la colonne pour le joueur
 
 % Le joueur 2 gagne sur la ligne 2
 test('du predicat victoireLigne. Victoire du joueur 2 sur la ligne',
-	[ cleanup(viderPlateau) ]) :-
+	[ cleanup(testVidePlateau) ]) :-
 	ajouterPion(1, 2, 2),
 	ajouterPion(2, 2, 2),
 	ajouterPion(3, 2, 2),
@@ -195,7 +213,7 @@ test('du predicat victoireLigne. Victoire du joueur 2 sur la ligne',
 	
 % Le joueur 1 ne gagne pas sur la ligne 2
 test('du predicat victoireLigne. Pas de victoire du joueur 1 sur la ligne',
-	[ cleanup(viderPlateau), fail ]) :-
+	[ cleanup(testVidePlateau), fail ]) :-
 	ajouterPion(1, 2, 2),
 	ajouterPion(2, 2, 2),
 	ajouterPion(3, 2, 2),
