@@ -4,17 +4,7 @@ calculPourcentage(PJ1,PJ2,NBJ1,NBJ2) :- nb_getval('NBEval',N),PJ1 is (100*NBJ1/N
 
 incrementeVar(nom) :- nb_getval(nom,X),incrementeX(X,X1),nb_setval(nom,X1).
 
-testVidePlateau1 :- (
-                   retract(pion(_,_,1)) -> testVidePlateau1;
-                   true
-                   ).
-
-testVidePlateau2 :- (
-    retract(pion(_,_,2)) -> testVidePlateau2;
-    true
-    ).
-
-testVidePlateau :- testVidePlateau1,testVidePlateau2.
+% Le prédicat pour vider le plateau a été mis dans util.pl
 
 % aléatoire vs offensive
 eval1 :- nb_getval('NBEval',N),initEval1,between(1,N,I),combatIAEval1.
