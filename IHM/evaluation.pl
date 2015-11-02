@@ -12,9 +12,30 @@ lancerEval :- pourcentage1.
 lancerEval :- writeln('#### Aleatoire vs Defensive ####'),initEval,initEval2, eval2.
 lancerEval :- pourcentage2.
 
+lancerEval :- writeln('#### Aleatoire vs Mixte ####'),initEval,initEval3, eval3.
+lancerEval :- pourcentage3.
+/*
+lancerEval :- writeln('#### Aleatoire vs Complete ####'),initEval,initEval4, eval4.
+lancerEval :- pourcentage4.
+*/
 lancerEval :- writeln('#### Offensive vs Defensive ####'),initEval,initEval5, eval5.
 lancerEval :- pourcentage5.
 
+lancerEval :- writeln('#### Offensive vs Mixte ####'),initEval,initEval6, eval6.
+lancerEval :- pourcentage6.
+/*
+lancerEval :- writeln('#### Offensive vs Complete ####'),initEval,initEval7, eval7.
+lancerEval :- pourcentage7.
+*/
+lancerEval :- writeln('#### Defensive vs Mixte ####'),initEval,initEval8, eval8.
+lancerEval :- pourcentage8.
+/*
+lancerEval :- writeln('#### Defensive vs Complete ####'),initEval,initEval9, eval9.
+lancerEval :- pourcentage9.
+
+lancerEval :- writeln('#### Mixte vs Complete ####'),initEval,initEval10, eval10.
+lancerEval :- pourcentage10.
+*/
 % ####################################################################
 % #### aléatoire vs offensive (1) ####
 
