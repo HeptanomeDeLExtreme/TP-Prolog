@@ -50,34 +50,34 @@ afficherTestsFonctionnels :-
 	writeln('** ** ** ** ** ** ** ** ** ** **'),
 	nl.
 	
-afficherNumeroTest(N) :-
-	writeln(['Test n :', N]).
+afficherNomTest(N) :-
+	writeln(['Test :', N]).
 	
 %% Tests du fichier util.pl
 
-test1 :-
-	afficherNumeroTest(1),
+testUtil1 :-
+	afficherNomTest(testUtil1),
 	afficherDebut('incrementeX', true, 'Incrementation d une variable'),
 	incrementeX(1, Reponse),
 	(Reponse =:= 2 -> afficherFin('incrementeX', true, 'TEST REUSSI');
 	afficherFin('incrementeX', false, 'TEST ECHOUE')).
 	
-test2 :-
-	afficherNumeroTest(2),
+testUtil2 :-
+	afficherNomTest(testUtil2),
 	afficherDebut('decrementeX', true, 'Decrementation d une variable'),
 	decrementeX(3, Reponse),
 	(Reponse =:= 2 -> afficherFin('decrementeX', true, 'TEST REUSSI');
 	afficherFin('decrementeX', false, 'TEST ECHOUE')).
 	
-test3 :-
-	afficherNumeroTest(3),
+testUtil3 :-
+	afficherNomTest(testUtil3),
 	afficherDebut('doubleInc', true, 'Incrementation de deux variables'),
 	doubleInc(2, 3, NewColonne, NewLigne),
 	( (NewColonne =:= 3, NewLigne =:= 4) -> afficherFin('doubleInc', true, 'TEST REUSSI');
 	afficherFin('doubleInc', false, 'TEST ECHOUE')).
 	
-test4 :-
-	afficherNumeroTest(4),
+testUtil4 :-
+	afficherNomTest(testUtil4),
 	afficherDebut('testVidePlateau', false, 'Verifie que le plateau se vide correctement apres l insertion de plusieurs pions'),
 	assert(pion(1, 1, 1)),
 	assert(pion(1, 2, 2)),
@@ -85,8 +85,8 @@ test4 :-
 	( pion(Colonne, Ligne, Joueur) -> afficherFin('testVidePlateau', true, 'TEST ECHOUE');
 	afficherFin('testVidePlateau', false, 'TEST REUSSI')).
 
-test5 :-
-	afficherNumeroTest(5),
+testUtil5 :-
+	afficherNomTest(testUtil5),
 	afficherDebut('ajouterPion', true, 'Verifie qu un pion a bien ete ajoute'),
 	assert(pion(1, 1, 1)),
 	( pion(1, 1, _) -> afficherFin('ajouterPion', true, 'TEST REUSSI');
@@ -95,10 +95,10 @@ test5 :-
 	
 %% Tests du fichier iaDefOff.pl
 
-test6 :-
-	afficherNumeroTest(6),
+testIaDefOff1 :-
+	afficherNomTest(testIaDefOff1),
 	afficherDebut('findAll3PathColonne', true, 'Verifie que le predicat trouve tous les chemins de taille 3 en colonne du plateau'),
-	% Chemin sur la colonne 1, retour de findAll3PathColonne : [ColonneConcernee, SommetColonne]
+	% Chemin sur la colonne 1, tableau de retour de findAll3PathColonne : [ColonneConcernee, SommetColonne]
 	% ColonneConcernee = colonne ; SommetColonne = ligne
 	ajouterPion(1, 1, 1),
 	ajouterPion(1, 2, 1),
@@ -111,19 +111,36 @@ test6 :-
 	( list_to_set(ListeJoueur1, [[1, 3]]) -> afficherFin('findAll3PathColonne', true, 'TEST REUSSI');
 	afficherFin('findAll3PathColonne', false, 'TEST ECHOUE')),
 	testVidePlateau.
+	
+testIaDefOff2 :- 
+	afficherNomTest(testIaDefOff2),
+	afficherDebut('findAll2PathColonne', true, 'Verifie que le predicat trouve tous les chemins de taille 2 en colonne du plateau'),
+	% Chemin sur la colonne 1, tableau de retour de findAll2PathColonne : [ColonneConcernee, SommetColonne]
+	% ColonneConcernee = colonne ; SommetColonne = ligne
+	ajouterPion(1, 1, 1),
+	ajouterPion(1, 2, 1),
+	ajouterPion(2, 1, 1),
+	ajouterPion(3, 1, 1),
+	ajouterPion(5, 1, 1),
+	findAll2PathColonne(1, ListeJoueur1),
+	%writeln(['Liste trouvee :', ListeJoueur1] ),
+	( list_to_set(ListeJoueur1, [[1, 2]]) -> afficherFin('findAll2PathColonne', true, 'TEST REUSSI');
+	afficherFin('findAll2PathColonne', false, 'TEST ECHOUE')),
+	testVidePlateau.
 
 %% Appel des tests
 
 tests :-
 	afficherTestsUnitaires,
 	afficherNomTest('Fichier : util.pl'),
-	test1,
-	test2,
-	test3,
-	test4,
-	test5,
+	testUtil1,
+	testUtil2,
+	testUtil3,
+	testUtil4,
+	testUtil5,
 	afficherNomTest('Fichier : iaDefOff.pl'),
-	test6,
+	testIaDefOff1,
+	testIaDefOff2,
 	afficherTestsFonctionnels.
 /*
 % setup : permet d'effetuer des opérations avant que le test soit
