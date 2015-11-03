@@ -1,36 +1,52 @@
-initEval :- nb_setval('NBEval',100),
+:- use_module(library(statistics)).
+
+initEval :- nb_setval('NBEval',10),
 			nb_setval('NBEssaiReel',0).
 
 calculPourcentage(PJ1,PJ2,NBJ1,NBJ2) :- nb_getval('NBEval',N),PJ1 is (100*NBJ1/N),PJ2 is (100*NBJ2/N).
+moyenneTemps :- nb_getval('timeTable',L),average_easy(L,M),write('Temps moyen d\'execution : '),write(M),writeln(' secondes\n').
 
-printToEval(NBEssai,PJ1,PJ2) :- write('Nombre essai : '),writeln(NBEssai),write('J1 : '),write(PJ1),write('%       J2 : '),write(PJ2),writeln('%\n').
+average_easy( List, Avg ) :-
+    sum_( List, Sum ),
+    length_( List, Length ),
+    Avg is Sum / Length.
+
+sum_( [], 0 ).
+sum_( [H|T], Sum ) :-
+    sum_( T, Temp ),
+    Sum is Temp + H.
+
+length_( [], 0 ).
+length_( [_|B], L ):-
+    length_( B, Ln ),
+    L is Ln+1.
+
+printToEval(NBEssai,PJ1,PJ2) :- write('Nombre essai : '),writeln(NBEssai),write('J1 : '),write(PJ1),write('%       J2 : '),write(PJ2),writeln('%').
 
 % #### Lancement de l'evaluation ####
 lancerEval :- writeln('#### Aleatoire vs Offensive (1) ####'),initEval,initEval1,eval1.
-lancerEval :- pourcentage1.
+lancerEval :- pourcentage1,moyenneTemps.
 
 lancerEval :- writeln('#### Offensive vs Aleatoire (1b) ####'),initEval,initEval1b,eval1b.
-lancerEval :- pourcentage1b.
+lancerEval :- pourcentage1b,moyenneTemps.
 
 lancerEval :- writeln('#### Aleatoire vs Defensive (2) ####'),initEval,initEval2, eval2.
 lancerEval :- pourcentage2.
 
 lancerEval :- writeln('#### Defensive vs Aleatoire (2b) ####'),initEval,initEval2b, eval2b.
-lancerEval :- pourcentage2b.
+lancerEval :- pourcentage2b,moyenneTemps.
 
 lancerEval :- writeln('#### Aleatoire vs Mixte (3) ####'),initEval,initEval3, eval3.
 lancerEval :- pourcentage3.
 
 lancerEval :- writeln('#### Mixte vs Aleatoire (3b) ####'),initEval,initEval3b, eval3b.
-lancerEval :- pourcentage3b.
+lancerEval :- pourcentage3b,moyenneTemps.
 
-/* A REVOIR
-lancerEval :- writeln('#### Aleatoire vs Complete (4) ####'),initEval,initEval4, eval4.
-lancerEval :- pourcentage4.
+lancerEval :- writeln('#### Defensive vs Mixte (4) ####'),initEval,initEval8, eval8.
+lancerEval :- pourcentage8.
 
-lancerEval :- writeln('#### Complete vs Aleatoire (4b) ####'),initEval,initEval4b, eval4b.
-lancerEval :- pourcentage4b.
-*/
+lancerEval :- writeln('#### Mixte vs Defensive (4b) ####'),initEval,initEval8b, eval8b.
+lancerEval :- pourcentage8b.
 
 lancerEval :- writeln('#### Offensive vs Defensive (5) ####'),initEval,initEval5, eval5.
 lancerEval :- pourcentage5.
@@ -52,11 +68,13 @@ lancerEval :- writeln('#### Offensive vs Complete (7b) ####'),initEval,initEval7
 lancerEval :- pourcentage7.
 */
 
-lancerEval :- writeln('#### Defensive vs Mixte (8) ####'),initEval,initEval8, eval8.
-lancerEval :- pourcentage8.
+/* A REVOIR
+lancerEval :- writeln('#### Aleatoire vs Complete (8) ####'),initEval,initEval4, eval4.
+lancerEval :- pourcentage4.
 
-lancerEval :- writeln('#### Mixte vs Defensive (8b) ####'),initEval,initEval8b, eval8b.
-lancerEval :- pourcentage8b.
+lancerEval :- writeln('#### Complete vs Aleatoire (8b) ####'),initEval,initEval4b, eval4b.
+lancerEval :- pourcentage4b.
+*/
 
 /* A REVOIR
 lancerEval :- writeln('#### Defensive vs Complete (9) ####'),initEval,initEval9, eval9.
@@ -76,7 +94,7 @@ lancerEval :- pourcentage10b.
 
 eval1 :- nb_getval('NBEval',N),initEval1,between(1,N,I),combatIAEval1.
 
-initEval1 :- nb_setval('AVSO1',0),nb_setval('AVSO2',0).
+initEval1 :- nb_setval('timeTable',[]),nb_setval('AVSO1',0),nb_setval('AVSO2',0).
 
 combatIAEval1 :- tourIA1Eval1.
 
@@ -94,7 +112,7 @@ testIA2Eval1(N) :- isolerColonne(N, Colonne),
 		tourIA1Eval1
 		).
 		
-tourIA1Eval1 :-	ia(N),
+tourIA1Eval1 :-	statistics(cputime,T1),ia(N),statistics(cputime,T2),nb_getval('timeTable',TimeTable),Temp is T2-T1,append(TimeTable,[Temp],Final),nb_setval('timeTable',Final),
 		jouerCoup([N,1]),
 		testIA1Eval1(N),!.
 			
@@ -109,7 +127,7 @@ pourcentage1 :- nb_getval('AVSO1',NBJ1),nb_getval('AVSO2',NBJ2),nb_getval('NBEss
 
 eval1b :- nb_getval('NBEval',N),initEval1b,between(1,N,I),combatIAEval1b.
 
-initEval1b :- nb_setval('AVSO1b',0),nb_setval('AVSO2b',0).
+initEval1b :- nb_setval('timeTable',[]),nb_setval('AVSO1b',0),nb_setval('AVSO2b',0).
 
 combatIAEval1b :- tourIA1Eval1b.
 
@@ -127,7 +145,7 @@ testIA2Eval1b(N) :- isolerColonne(N, Colonne),
 		tourIA1Eval1b
 		).
 		
-tourIA1Eval1b :-	iAOffensive(1,N),
+tourIA1Eval1b :-	statistics(cputime,T1),iAOffensive(1,N),statistics(cputime,T2),nb_getval('timeTable',TimeTable),Temp is T2-T1,append(TimeTable,[Temp],Final),nb_setval('timeTable',Final),
 		jouerCoup([N,1]),
 		testIA1Eval1b(N),!.
 			
@@ -164,7 +182,7 @@ tourIA1Eval2 :-	ia(N),
 		jouerCoup([N,1]),
 		testIA1Eval2(N),!.
 			
-tourIA2Eval2 :-	iADefensive(1,M),
+tourIA2Eval2 :-	iADefensive(2,M),
 		jouerCoup([M,2]),
 		testIA2Eval2(M),!.  
 			
@@ -175,7 +193,7 @@ pourcentage2 :- nb_getval('AVSD1',NBJ1),nb_getval('AVSD2',NBJ2),nb_getval('NBEss
 
 eval2b :- nb_getval('NBEval',N),initEval2b,between(1,N,I),combatIAEval2b.
 
-initEval2b :- nb_setval('AVSD1b',0),nb_setval('AVSD2b',0).
+initEval2b :- nb_setval('timeTable',[]),nb_setval('AVSD1b',0),nb_setval('AVSD2b',0).
 
 combatIAEval2b :- tourIA1Eval2b.
 
@@ -193,7 +211,7 @@ testIA2Eval2b(N) :- isolerColonne(N, Colonne),
 		tourIA1Eval2b
 		).
 		
-tourIA1Eval2b :-	iADefensive(2,N),
+tourIA1Eval2b :-	statistics(cputime,T1),iADefensive(1,N),statistics(cputime,T2),nb_getval('timeTable',TimeTable),Temp is T2-T1,append(TimeTable,[Temp],Final),nb_setval('timeTable',Final),
 		jouerCoup([N,1]),
 		testIA1Eval2b(N),!.
 			
@@ -242,7 +260,7 @@ pourcentage3 :- nb_getval('AVSM1',NBJ1),nb_getval('AVSM2',NBJ2),nb_getval('NBEss
 
 eval3b :- nb_getval('NBEval',N),initEval3b,between(1,N,I),combatIAEval3b.
 
-initEval3b :- nb_setval('AVSM1b',0),nb_setval('AVSM2b',0).
+initEval3b :- nb_setval('timeTable',[]),nb_setval('AVSM1b',0),nb_setval('AVSM2b',0).
 
 combatIAEval3b :- tourIA1Eval3b.
 
@@ -260,7 +278,7 @@ testIA2Eval3b(N) :- isolerColonne(N, Colonne),
 		tourIA1Eval3b
 		).
 		
-tourIA1Eval3b :-	iaFS(1,N),
+tourIA1Eval3b :-	statistics(cputime,T1),iaFS(1,N),statistics(cputime,T2),nb_getval('timeTable',TimeTable),Temp is T2-T1,append(TimeTable,[Temp],Final),nb_setval('timeTable',Final),
 		jouerCoup([N,1]),
 		testIA1Eval3b(N),!.
 			
@@ -367,7 +385,7 @@ tourIA1Eval5 :-	iAOffensive(1,N),
 		jouerCoup([N,1]),
 		testIA1Eval5(N),!.
 			
-tourIA2Eval5 :-	iADefensive(1,M),
+tourIA2Eval5 :-	iADefensive(2,M),
 		jouerCoup([M,2]),
 		testIA2Eval5(M),!.  
 			
@@ -396,7 +414,7 @@ testIA2Eval5b(N) :- isolerColonne(N, Colonne),
 		tourIA1Eval5b
 		).
 		
-tourIA1Eval5b :-	iADefensive(2,N),
+tourIA1Eval5b :-	iADefensive(1,N),
 		jouerCoup([N,1]),
 		testIA1Eval5b(N),!.
 			
@@ -575,7 +593,7 @@ tourIA2Eval8 :-	iaFS(2,M),
 pourcentage8 :- nb_getval('DVSM1',NBJ1),nb_getval('DVSM2',NBJ2),nb_getval('NBEssaiReel',NBEssai),calculPourcentage(PJ1,PJ2,NBJ1,NBJ2),printToEval(NBEssai,PJ1,PJ2).
 
 % ####################################################################
-% ####  defensive vs mixte (8b) ####
+% ####  mixte vs defensive (8b) ####
 
 eval8b :- nb_getval('NBEval',N),initEval8b,between(1,N,I),combatIAEval8b.
 
