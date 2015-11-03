@@ -1,4 +1,4 @@
-initEval :- nb_setval('NBEval',500),
+initEval :- nb_setval('NBEval',100),
 			nb_setval('NBEssaiReel',0).
 
 calculPourcentage(PJ1,PJ2,NBJ1,NBJ2) :- nb_getval('NBEval',N),PJ1 is (100*NBJ1/N),PJ2 is (100*NBJ2/N).
@@ -24,7 +24,7 @@ lancerEval :- pourcentage3.
 lancerEval :- writeln('#### Mixte vs Aleatoire (3b) ####'),initEval,initEval3b, eval3b.
 lancerEval :- pourcentage3b.
 
-/*
+/* A REVOIR
 lancerEval :- writeln('#### Aleatoire vs Complete (4) ####'),initEval,initEval4, eval4.
 lancerEval :- pourcentage4.
 
@@ -44,7 +44,7 @@ lancerEval :- pourcentage6.
 lancerEval :- writeln('#### Mixte vs Offensive (6b) ####'),initEval,initEval6b, eval6b.
 lancerEval :- pourcentage6b.
 
-/*
+/* A REVOIR
 lancerEval :- writeln('#### Offensive vs Complete (7) ####'),initEval,initEval7, eval7.
 lancerEval :- pourcentage7.
 
@@ -58,7 +58,7 @@ lancerEval :- pourcentage8.
 lancerEval :- writeln('#### Mixte vs Defensive (8b) ####'),initEval,initEval8b, eval8b.
 lancerEval :- pourcentage8b.
 
-/*
+/* A REVOIR
 lancerEval :- writeln('#### Defensive vs Complete (9) ####'),initEval,initEval9, eval9.
 lancerEval :- pourcentage9.
 
@@ -107,36 +107,35 @@ pourcentage1 :- nb_getval('AVSO1',NBJ1),nb_getval('AVSO2',NBJ2),nb_getval('NBEss
 % ####################################################################
 % #### offensive vs aléatoire (1b) ####
 
-eval1 :- nb_getval('NBEval',N),initEval1,between(1,N,I),combatIAEval1.
+eval1b :- nb_getval('NBEval',N),initEval1b,between(1,N,I),combatIAEval1b.
 
-initEval1 :- nb_setval('AVSO1',0),nb_setval('AVSO2',0).
+initEval1b :- nb_setval('AVSO1b',0),nb_setval('AVSO2b',0).
 
-combatIAEval1 :- tourIA1Eval1.
+combatIAEval1b :- tourIA1Eval1b.
 
-testIA1Eval1(N) :- isolerColonne(N, Colonne),
+testIA1Eval1b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
-		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSO1',X),incrementeX(X,X1),nb_setval('AVSO1',X1),testVidePlateau;
-		tourIA2Eval1
+		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSO1b',X),incrementeX(X,X1),nb_setval('AVSO1b',X1),testVidePlateau;
+		tourIA2Eval1b
 		).
 		
-testIA2Eval1(N) :- isolerColonne(N, Colonne),
+testIA2Eval1b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
-		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSO2',X),incrementeX(X,X1),nb_setval('AVSO2',X1),testVidePlateau;
-		tourIA1Eval1
+		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSO2b',X),incrementeX(X,X1),nb_setval('AVSO2b',X1),testVidePlateau;
+		tourIA1Eval1b
 		).
 		
-tourIA2Eval1 :-	ia(N),
+tourIA1Eval1b :-	iAOffensive(1,N),
 		jouerCoup([N,1]),
-		testIA1Eval1(N),!.
+		testIA1Eval1b(N),!.
 			
-tourIA1Eval1 :-	iAOffensive(2,M),
+tourIA2Eval1b :-	ia(M),
 		jouerCoup([M,2]),
-		testIA2Eval1(M),!.  
+		testIA2Eval1b(M),!.  
 			
-pourcentage1 :- nb_getval('AVSO1',NBJ1),nb_getval('AVSO2',NBJ2),nb_getval('NBEssaiReel',NBEssai),calculPourcentage(PJ1,PJ2,NBJ1,NBJ2),printToEval(NBEssai,PJ1,PJ2).
-
+pourcentage1b :- nb_getval('AVSO1b',NBJ1),nb_getval('AVSO2b',NBJ2),nb_getval('NBEssaiReel',NBEssai),calculPourcentage(PJ1,PJ2,NBJ1,NBJ2),printToEval(NBEssai,PJ1,PJ2).
 
 % ####################################################################
 % ####  aléatoire vs defensive (2) ####
@@ -174,36 +173,35 @@ pourcentage2 :- nb_getval('AVSD1',NBJ1),nb_getval('AVSD2',NBJ2),nb_getval('NBEss
 % ####################################################################
 % ####  defensive vs aléatoire (2b) ####
 
-eval2 :- nb_getval('NBEval',N),initEval2,between(1,N,I),combatIAEval2.
+eval2b :- nb_getval('NBEval',N),initEval2b,between(1,N,I),combatIAEval2b.
 
-initEval2 :- nb_setval('AVSD1',0),nb_setval('AVSD2',0).
+initEval2b :- nb_setval('AVSD1b',0),nb_setval('AVSD2b',0).
 
-combatIAEval2 :- tourIA1Eval2.
+combatIAEval2b :- tourIA1Eval2b.
 
-testIA1Eval2(N) :- isolerColonne(N, Colonne),
+testIA1Eval2b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
-		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSD1',X),incrementeX(X,X1),nb_setval('AVSD1',X1),testVidePlateau;
-		tourIA2Eval2
+		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSD1b',X),incrementeX(X,X1),nb_setval('AVSD1b',X1),testVidePlateau;
+		tourIA2Eval2b
 		).
 		
-testIA2Eval2(N) :- isolerColonne(N, Colonne),
+testIA2Eval2b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
-		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSD2',X),incrementeX(X,X1),nb_setval('AVSD2',X1),testVidePlateau;
-		tourIA1Eval2
+		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSD2b',X),incrementeX(X,X1),nb_setval('AVSD2b',X1),testVidePlateau;
+		tourIA1Eval2b
 		).
 		
-tourIA2Eval2 :-	ia(N),
+tourIA1Eval2b :-	iADefensive(2,N),
 		jouerCoup([N,1]),
-		testIA1Eval2(N),!.
+		testIA1Eval2b(N),!.
 			
-tourIA1Eval2 :-	iADefensive(1,M),
+tourIA2Eval2b :-	ia(M),
 		jouerCoup([M,2]),
-		testIA2Eval2(M),!.  
+		testIA2Eval2b(M),!.  
 			
-pourcentage2 :- nb_getval('AVSD1',NBJ1),nb_getval('AVSD2',NBJ2),nb_getval('NBEssaiReel',NBEssai),calculPourcentage(PJ1,PJ2,NBJ1,NBJ2),printToEval(NBEssai,PJ1,PJ2).
-
+pourcentage2b :- nb_getval('AVSD1b',NBJ1),nb_getval('AVSD2b',NBJ2),nb_getval('NBEssaiReel',NBEssai),calculPourcentage(PJ1,PJ2,NBJ1,NBJ2),printToEval(NBEssai,PJ1,PJ2).
 
 % ####################################################################
 % ####  aléatoire vs mixte (3) ####
@@ -232,7 +230,7 @@ tourIA1Eval3 :-	ia(N),
 		jouerCoup([N,1]),
 		testIA1Eval3(N),!.
 			
-tourIA2Eval3 :-	iaFS(1,M),
+tourIA2Eval3 :-	iaFS(2,M),
 		jouerCoup([M,2]),
 		testIA2Eval3(M),!.  
 			
@@ -241,36 +239,36 @@ pourcentage3 :- nb_getval('AVSM1',NBJ1),nb_getval('AVSM2',NBJ2),nb_getval('NBEss
 % ####################################################################
 % ####  mixte vs aléatoire (3b) ####
 
-eval3 :- nb_getval('NBEval',N),initEval3,between(1,N,I),combatIAEval3.
 
-initEval3 :- nb_setval('AVSM1',0),nb_setval('AVSM2',0).
+eval3b :- nb_getval('NBEval',N),initEval3b,between(1,N,I),combatIAEval3b.
 
-combatIAEval3 :- tourIA1Eval3.
+initEval3b :- nb_setval('AVSM1b',0),nb_setval('AVSM2b',0).
 
-testIA1Eval3(N) :- isolerColonne(N, Colonne),
+combatIAEval3b :- tourIA1Eval3b.
+
+testIA1Eval3b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
-		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSM1',X),incrementeX(X,X1),nb_setval('AVSM1',X1),testVidePlateau;
-		tourIA2Eval3
+		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSM1b',X),incrementeX(X,X1),nb_setval('AVSM1b',X1),testVidePlateau;
+		tourIA2Eval3b
 		).
 		
-testIA2Eval3(N) :- isolerColonne(N, Colonne),
+testIA2Eval3b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
-		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSM2',X),incrementeX(X,X1),nb_setval('AVSM2',X1),testVidePlateau;
-		tourIA1Eval3
+		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSM2b',X),incrementeX(X,X1),nb_setval('AVSM2b',X1),testVidePlateau;
+		tourIA1Eval3b
 		).
 		
-tourIA2Eval3 :-	ia(N),
+tourIA1Eval3b :-	iaFS(1,N),
 		jouerCoup([N,1]),
-		testIA1Eval3(N),!.
+		testIA1Eval3b(N),!.
 			
-tourIA1Eval3 :-	iaFS(1,M),
+tourIA2Eval3b :-	ia(M),
 		jouerCoup([M,2]),
-		testIA2Eval3(M),!.  
+		testIA2Eval3b(M),!.  
 			
-pourcentage3 :- nb_getval('AVSM1',NBJ1),nb_getval('AVSM2',NBJ2),nb_getval('NBEssaiReel',NBEssai),calculPourcentage(PJ1,PJ2,NBJ1,NBJ2),printToEval(NBEssai,PJ1,PJ2).
-
+pourcentage3b :- nb_getval('AVSM1b',NBJ1),nb_getval('AVSM2b',NBJ2),nb_getval('NBEssaiReel',NBEssai),calculPourcentage(PJ1,PJ2,NBJ1,NBJ2),printToEval(NBEssai,PJ1,PJ2).
 
 % ####################################################################
 % ####  aléatoire vs complète (4) ####
@@ -378,36 +376,35 @@ pourcentage5 :- nb_getval('OVSD1',NBJ1),nb_getval('OVSD2',NBJ2),nb_getval('NBEss
 % ####################################################################
 % ####   defensive vs offensive (5b) ####
 
-eval5 :- nb_getval('NBEval',N),initEval5,between(1,N,I),combatIAEval5.
+eval5b :- nb_getval('NBEval',N),initEval5b,between(1,N,I),combatIAEval5b.
 
-initEval5 :- nb_setval('OVSD1',0),nb_setval('OVSD2',0).
+initEval5b :- nb_setval('OVSD1b',0),nb_setval('OVSD2b',0).
 
-combatIAEval5 :- tourIA1Eval5.
+combatIAEval5b :- tourIA1Eval5b.
 
-testIA1Eval5(N) :- isolerColonne(N, Colonne),
+testIA1Eval5b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
-		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSD1',X),incrementeX(X,X1),nb_setval('OVSD1',X1),testVidePlateau;
-		tourIA2Eval5
+		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSD1b',X),incrementeX(X,X1),nb_setval('OVSD1b',X1),testVidePlateau;
+		tourIA2Eval5b
 		).
 		
-testIA2Eval5(N) :- isolerColonne(N, Colonne),
+testIA2Eval5b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
-		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSD2',X),incrementeX(X,X1),nb_setval('OVSD2',X1),testVidePlateau;
-		tourIA1Eval5
+		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSD2b',X),incrementeX(X,X1),nb_setval('OVSD2b',X1),testVidePlateau;
+		tourIA1Eval5b
 		).
 		
-tourIA2Eval5 :-	iAOffensive(1,N),
+tourIA1Eval5b :-	iADefensive(2,N),
 		jouerCoup([N,1]),
-		testIA1Eval5(N),!.
+		testIA1Eval5b(N),!.
 			
-tourIA1Eval5 :-	iADefensive(1,M),
+tourIA2Eval5b :-	iAOffensive(2,M),
 		jouerCoup([M,2]),
-		testIA2Eval5(M),!.  
+		testIA2Eval5b(M),!.  
 			
-pourcentage5 :- nb_getval('OVSD1',NBJ1),nb_getval('OVSD2',NBJ2),nb_getval('NBEssaiReel',NBEssai),calculPourcentage(PJ1,PJ2,NBJ1,NBJ2),printToEval(NBEssai,PJ1,PJ2).
-
+pourcentage5b :- nb_getval('OVSD1b',NBJ1),nb_getval('OVSD2b',NBJ2),nb_getval('NBEssaiReel',NBEssai),calculPourcentage(PJ1,PJ2,NBJ1,NBJ2),printToEval(NBEssai,PJ1,PJ2).
 
 % ####################################################################
 % ####  offensive vs mixte (6) ####
@@ -436,7 +433,7 @@ tourIA1Eval6 :-	iAOffensive(1,N),
 		jouerCoup([N,1]),
 		testIA1Eval6(N),!.
 			
-tourIA2Eval6 :-	iaFS(1,M),
+tourIA2Eval6 :-	iaFS(2,M),
 		jouerCoup([M,2]),
 		testIA2Eval6(M),!.  
 			
@@ -445,36 +442,35 @@ pourcentage6 :- nb_getval('OVSM1',NBJ1),nb_getval('OVSM2',NBJ2),nb_getval('NBEss
 % ####################################################################
 % ####  mixte vs offensive (6b) ####
 
-eval6 :- nb_getval('NBEval',N),initEval6,between(1,N,I),combatIAEval6.
+eval6b :- nb_getval('NBEval',N),initEval6b,between(1,N,I),combatIAEval6b.
 
-initEval6 :- nb_setval('OVSM1',0),nb_setval('OVSM2',0).
+initEval6b :- nb_setval('OVSM1b',0),nb_setval('OVSM2b',0).
 
-combatIAEval6 :- tourIA1Eval6.
+combatIAEval6b :- tourIA1Eval6b.
 
-testIA1Eval6(N) :- isolerColonne(N, Colonne),
+testIA1Eval6b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
-		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSM1',X),incrementeX(X,X1),nb_setval('OVSM1',X1),testVidePlateau;
-		tourIA2Eval6
+		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSM1b',X),incrementeX(X,X1),nb_setval('OVSM1b',X1),testVidePlateau;
+		tourIA2Eval6b
 		).
 		
-testIA2Eval6(N) :- isolerColonne(N, Colonne),
+testIA2Eval6b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
-		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSM2',X),incrementeX(X,X1),nb_setval('OVSM2',X1),testVidePlateau;
-		tourIA1Eval6
+		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSM2b',X),incrementeX(X,X1),nb_setval('OVSM2b',X1),testVidePlateau;
+		tourIA1Eval6b
 		).
 		
-tourIA2Eval6 :-	iAOffensive(1,N),
+tourIA1Eval6b :-	iaFS(1,N),
 		jouerCoup([N,1]),
-		testIA1Eval6(N),!.
+		testIA1Eval6b(N),!.
 			
-tourIA1Eval6 :-	iaFS(1,M),
+tourIA2Eval6b :-	iAOffensive(2,M),
 		jouerCoup([M,2]),
-		testIA2Eval6(M),!.  
+		testIA2Eval6b(M),!.  
 			
-pourcentage6 :- nb_getval('OVSM1',NBJ1),nb_getval('OVSM2',NBJ2),nb_getval('NBEssaiReel',NBEssai),calculPourcentage(PJ1,PJ2,NBJ1,NBJ2),printToEval(NBEssai,PJ1,PJ2).
-
+pourcentage6b :- nb_getval('OVSM1b',NBJ1),nb_getval('OVSM2b',NBJ2),nb_getval('NBEssaiReel',NBEssai),calculPourcentage(PJ1,PJ2,NBJ1,NBJ2),printToEval(NBEssai,PJ1,PJ2).
 
 % ####################################################################
 % ####  offensive vs complète (7) ####
@@ -572,7 +568,7 @@ tourIA1Eval8 :-	iADefensive(1,N),
 		jouerCoup([N,1]),
 		testIA1Eval8(N),!.
 			
-tourIA2Eval8 :-	iaFS(1,M),
+tourIA2Eval8 :-	iaFS(2,M),
 		jouerCoup([M,2]),
 		testIA2Eval8(M),!.  
 			
@@ -580,36 +576,36 @@ pourcentage8 :- nb_getval('DVSM1',NBJ1),nb_getval('DVSM2',NBJ2),nb_getval('NBEss
 
 % ####################################################################
 % ####  defensive vs mixte (8b) ####
-eval8 :- nb_getval('NBEval',N),initEval8,between(1,N,I),combatIAEval8.
 
-initEval8 :- nb_setval('DVSM1',0),nb_setval('DVSM2',0).
+eval8b :- nb_getval('NBEval',N),initEval8b,between(1,N,I),combatIAEval8b.
 
-combatIAEval8 :- tourIA1Eval8.
+initEval8b :- nb_setval('DVSM1b',0),nb_setval('DVSM2b',0).
 
-testIA1Eval8(N) :- isolerColonne(N, Colonne),
+combatIAEval8b :- tourIA1Eval8b.
+
+testIA1Eval8b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
-		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('DVSM1',X),incrementeX(X,X1),nb_setval('DVSM1',X1),testVidePlateau;
-		tourIA2Eval8
+		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('DVSM1b',X),incrementeX(X,X1),nb_setval('DVSM1b',X1),testVidePlateau;
+		tourIA2Eval8b
 		).
 		
-testIA2Eval8(N) :- isolerColonne(N, Colonne),
+testIA2Eval8b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
-		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('DVSM2',X),incrementeX(X,X1),nb_setval('DVSM2',X1),testVidePlateau;
-		tourIA1Eval8
+		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('DVSM2b',X),incrementeX(X,X1),nb_setval('DVSM2b',X1),testVidePlateau;
+		tourIA1Eval8b
 		).
 		
-tourIA2Eval8 :-	iADefensive(1,N),
+tourIA1Eval8b :-	iaFS(1,N),
 		jouerCoup([N,1]),
-		testIA1Eval8(N),!.
+		testIA1Eval8b(N),!.
 			
-tourIA1Eval8 :-	iaFS(1,M),
+tourIA2Eval8b :-	iADefensive(2,M),
 		jouerCoup([M,2]),
-		testIA2Eval8(M),!.  
+		testIA2Eval8b(M),!.  
 			
-pourcentage8 :- nb_getval('DVSM1',NBJ1),nb_getval('DVSM2',NBJ2),nb_getval('NBEssaiReel',NBEssai),calculPourcentage(PJ1,PJ2,NBJ1,NBJ2),printToEval(NBEssai,PJ1,PJ2).
-
+pourcentage8b :- nb_getval('DVSM1b',NBJ1),nb_getval('DVSM2b',NBJ2),nb_getval('NBEssaiReel',NBEssai),calculPourcentage(PJ1,PJ2,NBJ1,NBJ2),printToEval(NBEssai,PJ1,PJ2).
 
 % ####################################################################
 % ####  defensive vs complète (9) ####

@@ -16,7 +16,7 @@
 % (Le repeat est géré dans "peutGagner")
 iaFS(J,Col) :- peutGagner(Col,J).
 
-% peutPerdre est vrai si ce pion, de l'autre couleur,
+% peutPerdre est vrai si ce pion, de l'autre couleur, 
 % entraine la victoire adverse
 iaFS(J,Col) :- peutPerdre(Col,J).
 
