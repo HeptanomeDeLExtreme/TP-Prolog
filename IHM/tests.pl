@@ -209,6 +209,22 @@ testJouerCoup4 :-
     testVidePlateau.
 
 
+%% Tests du fichier iaAleatoire.pl
+testIaAleatoire1 :-
+    afficherNomTest(testIaAleatoire1),
+    afficherDebut('peutJouer', true, 'Verifie que le predicat est vrai si la colonne est non-pleine et faux si elle est pleine'),
+    assert(pion(2, 1, 1)),
+    assert(pion(2, 2, 1)),
+    assert(pion(2, 3, 1)),
+    assert(pion(2, 4, 1)),
+    assert(pion(2, 5, 1)),
+    assert(pion(2, 6, 1)),
+    assert(pion(4, 1, 1)),
+    (peutJouer(4), not(peutJouer(2)) -> afficherFin('peutJouer', true, 'TEST REUSSI');
+      afficherFin('peutJouer', false, '')),
+    testVidePlateau.
+
+
 
 %% Appel des tests
 
@@ -232,6 +248,8 @@ tests :-
 	testM1,
 	testM2,
 	% testM3, ça merde à partir d'ici.
+	afficherNomTest('Fichier : iaAleatoire.pl'),
+	testIaAleatoire1,
 
 	afficherTestsFonctionnels.
 /*
