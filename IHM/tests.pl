@@ -6,6 +6,7 @@
 :- include('jouerCoup.pl').
 :- include('debug.pl').
 :- include('evaluation.pl').
+:- include('ia2FenouilSec.pl').
 :- use_module(library(lists)).
 
 %% Affichage dans la console
@@ -127,6 +128,40 @@ testIaDefOff2 :-
 	( list_to_set(ListeJoueur1, [[1, 2]]) -> afficherFin('findAll2PathColonne', true, 'TEST REUSSI');
 	afficherFin('findAll2PathColonne', false, 'TEST ECHOUE')),
 	testVidePlateau.
+	
+%% Tests du fichier ia2FenouilSec.pl
+
+testM1:-
+	afficherNomTest(testM1),
+	afficherDebut('PeutGagnerSurCol', true, 'Verifie que le predicat peutGagnerSurCol vérifie une colonne qui permet la victoire'),
+	ajouterPion(3, 1, 1),
+	ajouterPion(3, 2, 1),
+	ajouterPion(3, 3, 1),
+	(peutGagnerSurCol(3) -> afficherFin('peutGagnerSurCol', true, 'TEST REUSSI');
+	afficherFin('peutGagnerSurCol', false, 'TEST ECHOUE')),
+	testVidePlateau.
+
+testM2:-
+	afficherNomTest(testM2),
+	afficherDebut('PeutGagnerSurCol', true, 'Verifie que le predicat peutGagnerSurCol ne vérifie pas une colonne qui ne permet pas la victoire.'),
+	ajouterPion(3, 1, 1),
+	ajouterPion(3, 2, 1),
+	ajouterPion(3, 3, 1),
+	(peutGagnerSurCol(4) ->afficherFin('peutGagnerSurCol', false, 'TEST ECHOUE');
+ 	afficherFin('peutGagnerSurCol', true, 'TEST REUSSI')),
+	testVidePlateau.
+
+
+testM3:-
+	afficherNomTest(testM3),
+	afficherDebut('peutGagner', true, 'Verifie que le predicat peutGagner trouve une colonne où une victoire est possible.'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(1, 2, 1),
+	ajouterPion(1, 3, 1),
+	peutGagner(X,1),
+	(X =:=1 ->afficherFin('peutGagner', true, 'TEST REUSSI');
+ 	afficherFin('peutGagner', false, 'TEST ECHOUE')),
+	testVidePlateau.
 
 %% Appel des tests
 
@@ -141,6 +176,10 @@ tests :-
 	afficherNomTest('Fichier : iaDefOff.pl'),
 	testIaDefOff1,
 	testIaDefOff2,
+	afficherNomTest('Fichier : ia2FenouilSec.pl'),
+	testM1,
+	testM2,
+	testM3,
 	afficherTestsFonctionnels.
 /*
 % setup : permet d'effetuer des opérations avant que le test soit
