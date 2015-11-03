@@ -287,8 +287,161 @@ testIaAleatoire1 :-
       afficherFin('peutJouer', false, '')),
     testVidePlateau.
 
+%% Tests du fichier finDeJeu.pl
+testFDJ1:-
+	afficherNomTest(testFDJ1),
+	afficherDebut('caseVide', true, 'Verifie que le predicat caseVide identifie une case vide.'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(1, 2, 1),
+	ajouterPion(1, 3, 1),
+	(caseVide(1,4)->afficherFin('caseVide', true, 'TEST REUSSI');
+	afficherFin('caseVide', false, 'TEST ECHOUE')),
+	testVidePlateau.
 
+testFDJ2:-
+	afficherNomTest(testFDJ2),
+	afficherDebut('caseVide', true, 'Verifie que le predicat caseVide ne vérifie pas une case pleine.'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(1, 2, 1),
+	ajouterPion(1, 3, 1),
+	(caseVide(1,3)->afficherFin('caseVide', false, 'TEST ECHOUE');
+	afficherFin('caseVide', true, 'TEST REUSSI')),
+	testVidePlateau.
 
+testFDJ3:-
+	afficherNomTest(testFDJ3),
+	afficherDebut('victoireColonne', true, 'Verifie que le predicat victoireColonne détecte une colonne de 4 pions du même joueur.'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(1, 2, 1),
+	ajouterPion(1, 3, 1),
+	ajouterPion(1, 4, 1),
+	ajouterPion(2, 1, 2),
+	ajouterPion(2, 2, 2),
+	ajouterPion(2, 3, 2),
+	ajouterPion(2, 4, 1),
+	( (victoireColonne(1,4,1), not(victoireColonne(2,4,1)) ) -> afficherFin('victoireColonne', true, 'TEST REUSSI');
+	afficherFin('victoireColonne', false, 'TEST ECHOUE')) ,
+	testVidePlateau.
+
+testFDJ4:-
+	afficherNomTest(testFDJ4),
+	afficherDebut('verifieGauche', true, 'Verifie que le predicat verifieGauche détecte les pions à Gauche du pion en paramètre (uniquement ceux du joueur actif).'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(2, 1, 1),
+	ajouterPion(3, 1, 1),
+	ajouterPion(4, 1, 1),
+	ajouterPion(1, 2, 2),
+	ajouterPion(2, 2, 1),
+	ajouterPion(3, 2, 2),
+	ajouterPion(4, 2, 2),
+	verifieGauche(4, 1, 1, X1),
+	verifieGauche(4, 2, 2, X2),
+	((X1 =:= 4, X2 =:= 2 ) -> afficherFin('verifieDroite', true, 'TEST REUSSI');
+	afficherFin('verifieGauche', false, 'TEST ECHOUE')) ,
+	testVidePlateau.
+
+testFDJ5:-
+	afficherNomTest(testFDJ5),
+	afficherDebut('verifieDroite', true, 'Verifie que le predicat verifieDroite détecte les pions à Droite du pion en paramètre (uniquement ceux du joueur actif).'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(2, 1, 1),
+	ajouterPion(3, 1, 1),
+	ajouterPion(4, 1, 1),
+	ajouterPion(1, 2, 2),
+	ajouterPion(2, 2, 1),
+	ajouterPion(3, 2, 2),
+	ajouterPion(4, 2, 2),
+	verifieDroite(1, 1, 1, X1),
+	verifieDroite(1, 2, 2, X2),
+	((X1 =:= 4, X2 =:= 1 ) -> afficherFin('verifieDroite', true, 'TEST REUSSI');
+	afficherFin('verifieDroite', false, 'TEST ECHOUE')) ,
+	testVidePlateau.
+
+testFDJ6:-
+	afficherNomTest(testFDJ6),
+	afficherDebut('victoireLigne', true, 'Verifie que le predicat victoireLigne détecte une ligne de 4 pions du même joueur.'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(2, 1, 1),
+	ajouterPion(3, 1, 1),
+	ajouterPion(4, 1, 1),
+	ajouterPion(1, 2, 2),
+	ajouterPion(2, 2, 2),
+	ajouterPion(3, 2, 2),
+	ajouterPion(4, 2, 1),
+	( (victoireLigne(4,1,1), not(victoireColonne(4,2,1)) ) -> afficherFin('victoireLigne', true, 'TEST REUSSI');
+	afficherFin('victoireLigne', false, 'TEST ECHOUE')) ,
+	testVidePlateau.
+
+testFDJ7:-
+	afficherNomTest(testFDJ7),
+	afficherDebut('verifieGaucheHaut', true, 'Verifie que le prédicat compte bien le nombre de pions du même joueur alignés sur une diagonale Gauche haut.'),
+	ajouterPion(1, 4, 1),
+	ajouterPion(2, 3, 1),
+	ajouterPion(3, 2, 1),
+	ajouterPion(4, 1, 1),
+	verifieGaucheHaut(4, 1, 1, X),
+	( X =:= 4-> afficherFin('verifieGaucheHaut', true, 'TEST REUSSI');
+	afficherFin('verifieGaucheHaut', false, 'TEST ECHOUE')) ,
+	testVidePlateau.
+
+testFDJ8:-
+	afficherNomTest(testFDJ8),
+	afficherDebut('verifieDroiteBas', true, 'Verifie que le prédicat compte bien le nombre de pions du même joueur alignés sur une droite bas.'),
+	ajouterPion(1, 4, 1),
+	ajouterPion(2, 3, 1),
+	ajouterPion(3, 2, 1),
+	ajouterPion(4, 1, 1),
+	verifieDroiteBas(1, 4, 1, X),
+	( X =:= 4-> afficherFin('verifieDroiteBas', true, 'TEST REUSSI');
+	afficherFin('verifieDroiteBas', false, 'TEST ECHOUE')) ,
+	testVidePlateau.
+
+testFDJ9:-
+	afficherNomTest(testFDJ9),
+	afficherDebut('victoireDiagGauche', true, 'Verifie que le prédicat détecte une diagonale Gauche Haut/ Droite Bas de 4 pions du même joueur.'),
+	ajouterPion(1, 4, 1),
+	ajouterPion(2, 3, 1),
+	ajouterPion(3, 2, 1),
+	ajouterPion(4, 1, 1),
+	
+	( (victoireDiagGauche(1,4,1), victoireDiagGauche(4,1,1))-> afficherFin('victoireDiagGauche', true, 'TEST REUSSI');
+	afficherFin('victoireDiagGauche', false, 'TEST ECHOUE')) ,
+	testVidePlateau.
+
+testFDJ10:-
+	afficherNomTest(testFDJ10),
+	afficherDebut('verifieGaucheBas', true, 'Verifie que le prédicat compte bien le nombre de pions du même joueur alignés sur une diagonale Gauche bas.'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(2, 2, 1),
+	ajouterPion(3, 3, 1),
+	ajouterPion(4, 4, 1),
+	verifieGaucheBas(4, 4, 1, X),
+	( X =:= 4-> afficherFin('verifieGaucheBas', true, 'TEST REUSSI');
+	afficherFin('verifieGaucheBas', false, 'TEST ECHOUE')) ,
+	testVidePlateau.
+
+testFDJ11:-
+	afficherNomTest(testFDJ11),
+	afficherDebut('verifieDroiteHaut', true, 'Verifie que le prédicat compte bien le nombre de pions du même joueur alignés sur une diagonale droiteHaut.'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(2, 2, 1),
+	ajouterPion(3, 3, 1),
+	ajouterPion(4, 4, 1),
+	verifieDroiteHaut(1, 1, 1, X),
+	( X =:= 4-> afficherFin('verifieDroiteHaut', true, 'TEST REUSSI');
+	afficherFin('verifieDroiteHaut', false, 'TEST ECHOUE')) ,
+	testVidePlateau.
+
+testFDJ12:-
+	afficherNomTest(testFDJ12),
+	afficherDebut('victoireDiagDroite', true, 'Verifie que le prédicat détecte une diagonale Gauche Bas/ Droite Haut de 4 pions du même joueur.'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(2, 2, 1),
+	ajouterPion(3, 3, 1),
+	ajouterPion(4, 4, 1),
+	((victoireDiagDroite(1,1,1), victoireDiagDroite(4,4,1))-> afficherFin('victoireDiagDroite', true, 'TEST REUSSI');
+	afficherFin('victoireDiagDroite', false, 'TEST ECHOUE')) ,
+	testVidePlateau.
 %% Appel des tests
 
 tests :-
@@ -318,6 +471,19 @@ tests :-
 	% testM3, ça merde à partir d'ici.
 	afficherNomTest('Fichier : iaAleatoire.pl'),
 	testIaAleatoire1,
+	afficherNomTest('Fichier : finDeJeu.pl'),
+	testFDJ1,
+	testFDJ2,
+	testFDJ3,
+	testFDJ4,
+	testFDJ5,
+	testFDJ6,
+	testFDJ7,
+	testFDJ8,
+	testFDJ9,
+	testFDJ10,
+	testFDJ11,
+	testFDJ12,
 
 	afficherTestsFonctionnels.
 /*
