@@ -96,6 +96,8 @@ testUtil5 :-
 	
 %% Tests du fichier iaDefOff.pl
 
+%% Tests du fichier iaDefOff.pl
+
 testIaDefOff1 :-
 	afficherNomTest(testIaDefOff1),
 	afficherDebut('findAll3PathColonne', true, 'Verifie que le predicat trouve tous les chemins de taille 3 en colonne du plateau'),
@@ -127,6 +129,67 @@ testIaDefOff2 :-
 	%writeln(['Liste trouvee :', ListeJoueur1] ),
 	( list_to_set(ListeJoueur1, [[1, 2]]) -> afficherFin('findAll2PathColonne', true, 'TEST REUSSI');
 	afficherFin('findAll2PathColonne', false, 'TEST ECHOUE')),
+	testVidePlateau.
+	
+testIaDefOff3 :- 
+	afficherNomTest(testIaDefOff3),
+	afficherDebut('parcoursListeColonne', true, 'Verifie que le predicat renvoie la premiere colonne qui n est pas remplie'),
+	% Une liste représentant le sommet de la colonne 1, le sommet de la colonne 2 et le sommet de la colonne 3
+	parcoursListeColonne([[1, 7], [2, 4],[3, 1]], 1, Colonne),
+	%writeln(['Liste trouvee :', ListeJoueur1] ),
+	( Colonne =:= 2 -> afficherFin('parcoursListeColonne', true, 'TEST REUSSI');
+	afficherFin('parcoursListeColonne', false, 'TEST ECHOUE')),
+	testVidePlateau.
+	
+testIaDefOff4 :- 
+	afficherNomTest(testIaDefOff4),
+	afficherDebut('parcoursListeColonne', false, 'Verifie que le predicat renvoie false quand la liste est vide'),
+	( parcoursListeColonne([[]], 1, Colonne) -> afficherFin('parcoursListeColonne', true, 'TEST ECHOUE');
+	afficherFin('parcoursListeColonne', false, 'TEST REUSSI')),
+	testVidePlateau.
+	
+testIaDefOff5 :-
+	afficherNomTest(testIaDefOff5),
+	afficherDebut('findAll3PathLigne', true, 'Verifie que le predicat trouve tous les chemins de taille 3 en ligne du plateau'),
+	% Chemin sur la ligne 1, tableau de retour de findAll3PathColonne : [Ligne, PionGauche, PionDroit]
+	% PionGauche = Colonne ; PionDroit = Ligne
+	ajouterPion(1, 1, 1),
+	ajouterPion(1, 2, 1),
+	ajouterPion(1, 3, 1),
+	ajouterPion(2, 1, 1),
+	ajouterPion(3, 1, 1),
+	ajouterPion(5, 1, 1),
+	findAll3PathLigne(1, ListeJoueur1),
+	%writeln(['Liste trouvee :', ListeJoueur1] ),
+	( list_to_set(ListeJoueur1, [[1, 1, 3]]) -> afficherFin('findAll3PathLigne', true, 'TEST REUSSI');
+	afficherFin('findAll3PathLigne', false, 'TEST ECHOUE')),
+	testVidePlateau.
+	
+testIaDefOff6 :- 
+	afficherNomTest(testIaDefOff6),
+	afficherDebut('findAll2PathLigne', true, 'Verifie que le predicat trouve tous les chemins de taille 2 en ligne du plateau'),
+	% Chemin sur la ligne 1, tableau de retour de findAll3PathColonne : [Ligne, PionGauche, PionDroit]
+	% PionGauche = Colonne ; PionDroit = Ligne
+	ajouterPion(1, 1, 1),
+	ajouterPion(1, 2, 1),
+	ajouterPion(2, 1, 1),
+	ajouterPion(3, 1, 1),
+	ajouterPion(5, 1, 1),
+	findAll2PathLigne(1, ListeJoueur1),
+	%writeln(['Liste trouvee :', ListeJoueur1] ),
+	( list_to_set(ListeJoueur1, [[1, 1, 2], [1, 2, 3]]) -> afficherFin('findAll2PathLigne', true, 'TEST REUSSI');
+	afficherFin('findAll2PathLigne', false, 'TEST ECHOUE')),
+	testVidePlateau.
+	
+	/* TEST A REVOIR TRES CERTAINEMENT - LA SORTIE EST 3 MAIS JE NE COMPENDS PAS PK*/
+testIaDefOff7 :- 
+	afficherNomTest(testIaDefOff7),
+	afficherDebut('parcoursListeLigne', true, 'Verifie que le predicat renvoie la premiere ligne qui n est pas remplie'),
+	% Une liste représentant le sommet de la colonne 1, le sommet de la colonne 2 et le sommet de la colonne 3
+	parcoursListeLigne([[1, 1, 2], [1, 2, 3], [2, 1, 2]], 1, Colonne),
+	% writeln(['Colonne :', Colonne] ),
+	( Colonne =:= 3 -> afficherFin('parcoursListeLigne', true, 'TEST REUSSI');
+	afficherFin('parcoursListeLigne', false, 'TEST ECHOUE')),
 	testVidePlateau.
 	
 %% Tests du fichier ia2FenouilSec.pl
@@ -239,6 +302,11 @@ tests :-
 	afficherNomTest('Fichier : iaDefOff.pl'),
 	testIaDefOff1,
 	testIaDefOff2,
+	testIaDefOff3,
+	testIaDefOff4,
+	testIaDefOff5,
+	testIaDefOff6,
+	testIaDefOff7,
 	afficherNomTest('Fichier : jouerCoup.pl'),
 	testJouerCoup1,
 	testJouerCoup2,
