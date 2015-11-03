@@ -128,6 +128,53 @@ testIaDefOff2 :-
 	afficherFin('findAll2PathColonne', false, 'TEST ECHOUE')),
 	testVidePlateau.
 
+
+%% Tests du fichier jouerCoup.pl
+testJouerCoup1 :-
+    afficherNomTest(testJouerCoup1),
+    afficherDebut('isolerColonne', true, 'Verifie que le predicat renvoie la liste des pions présents sur la colonne'),
+    assert(pion(1, 1, 1)),
+    assert(pion(2, 1, 1)),
+    assert(pion(2, 2, 1)),
+    assert(pion(4, 1, 1)),
+    isolerColonne(2,ColIsol),
+    ( list_to_set(ColIsol, [pion(2, 1, 1), pion(2, 2, 1)]) -> afficherFin('isolerColonne', true, 'TEST REUSSI');
+      afficherFin('isolerColonne', false, '')),
+    testVidePlateau.
+
+
+testJouerCoup2 :-
+    afficherNomTest(testJouerCoup2),
+    afficherDebut('indexDernierPion', true, 'Verifie que le predicat renvoie le numero de ligne du pion le plus haut de la colonne'),
+    indexDernierPion([pion(2,1,1),pion(2,2,1),pion(2,3,1)],NumLi),
+    ( NumLi == 3 -> afficherFin('indexDernierPion', true, 'TEST REUSSI');
+      afficherFin('indexDernierPion', false, '')),
+    testVidePlateau.
+
+
+testJouerCoup3 :-
+    afficherNomTest(testJouerCoup3),
+    afficherDebut('calculProchainepion', true, 'Verifie que le predicat renvoie le numero de ligne suivant'),
+    calculProchainepion(3,NextNumLi),
+    ( NextNumLi == 4 -> afficherFin('calculProchainepion', true, 'TEST REUSSI');
+      afficherFin('calculProchainepion', false, '')),
+    testVidePlateau.
+
+
+testJouerCoup4 :-
+    afficherNomTest(testJouerCoup4),
+    afficherDebut('isolerColonne', true, 'Verifie que le predicat jouerCoup ajoute un pion sur la première ligne vide de la colonne voulue'),
+    assert(pion(1, 1, 1)),
+    assert(pion(2, 1, 1)),
+    assert(pion(2, 2, 1)),
+    assert(pion(4, 1, 1)),
+    jouerCoup([2,1]),
+    ( pion(2,3,1) -> afficherFin('isolerColonne', true, 'TEST REUSSI');
+      afficherFin('isolerColonne', false, '')),
+    testVidePlateau.
+
+
+
 %% Appel des tests
 
 tests :-
@@ -141,6 +188,11 @@ tests :-
 	afficherNomTest('Fichier : iaDefOff.pl'),
 	testIaDefOff1,
 	testIaDefOff2,
+	afficherNomTest('Fichier : jouerCoup.pl'),
+	testJouerCoup1,
+	testJouerCoup2,
+	testJouerCoup3,
+	testJouerCoup4,
 	afficherTestsFonctionnels.
 /*
 % setup : permet d'effetuer des opérations avant que le test soit
