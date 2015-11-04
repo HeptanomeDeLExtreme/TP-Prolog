@@ -5,7 +5,6 @@
 :- include('pionsFictifs.pl').
 :- include('IHM.pl').
 :- include('jouerCoup.pl').
-:- include('debug.pl').
 :- include('evaluation.pl').
 :- include('ia2FenouilSec').
 

@@ -27,12 +27,12 @@ public class Panel extends JPanel {
 	   if(victoire){
 		   g.setColor(Color.BLACK);
 		   g.setFont(fnt1);
-		   g.drawString("YOUHOUCH !",350/Querifier.coef,390/Querifier.coef);
+		   g.drawString("VICTOIRE !",350/Querifier.coef,390/Querifier.coef);
 	   }
 	   else if(echec){
 		   g.setColor(Color.BLACK);
 		   g.setFont(fnt1);
-		   g.drawString("PERDU",370/Querifier.coef,390/Querifier.coef);
+		   g.drawString("PERDU !",370/Querifier.coef,390/Querifier.coef);
 	   }
 	   g.setColor(Color.BLACK);
 	   g.setFont(fnt1);

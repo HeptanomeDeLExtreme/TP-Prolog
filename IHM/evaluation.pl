@@ -1,6 +1,6 @@
 :- use_module(library(statistics)).
 
-initEval :- nb_setval('NBEval',500),
+initEval :- nb_setval('NBEval',10),
 			nb_setval('NBEssaiReel',0).
 
 calculPourcentage(PJ1,PJ2,NBJ1,NBJ2) :- nb_getval('NBEval',N),PJ1 is (100*NBJ1/N),PJ2 is (100*NBJ2/N).
