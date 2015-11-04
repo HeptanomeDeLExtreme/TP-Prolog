@@ -1,5 +1,0 @@
-Il faudrait faire un pedricat qu'on appelerai dans coupJoueur qui verifie 
-si le coup du joueur provoque sa victoire.
-
-Il faudrait faire un predicat qu'on appelerai après le coup de l'ia qui 
-verifie si elle a fait un coup qui provoque sa victoire.
