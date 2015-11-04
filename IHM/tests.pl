@@ -288,26 +288,6 @@ testIaAleatoire1 :-
     testVidePlateau.
 
 %% Tests du fichier finDeJeu.pl
-testFDJ1:-
-	afficherNomTest(testFDJ1),
-	afficherDebut('caseVide', true, 'Verifie que le predicat caseVide identifie une case vide.'),
-	ajouterPion(1, 1, 1),
-	ajouterPion(1, 2, 1),
-	ajouterPion(1, 3, 1),
-	(caseVide(1,4)->afficherFin('caseVide', true, 'TEST REUSSI');
-	afficherFin('caseVide', false, 'TEST ECHOUE')),
-	testVidePlateau.
-
-testFDJ2:-
-	afficherNomTest(testFDJ2),
-	afficherDebut('caseVide', true, 'Verifie que le predicat caseVide ne vérifie pas une case pleine.'),
-	ajouterPion(1, 1, 1),
-	ajouterPion(1, 2, 1),
-	ajouterPion(1, 3, 1),
-	(caseVide(1,3)->afficherFin('caseVide', false, 'TEST ECHOUE');
-	afficherFin('caseVide', true, 'TEST REUSSI')),
-	testVidePlateau.
-
 testFDJ3:-
 	afficherNomTest(testFDJ3),
 	afficherDebut('victoireColonne', true, 'Verifie que le predicat victoireColonne détecte une colonne de 4 pions du même joueur.'),
@@ -472,8 +452,6 @@ tests :-
 	afficherNomTest('Fichier : iaAleatoire.pl'),
 	testIaAleatoire1,
 	afficherNomTest('Fichier : finDeJeu.pl'),
-	testFDJ1,
-	testFDJ2,
 	testFDJ3,
 	testFDJ4,
 	testFDJ5,

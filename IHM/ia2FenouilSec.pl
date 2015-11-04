@@ -1,19 +1,5 @@
-% IA Fenouil Sec
-% Recherche du coup le plus pertinent dans l'immédiat
-% H4203
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%% IA Fenouil Sec %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% iaFS renvoie la colonne sur laquelle jouer
-% elle accède à la grille de jeu courante (base de faits)
-
-
-%%%%%%%%%%%%%%%%%%%% Prog principal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% peutGagner est vrai si ce pion entraine la victoire de nous
-% (Le repeat est géré dans "peutGagner")
+% peutGagner est vrai si ce pion entraine la victoire du joueur J
+% Unifie Col à la colonne sur laquelle jouer
 iaFS(J,Col) :- peutGagner(Col,J).
 
 % peutPerdre est vrai si ce pion, de l'autre couleur, 
@@ -35,58 +21,25 @@ iaFS(J,Col) :- (
 		  testInsertion2DD(3-J,Col)->stop ;
  		  testInsertionPion(J,Col)->stop ;
  		  testInsertionPion(3-J,Col)->stop ;
- 		  zbla(Col)).
+ 		  ia(Col)).
 
 
 %%%%%%%%%%%%%%%%%%%% Sous-prédicats %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%retirerPion
+% Retire le dernier pion de la colonne Col
 retirerPion(Col) :- isolerColonne(Col, Colonne),
 		    indexDernierPion(Colonne, NumeroLigne),
 		    retract(pion(Col,NumeroLigne,_)).
 
-%peutJouer est vrai si il est possible de jouer sur la col N (col non pleine)
-peutJouer(N):- \+ pion(N, 6, 1).
-
-%peutGagner
-%% peutGagner(pion(Col,Li,Joueur)) :- between(1,7,ColCour),
-%% 				   jouerCoup([ColCour,Joueur]),
-%% 				   isolerColonne(ColCour, PionsPrsnt),
-%% 				   indexDernierPion(PionsPrsnt, NumeroLigne),
-%% 				   (gagne(PionsPrsnt,NumeroLigne,Joueur) ->
-%% 					Col is ColCour,retirerPion(Col),stop,!
-%% 				    ;retirerPion(Col),nostop).
-
-%Tentative bas de gamme de récursivité
-%% peutGagner(pion(Col,Li,Joueur)) :- jouerCoup([ColCour,Joueur]),
-%%    				   isolerColonne(ColCour, PionsPrsnt),
-%% 				   indexDernierPion(PionsPrsnt, NumeroLigne),
-%% 				   gagne(PionsPrsnt,NumeroLigne,Joueur),
-%% 				   Col is ColCour,
-%% 				   retirerPion(Col),
-%% 				   nostop.
-%% peutGagner(pion(Col,Li,Joueur)) :- peutGagner(pion((Col is Col+1),Li,Joueur)).
-
-
-%Tentative de folie
-%% peutGagner(Col,J) :- between(1,7,Col),
-%%                      jouerCoup([Col,J]),
-%% 		     isolerColonne(Col, PionsPrsnt),
-%%  		     indexDernierPion(PionsPrsnt, Li),
-%% 		     (
-%% 			 gagne(Col,Li,J) ->retirerPion(Col), stop;
-%% 			 retirerPion(Col)
-%% 		     ).
-
-
-% Code qui marche et qui casse des culs
+% Predicat qui renvoit true si on peut gagner sur la colonne Col
 peutGagnerSurCol(Col) :- jouerCoup([Col,1]),
 	    isolerColonne(Col,P),
 	    indexDernierPion(P,L),
 	    (gagne(Col,L,1) -> retirerPion(Col) ;
             retirerPion(Col),!,false).
 
+% Predicat qui renvoit true si le joueur J peut gagner sur la colonne Col 
 heyJpeuxGagner(Col,J) :- peutGagnerSurCol(1), Col is 1.
 heyJpeuxGagner(Col,J) :- peutGagnerSurCol(2), Col is 2.
 heyJpeuxGagner(Col,J) :- peutGagnerSurCol(3), Col is 3.
@@ -95,5 +48,8 @@ heyJpeuxGagner(Col,J) :- peutGagnerSurCol(5), Col is 5.
 heyJpeuxGagner(Col,J) :- peutGagnerSurCol(6), Col is 6.
 heyJpeuxGagner(Col,J) :- peutGagnerSurCol(7), Col is 7.
 
+% Predicat qui unifie Col avec la colonne qui fait gagner le joueur J
 peutGagner(Col,J) :- heyJpeuxGagner(Col,J),!.
+
+% Predicat qui unifie Col avec la colonne qui fait perdre le joueur J
 peutPerdre(Col,J) :- heyJpeuxGagner(Col,3-J),!.

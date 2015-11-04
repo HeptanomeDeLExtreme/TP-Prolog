@@ -9,8 +9,9 @@
 :- include('evaluation.pl').
 :- include('ia2FenouilSec').
 
-
+%% Predicat appelé par l'IHM lorsqu'on demande un combat IA vs Ia
 combatIA :- tourIA1.
 
+%% Predicat appelé par l'IHM lorsqu'un humain à joué un coup
 coupJoueur(X,Y,Z) :- ajouterPion(X,Y,Z),
 					(gagne(X,Y,Z)-> victoire;coupIA).
