@@ -1,4 +1,3 @@
-
 :- include('pionsFictifs.pl'). 
 :- include('finDeJeu.pl').
 :- include('iaAleatoire.pl').
@@ -227,8 +226,8 @@ testIaDefOff7 :-
 	ajouterPion(3, 1, 1),
 	tenteAjoutADroite( [[1, 1, 3]], 1, Colonne),!,
 	%writeln( ['Colonne :', Colonne] ),
-	( Colonne =:= 4 ) -> afficherFin('tenteAjoutADroite', true, 'TEST REUSSI');
-	afficherFin('tenteAjoutADroite', false, 'TEST ECHOUE'),
+	( Colonne =:= 4 -> afficherFin('tenteAjoutADroite', true, 'TEST REUSSI');
+	afficherFin('tenteAjoutADroite', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
 testIaDefOff8 :- 
@@ -239,7 +238,7 @@ testIaDefOff8 :-
 	ajouterPion(3, 1, 1),
 	ajouterPion(4, 1, 1),
 	parcoursListeLigne([[1, 2, 4]], 1, Colonne),!,
-	% writeln(['Colonne :', Colonne] ),
+	writeln(['Colonne :', Colonne] ),
 	( Colonne =:= 1 -> afficherFin('parcoursListeLigne', true, 'TEST REUSSI');
 	afficherFin('parcoursListeLigne', false, 'TEST ECHOUE')),
 	testVidePlateau.
