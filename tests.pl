@@ -29,8 +29,8 @@ afficherFin(NomPredicat, Sortie, FailOrNot) :-
 	( 
 		FailOrNot == 'TEST REUSSI' -> ansi_format([fg(green)], 'TEST REUSSI', []);
 		ansi_format([fg(red)], 'TEST ECHOUE', [])
-	),
-	writeln(['\n### FIN - Test du predicat ', NomPredicat, ' ###']),
+	),write('\n'),
+	writeln(['### FIN - Test du predicat ', NomPredicat, ' ###']),
 	nl.
 	
 afficherNomTest(NomTest) :-
@@ -94,7 +94,7 @@ testUtil4 :-
 	assert(pion(1, 1, 1)),
 	assert(pion(1, 2, 2)),
 	testVidePlateau,!,
-	( pion(Colonne, Ligne, Joueur) -> afficherFin('testVidePlateau', true, 'TEST ECHOUE');
+	( (pion(Colonne, Ligne, 1) ; pion(Colonne, Ligne, 2)) -> afficherFin('testVidePlateau', true, 'TEST ECHOUE');
 	afficherFin('testVidePlateau', false, 'TEST REUSSI')).
 
 testUtil5 :-
@@ -210,7 +210,7 @@ testIaDefOff8 :-
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 1, 1),
 	ajouterPion(4, 1, 1),
-	parcoursListeLigne([[1, 2, 4]], 1, Colonne),
+	parcoursListeLigne([[1, 2, 4]], 1, Colonne),!,
 	% writeln(['Colonne :', Colonne] ),
 	( Colonne =:= 1 -> afficherFin('parcoursListeLigne', true, 'TEST REUSSI');
 	afficherFin('parcoursListeLigne', false, 'TEST ECHOUE')),
@@ -679,7 +679,7 @@ testJouerCoup1 :-
     assert(pion(2, 2, 1)),
     assert(pion(4, 1, 1)),
     isolerColonne(2,ColIsol),
-    ( list_to_set(ColIsol, [pion(2, 1, 1), pion(2, 2, 1)]) -> afficherFin('isolerColonne', true, 'TEST REUSSI');
+    ( list_to_set(ColIsol, [pion(2,0,-10), pion(2, 1, 1), pion(2, 2, 1)]) -> afficherFin('isolerColonne', true, 'TEST REUSSI');
       afficherFin('isolerColonne', false, '')),
     testVidePlateau.
 
