@@ -468,7 +468,141 @@ testIaDefOff31 :-
 	( parcoursListePion([ [2, 2] ], 1, ColonneAJouer) -> afficherFin('parcoursListePion', true, 'TEST ECHOUE');
 	afficherFin('parcoursListePion', false, 'TEST REUSSI') ),
 	testVidePlateau.
+	
+testIaDefOff32 :-
+	afficherNomTest(testIaDefOff32),
+	afficherDebut('testInsertion3C', true, 'Verifie que le predicat demande l insertion d abord dans un chemin en colonne de longueur 3 quand c est possible'),
+	ajouterPion(3, 1, 1),
+	ajouterPion(3, 2, 1),
+	ajouterPion(3, 3, 1),
+	ajouterPion(4, 1, 2),
+	ajouterPion(4, 2, 2),
+	ajouterPion(5, 1, 1),
+	testInsertion3C(1, ColonneAJouer),
+	( ColonneAJouer =:= 3 -> afficherFin('testInsertion3C', true, 'TEST REUSSI');
+	afficherFin('testInsertion3C', false, 'TEST ECHOUE') ),
+	testVidePlateau.
 
+testIaDefOff33 :-
+	afficherNomTest(testIaDefOff33),
+	afficherDebut('testInsertion3L', true, 'Verifie que le predicat demande l insertion dans un chemin en ligne de longueur 3 quand l insertion en colonne n est pas possible (colonne de taille 3)'),
+	ajouterPion(3, 1, 1),
+	ajouterPion(3, 2, 2),
+	ajouterPion(3, 3, 2),
+	ajouterPion(4, 1, 1),
+	ajouterPion(4, 2, 2),
+	ajouterPion(5, 1, 1),
+	testInsertion3L(1, ColonneAJouer),
+	%writeln( ['ColonneAJouer :', ColonneAJouer] ),
+	( ColonneAJouer =:= 2 -> afficherFin('testInsertion3L', true, 'TEST REUSSI');
+	afficherFin('testInsertion3L', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+	
+testIaDefOff34 :-
+	afficherNomTest(testIaDefOff34),
+	afficherDebut('testInsertion3DG', true, 'Verifie que le predicat demande l insertion en haut a gauche dans un chemin en diagonal de longueur 3 quand l insertion en ligne n est pas possible (ligne de taille 3)'),
+	ajouterPion(2, 1, 2),
+	ajouterPion(2, 2, 2),
+	ajouterPion(2, 3, 2),
+	ajouterPion(3, 1, 2),
+	ajouterPion(3, 2, 2),
+	ajouterPion(3, 3, 1),
+	ajouterPion(4, 1, 2),
+	ajouterPion(4, 2, 1),
+	ajouterPion(4, 3, 2),
+	ajouterPion(5, 1, 1),
+	ajouterPion(5, 2, 2),
+	ajouterPion(5, 3, 2),
+	testInsertion3DG(1, ColonneAJouer),
+	( ColonneAJouer =:= 2 -> afficherFin('testInsertion3DG', true, 'TEST REUSSI');
+	afficherFin('testInsertion3DG', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+	
+testIaDefOff35 :-
+	afficherNomTest(testIaDefOff35),
+	afficherDebut('testInsertion3DD', true, 'Verifie que le predicat demande l insertion en haut a droite dans un chemin en diagonal de longueur 3 quand l insertion en haut a gauche d une diagonal de longueur 3 n est pas possible'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(1, 2, 2),
+	ajouterPion(1, 3, 2),
+	ajouterPion(2, 1, 2),
+	ajouterPion(2, 2, 1),
+	ajouterPion(2, 3, 2),
+	ajouterPion(3, 1, 2),
+	ajouterPion(3, 2, 2),
+	ajouterPion(3, 3, 1),
+	ajouterPion(4, 1, 2),
+	ajouterPion(4, 2, 2),
+	ajouterPion(4, 3, 2),
+	testInsertion3DD(1, ColonneAJouer),
+	( ColonneAJouer =:= 4 -> afficherFin('testInsertion3DD', true, 'TEST REUSSI');
+	afficherFin('testInsertion3DD', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+	
+testIaDefOff36 :-
+	afficherNomTest(testIaDefOff36),
+	afficherDebut('testInsertion2C', true, 'Verifie que le predicat demande l insertion sur une colonne de taille 2 lorsque l insertion en faut a droite dans un chemin en diagonal de longueur 3 est impossible'),
+	ajouterPion(4, 1, 1),
+	ajouterPion(4, 2, 1),
+	ajouterPion(5, 1, 1),
+	testInsertion2C(1, ColonneAJouer),
+	( ColonneAJouer =:= 4 -> afficherFin('testInsertion2C', true, 'TEST REUSSI');
+	afficherFin('testInsertion2C', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+	
+testIaDefOff37 :-
+	afficherNomTest(testIaDefOff37),
+	afficherDebut('testInsertion2L', true, 'Verifie que le predicat demande sur une ligne de taille 2 lorsque l insertion sur une colonne de taille 2 est impossible'),
+	ajouterPion(3, 1, 1),
+	ajouterPion(3, 2, 2),
+	ajouterPion(3, 3, 2),
+	ajouterPion(4, 1, 1),
+	ajouterPion(4, 2, 2),
+	testInsertion2L(1, ColonneAJouer),
+	%writeln( ['ColonneAJouer :', ColonneAJouer] ),
+	( ColonneAJouer =:= 2 -> afficherFin('testInsertion2L', true, 'TEST REUSSI');
+	afficherFin('testInsertion2L', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+	
+testIaDefOff38 :-
+	afficherNomTest(testIaDefOff38),
+	afficherDebut('testInsertion2DG', true, 'Verifie que le predicat demande l insertion en haut a gauche d une diagonale si l insertion sur une ligne de taille 2 est impossible'),
+	ajouterPion(3, 1, 2),
+	ajouterPion(3, 2, 2),
+	ajouterPion(4, 1, 2),
+	ajouterPion(4, 2, 1),
+	ajouterPion(4, 3, 2),
+	ajouterPion(5, 1, 1),
+	ajouterPion(5, 2, 2),
+	ajouterPion(5, 3, 2),
+	testInsertion2DG(1, ColonneAJouer),
+	( ColonneAJouer =:= 3 -> afficherFin('testInsertion2DG', true, 'TEST REUSSI');
+	afficherFin('testInsertion2DG', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+	
+testIaDefOff39 :-
+	afficherNomTest(testIaDefOff39),
+	afficherDebut('testInsertion2DD', true, 'Verifie que le predicat demande l insertion en haut a droite d une diagonale de taille 2 lorsque l insertion en haut a gauche d une diagonale de taille 2 est impossible'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(1, 2, 2),
+	ajouterPion(1, 3, 2),
+	ajouterPion(2, 1, 2),
+	ajouterPion(2, 2, 1),
+	ajouterPion(2, 3, 2),
+	ajouterPion(3, 1, 2),
+	ajouterPion(3, 2, 2),
+	testInsertion2DD(1, ColonneAJouer),
+	( ColonneAJouer =:= 3 -> afficherFin('testInsertion2DD', true, 'TEST REUSSI');
+	afficherFin('testInsertion2DD', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+	
+testIaDefOff40 :-
+	afficherNomTest(testIaDefOff40),
+	afficherDebut('testInsertionPion', true, 'Verifie que le predicat demande l insertion autours d un pion lorsque l insertion en haut a droite d une diagonale de taille 2 est impossible'),
+	ajouterPion(1, 1, 1),
+	testInsertionPion(1, ColonneAJouer),
+	( ColonneAJouer =:= 2 -> afficherFin('testInsertionPion', true, 'TEST REUSSI');
+	afficherFin('testInsertionPion', false, 'TEST ECHOUE') ),
+	testVidePlateau.
 	
 %% Tests du fichier iaMixte.pl
 
@@ -739,7 +873,7 @@ tests :-
 	testUtil4,
 	testUtil5,
 	afficherNomTest('Fichier : iaDefOff.pl'),
-	testIaDefOff1,
+testIaDefOff1,
 	testIaDefOff2,
 	testIaDefOff3,
 	testIaDefOff4,
@@ -770,6 +904,17 @@ tests :-
 	testIaDefOff29,
 	testIaDefOff30,
 	testIaDefOff31,
+	testIaDefOff31,
+	testIaDefOff32,
+	testIaDefOff33,
+	testIaDefOff34,
+	testIaDefOff35,
+	testIaDefOff36,
+	testIaDefOff37,
+	testIaDefOff38,
+	testIaDefOff39,
+	testIaDefOff40,
+	testIaDefOff41,
 
 	afficherNomTest('Fichier : jouerCoup.pl'),
 	testJouerCoup1,
