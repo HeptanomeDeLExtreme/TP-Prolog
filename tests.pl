@@ -98,8 +98,6 @@ testUtil5 :-
 	
 %% Tests du fichier iaDefOff.pl
 
-%% Tests du fichier iaDefOff.pl
-
 testIaDefOff1 :-
 	afficherNomTest(testIaDefOff1),
 	afficherDebut('findAll3PathColonne', true, 'Verifie que le predicat trouve tous les chemins de taille 3 en colonne du plateau'),
@@ -183,14 +181,56 @@ testIaDefOff6 :-
 	afficherFin('findAll2PathLigne', false, 'TEST ECHOUE')),
 	testVidePlateau.
 	
-	/* TEST A REVOIR TRES CERTAINEMENT - LA SORTIE EST 3 MAIS JE NE COMPENDS PAS PK*/
-testIaDefOff7 :- 
+testIaDefOff7 :-
 	afficherNomTest(testIaDefOff7),
-	afficherDebut('parcoursListeLigne', true, 'Verifie que le predicat renvoie la premiere ligne qui n est pas remplie'),
-	% Une liste représentant le sommet de la colonne 1, le sommet de la colonne 2 et le sommet de la colonne 3
-	parcoursListeLigne([[1, 1, 2], [1, 2, 3], [2, 1, 2]], 1, Colonne),
+	afficherDebut('tenteAjoutADroite', true, 'Verifie que le predicat ajoute bien un pion a droite d une ligne'),
+	% Une liste représente [Ligne, PionLePlusAGauche, PionLePlusADroite]
+	ajouterPion(1, 1, 1),
+	ajouterPion(2, 1, 1),
+	ajouterPion(3, 1, 1),
+	tenteAjoutADroite([[1, 1, 3]],1,Colonne),
+	writeln(['Colonne :', Colonne] ),
+	( Colonne =:= 4) -> afficherFin('tenteAjoutADroite', true, 'TEST REUSSI');
+	afficherFin('tenteAjoutADroite', false, 'TEST ECHOUE'),
+	testVidePlateau.
+	
+testIaDefOff8 :-
+	afficherNomTest(testIaDefOff8),
+	afficherDebut('tenteAjoutADroite', true, 'Verifie que le predicat renvoie false lorsqu il ne peut pas ajouter a droite d une ligne'),
+	% Une liste représente [Ligne, PionLePlusAGauche, PionLePlusADroite]
+	ajouterPion(1, 1, 1),
+	ajouterPion(2, 1, 1),
+	ajouterPion(3, 1, 1),
+	ajouterPion(4, 1, 2),
+	( tenteAjoutADroite([[1, 1, 3]],1,Colonne) ) -> afficherFin('tenteAjoutADroite', false, 'TEST REUSSI');
+	afficherFin('tenteAjoutADroite', true, 'TEST ECHOUE'),
+	testVidePlateau.
+	
+	
+testIaDefOff9 :- 
+	afficherNomTest(testIaDefOff9),
+	afficherDebut('parcoursListeLigne', true, 'Verifie que le predicat ajoute bien un pion a gauche d une ligne avant de l ajouter de tenter l ajout a droite'),
+	% Une liste représente [Ligne, PionLePlusAGauche, PionLePlusADroite]
+	ajouterPion(2, 1, 1),
+	ajouterPion(3, 1, 1),
+	ajouterPion(4, 1, 1),
+	parcoursListeLigne([[1, 1, 2], [1, 2, 3]], 1, Colonne),
 	% writeln(['Colonne :', Colonne] ),
-	( Colonne =:= 3 -> afficherFin('parcoursListeLigne', true, 'TEST REUSSI');
+	( Colonne =:= 1 -> afficherFin('parcoursListeLigne', true, 'TEST REUSSI');
+	afficherFin('parcoursListeLigne', false, 'TEST ECHOUE')),
+	testVidePlateau.
+	
+testIaDefOff10 :- 
+	afficherNomTest(testIaDefOff10),
+	afficherDebut('parcoursListeLigne', true, 'Verifie que le predicat ajoute bien un pion a droite d une ligne lorsque l ajout a gauche est impossible'),
+	% Une liste représente [Ligne, PionLePlusAGauche, PionLePlusADroite]
+	ajouterPion(1, 1, 2),
+	ajouterPion(2, 1, 1),
+	ajouterPion(3, 1, 1),
+	ajouterPion(4, 1, 1),
+	parcoursListeLigne([[1, 1, 2], [1, 2, 3]], 1, Colonne),
+	% writeln(['Colonne :', Colonne] ),
+	( Colonne =:= 5 -> afficherFin('parcoursListeLigne', true, 'TEST REUSSI');
 	afficherFin('parcoursListeLigne', false, 'TEST ECHOUE')),
 	testVidePlateau.
 	
@@ -468,7 +508,10 @@ tests :-
 	%testIaDefOff4,
 	%testIaDefOff5,
 	%testIaDefOff6,
-	%testIaDefOff7,
+	testIaDefOff7,
+	/*testIaDefOff8,
+	testIaDefOff9,
+	testIaDefOff10,*/
 	afficherNomTest('Fichier : jouerCoup.pl'),
 	testJouerCoup1,
 	testJouerCoup2,
