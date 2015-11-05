@@ -282,13 +282,29 @@ testIaDefOff12 :-
 
 testIaDefOff13 :-
 	afficherNomTest(testIaDefOff13),
-	afficherDebut('parcoursListeDiagGauche', true, 'Verifie que le predicat trouve tous les chemins en diagonale gauche'),
-	ajouterPion(3, 1, 1),
+	afficherDebut('parcoursListeDiagGauche', true, 'Verifie que le predicat trouve la colonne où jouer pour rallonger une diagonale gauche par la gauche'),
+	ajouterPion(2, 1, 1),
 	ajouterPion(2, 2, 1),
+	ajouterPion(2, 3, 1),
+	ajouterPion(3, 3, 1),
+	ajouterPion(4, 2, 1),
 	findAll2PathDiagGauche(1, ListeJoueur1),
-	( list_to_set(ListeJoueur1, [[2,2,3,1]]) -> afficherFin('findAll2PathDiagGauche', true, 'TEST REUSSI');
-	afficherFin('findAll2PathDiagGauche', false, 'TEST ECHOUE')),
+	parcoursListeDiagGauche(ListeJoueur1,1,N),
+	( N == 2 -> afficherFin('parcoursListeDiagGauche', true, 'TEST REUSSI');
+	afficherFin('parcoursListeDiagGauche', false, 'TEST ECHOUE')),
 	testVidePlateau.
+
+testIaDefOff14 :-
+	afficherNomTest(testIaDefOff1),
+	afficherDebut('tenteAjoutDiagGauche', true, 'Verifie que le predicat trouve la colonne où jouer pour rallonger une diagonale gauche par la droite'),
+	ajouterPion(3, 3, 1),
+	ajouterPion(4, 2, 1),
+	findAll2PathDiagGauche(1, ListeJoueur1),
+	parcoursListeDiagGauche(ListeJoueur1,1,N),
+	( N == 5 -> afficherFin('tenteAjoutDiagGauche', true, 'TEST REUSSI');
+	afficherFin('tenteAjoutDiagGauche', false, 'TEST ECHOUE')),
+	testVidePlateau.
+
 
 testIaDefOff15 :-
 	afficherNomTest(testIaDefOff15),
@@ -310,7 +326,35 @@ testIaDefOff16 :-
 	( list_to_set(ListeJoueur1, [[1,1,2,2]]) -> afficherFin('findAll2PathDiagDroite', true, 'TEST REUSSI');
 	afficherFin('findAll2PathDiagDroite', false, 'TEST ECHOUE')),
 	testVidePlateau.
-	
+
+
+
+testIaDefOff17 :-
+	afficherNomTest(testIaDefOff17),
+	afficherDebut('parcoursListeDiagDroite', true, 'Verifie que le predicat trouve la colonne où jouer pour rallonger une diagonale droite par la gauche'),
+	ajouterPion(3, 3, 1),
+	ajouterPion(2, 2, 1),
+	findAll2PathDiagDroite(1, ListeJoueur1),
+	parcoursListeDiagDroite(ListeJoueur1,1,N),
+	( N == 1 -> afficherFin('parcoursListeDiagDroite', true, 'TEST REUSSI');
+	afficherFin('parcoursListeDiagDroite', false, 'TEST ECHOUE')),
+	testVidePlateau.
+
+testIaDefOff18 :-
+	afficherNomTest(testIaDefOff18),
+	afficherDebut('tenteAjoutDiagDroite', true, 'Verifie que le predicat trouve la colonne où jouer pour rallonger une diagonale droite par la droite'),
+	ajouterPion(4, 1, 1),
+	ajouterPion(4, 2, 1),
+	ajouterPion(2, 1, 1),
+	ajouterPion(3, 2, 1),
+	findAll2PathDiagDroite(1, ListeJoueur1),
+	tenteAjoutDiagDroite(ListeJoueur1,1,N),
+	( N == 4 -> afficherFin('tenteAjoutDiagDroite', true, 'TEST REUSSI');
+	afficherFin('tenteAjoutDiagDroite', false, 'TEST ECHOUE')),
+	testVidePlateau.
+
+
+
 testIaDefOff19 :-
 	afficherNomTest(testIaDefOff19),
 	afficherDebut('findAllPion', true, 'Verifie que le predicat trouve tous les pions du joueur 2'),
@@ -919,11 +963,11 @@ testsIADefOFF :-
 	testIaDefOff11,
 	testIaDefOff12,
 	testIaDefOff13,
-	%testIaDefOff14,
+	testIaDefOff14,
 	testIaDefOff15,
 	testIaDefOff16,
-	%testIaDefOff17,
-	%testIaDefOff18,
+	testIaDefOff17,
+	testIaDefOff18,
 	testIaDefOff19,
 	testIaDefOff20,
 	testIaDefOff21,
