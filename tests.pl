@@ -202,7 +202,7 @@ testM1:-
 	ajouterPion(3, 1, 1),
 	ajouterPion(3, 2, 1),
 	ajouterPion(3, 3, 1),
-	(peutGagnerSurCol(3) -> afficherFin('peutGagnerSurCol', true, 'TEST REUSSI');
+	(peutGagnerSurCol(3,1) -> afficherFin('peutGagnerSurCol', true, 'TEST REUSSI');
 	afficherFin('peutGagnerSurCol', false, 'TEST ECHOUE')),
 	testVidePlateau.
 
@@ -212,7 +212,7 @@ testM2:-
 	ajouterPion(3, 1, 1),
 	ajouterPion(3, 2, 1),
 	ajouterPion(3, 3, 1),
-	(peutGagnerSurCol(4) ->afficherFin('peutGagnerSurCol', false, 'TEST ECHOUE');
+	(peutGagnerSurCol(4,1) ->afficherFin('peutGagnerSurCol', false, 'TEST ECHOUE');
  	afficherFin('peutGagnerSurCol', true, 'TEST REUSSI')),
 	testVidePlateau.
 
