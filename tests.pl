@@ -16,14 +16,14 @@
 %% Affichage dans la console
 
 afficherDebut(NomPredicat,SortieAttendue, Objectif) :- 
-	writeln(['### Test du precidat ', NomPredicat, ' ###']),
+	writeln(['### Test du predicat ', NomPredicat, ' ###']),
 	writeln(Objectif),
 	writeln(['Sortie attendue : ', SortieAttendue]).
 	
 afficherFin(NomPredicat, Sortie, FailOrNot) :-
 	writeln(['Sortie obtenue : ', Sortie]),
 	writeln(FailOrNot),
-	writeln(['### FIN - Test du precidat ', NomPredicat, ' ###']),
+	writeln(['### FIN - Test du predicat ', NomPredicat, ' ###']),
 	nl.
 	
 afficherNomTest(NomTest) :-
@@ -235,7 +235,61 @@ testIaDefOff10 :-
 	( Colonne =:= 5 -> afficherFin('parcoursListeLigne', true, 'TEST REUSSI');
 	afficherFin('parcoursListeLigne', false, 'TEST ECHOUE')),
 	testVidePlateau.
-	
+
+testIaDefOff11 :-
+	afficherNomTest(testIaDefOff11),
+	afficherDebut('findAll3PathDiagGauche', true, 'Verifie que le predicat trouve tous les chemins de taille 3 en diagonale gauche'),
+	ajouterPion(3, 1, 1),
+	ajouterPion(2, 2, 1),
+	ajouterPion(1, 3, 1),
+	findAll3PathDiagGauche(1, ListeJoueur1),
+	( list_to_set(ListeJoueur1, [[1, 3, 3, 1]]) -> afficherFin('findAll3PathDiagGauche', true, 'TEST REUSSI');
+	afficherFin('findAll3PathDiagGauche', false, 'TEST ECHOUE')),
+	testVidePlateau.
+
+testIaDefOff12 :-
+	afficherNomTest(testIaDefOff12),
+	afficherDebut('findAll2PathDiagGauche', true, 'Verifie que le predicat trouve tous les chemins de taille 2 en diagonale gauche'),
+	ajouterPion(3, 1, 1),
+	ajouterPion(2, 2, 1),
+	findAll2PathDiagGauche(1, ListeJoueur1),
+	( list_to_set(ListeJoueur1, [[2,2,3,1]]) -> afficherFin('findAll2PathDiagGauche', true, 'TEST REUSSI');
+	afficherFin('findAll2PathDiagGauche', false, 'TEST ECHOUE')),
+	testVidePlateau.
+
+testIaDefOff13 :-
+	afficherNomTest(testIaDefOff13),
+	afficherDebut('parcoursListeDiagGauche', true, 'Verifie que le predicat trouve tous les chemins en diagonale gauche'),
+	ajouterPion(3, 1, 1),
+	ajouterPion(2, 2, 1),
+	findAll2PathDiagGauche(1, ListeJoueur1),
+	( list_to_set(ListeJoueur1, [[2,2,3,1]]) -> afficherFin('findAll2PathDiagGauche', true, 'TEST REUSSI');
+	afficherFin('findAll2PathDiagGauche', false, 'TEST ECHOUE')),
+	testVidePlateau.
+
+testIaDefOff15 :-
+	afficherNomTest(testIaDefOff15),
+	afficherDebut('findAll3PathDiagDroite', true, 'Verifie que le predicat trouve tous les chemins de taille 3 en diagonale droite'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(2, 2, 1),
+	ajouterPion(3, 3, 1),
+	findAll3PathDiagDroite(1, ListeJoueur1),
+	( list_to_set(ListeJoueur1, [[1,1,3,3]]) -> afficherFin('findAll3PathDiagDroite', true, 'TEST REUSSI');
+	afficherFin('findAll3PathDiagDroite', false, 'TEST ECHOUE')),
+	testVidePlateau.
+
+testIaDefOff16 :-
+	afficherNomTest(testIaDefOff16),
+	afficherDebut('findAll2PathDiagDroite', true, 'Verifie que le predicat trouve tous les chemins de taille 2 en diagonale droite'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(2, 2, 1),
+	findAll2PathDiagDroite(1, ListeJoueur1),
+	( list_to_set(ListeJoueur1, [[1,1,2,2]]) -> afficherFin('findAll2PathDiagDroite', true, 'TEST REUSSI');
+	afficherFin('findAll2PathDiagDroite', false, 'TEST ECHOUE')),
+	testVidePlateau.
+
+
+
 %% Tests du fichier ia2FenouilSec.pl
 
 testM1:-
@@ -514,6 +568,14 @@ tests :-
 	/*testIaDefOff8,
 	testIaDefOff9,
 	testIaDefOff10,*/
+	testIaDefOff11,
+	%testIaDefOff12,
+	%testIaDefOff13,
+	%testIaDefOff14,
+	%testIaDefOff15,
+	%testIaDefOff16,
+	%testIaDefOff17,
+	%testIaDefOff18,
 	afficherNomTest('Fichier : jouerCoup.pl'),
 	testJouerCoup1,
 	testJouerCoup2,
