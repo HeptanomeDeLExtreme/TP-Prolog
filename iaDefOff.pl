@@ -22,10 +22,11 @@ iAOffensive(J,N) :- (testInsertion3C(J,N)->stop ;
 %% Predicat qui unifie N à la colonne sur laquelle jouer
 %% Sachant qu'on est le joueur J
 %% Avec une stratégie défensive
-iADefensive(J,N) :- (testInsertion3C(J,N)->stop ; 
+iADefensive(J1,N) :- J is 3-J1,
+			(testInsertion3C(J,N)->stop ; 
 		     testInsertion3L(J,N)->stop ;
-		     %testInsertion3DG(J,N)->stop ;
-		     %testInsertion3DD(J,N)->stop ;
+		     testInsertion3DG(J,N)->stop ;
+		     testInsertion3DD(J,N)->stop ;
 		     testInsertion2C(J,N)->stop ;
 		     testInsertion2L(J,N)->stop ;
 		     testInsertion2DG(J,N)->stop ;

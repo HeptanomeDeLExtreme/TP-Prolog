@@ -63,28 +63,30 @@ afficherNomTest(N) :-
 	writeln(['Test :', N]).
 	
 %% Comptage des tests réussis et des tests échoués
-initTest() :-
-	b_setval(testsReussis, 0),
-	b_setval(testsEchoues, 0).
+initTest :-
+	nb_setval('testsReussis', 0),
+	nb_setval('testsEchoues', 0).
 	
 %% Incrémenter testsReussis
 incrementerTestsReussis :-
-	incrementeX(b_getval(testsReussis), Resultat),
-	b_setval(testsReussis, Resultat).
+	nb_getval('testsReussis',X),
+	incrementeX(X, Resultat),
+	nb_setval('testsReussis', Resultat).
 	
 %% Incrémenter testsEchoues
 incrementerTestsEchoues :-
-	incrementeX(b_getval(testsEchoues), Resultat),
-	b_setval(testsEchoues, Resultat).
+	nb_getval('testsEchoues', X),
+	incrementeX(X, Resultat),
+	nb_setval('testsEchoues', Resultat).
 	
 %% Affichage des variables testsReussis et testsEchoues
 affichageVariablesGloables :-
-	b_getval(testsReussis, R),
-	b_getval(testsEchoues, E),
+	nb_getval('testsReussis', R),
+	nb_getval('testsEchoues', E),
 	nl,
 	writeln(['testsReussis : ', R]),
 	writeln(['testsEchoues : ', E]),
-	nl,
+	nl.
 
 %% Tests du fichier util.pl
 
@@ -984,8 +986,7 @@ testsFDJ :-
 finTests :-	afficherFinTestsUnitaires,!.
 
 tests :- 
-	initTest(),
-	affichageVariablesGloables,
+	initTest,
 	testsUtils,
 	/*testsIADefOFF,
 	testsJouerCoup,
