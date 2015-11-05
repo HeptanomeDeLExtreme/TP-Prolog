@@ -48,12 +48,12 @@ afficherTestsUnitaires :-
 	writeln('** ** ** ** ** ** ** ** ** ** **'),
 	nl.
 	
-afficherTestsFonctionnels :-
+afficherFinTestsUnitaires :-
 	nl,
 	writeln('** ** ** ** ** ** ** ** ** ** **'),
 	writeln('** ** ** ** ** ** ** ** ** ** **'),
 	nl,
-	writeln('TESTS FONCTIONNELS'),
+	writeln('FIN - TESTS UNITAIRES'),
 	nl,
 	writeln('** ** ** ** ** ** ** ** ** ** **'),
 	writeln('** ** ** ** ** ** ** ** ** ** **'),
@@ -308,11 +308,166 @@ testIaDefOff19 :-
 	afficherNomTest(testIaDefOff19),
 	afficherDebut('tenteAjoutG', true, 'Verifie que le predicat demande bien l ajout d un pion a gauche du pion passe en parametre'),
 	ajouterPion(3, 1, 1),
-	tenteAjoutBG([ [3, 1] ], 1, ColonneAJouer),
+	tenteAjoutG([ [3, 1] ], 1, ColonneAJouer),
 	( ColonneAJouer =:= 2 -> afficherFin('tenteAjoutG', true, 'TEST REUSSI');
 	afficherFin('tenteAjoutG', false, 'TEST ECHOUE') ),
 	testVidePlateau.
-
+	
+testIaDefOff20 :-
+	afficherNomTest(testIaDefOff20),
+	afficherDebut('tenteAjoutHG', true, 'Verifie que le predicat demande bien l ajout d un pion en haut a gauche du pion passe en parametre'),
+	ajouterPion(3, 1, 1),
+	ajouterPion(2, 1, 2),
+	tenteAjoutHG([ [3, 1] ], 1, ColonneAJouer),
+	( ColonneAJouer =:= 2 -> afficherFin('tenteAjoutHG', true, 'TEST REUSSI');
+	afficherFin('tenteAjoutHG', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+	
+testIaDefOff21 :-
+	afficherNomTest(testIaDefOff21),
+	afficherDebut('tenteAjoutH', true, 'Verifie que le predicat demande bien l ajout d un pion en haut du pion passe en parametre'),
+	ajouterPion(3, 1, 1),
+	tenteAjoutH([ [3, 1] ], 1, ColonneAJouer),
+	( ColonneAJouer =:= 3 -> afficherFin('tenteAjoutH', true, 'TEST REUSSI');
+	afficherFin('tenteAjoutH', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+	
+testIaDefOff22 :-
+	afficherNomTest(testIaDefOff22),
+	afficherDebut('tenteAjoutHD', true, 'Verifie que le predicat demande bien l ajout d un pion en haut a droite du pion passe en parametre'),
+	ajouterPion(3, 1, 1),
+	ajouterPion(4, 1, 2),
+	tenteAjoutHD([ [3, 1] ], 1, ColonneAJouer),
+	( ColonneAJouer =:= 4 -> afficherFin('tenteAjoutHD', true, 'TEST REUSSI');
+	afficherFin('tenteAjoutHD', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+	
+testIaDefOff23 :-
+	afficherNomTest(testIaDefOff23),
+	afficherDebut('tenteAjoutD', true, 'Verifie que le predicat demande bien l ajout d un pion a droite du pion passe en parametre'),
+	ajouterPion(3, 1, 1),
+	tenteAjoutD([ [3, 1] ], 1, ColonneAJouer),
+	( ColonneAJouer =:= 4 -> afficherFin('tenteAjoutD', true, 'TEST REUSSI');
+	afficherFin('tenteAjoutD', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+	
+testIaDefOff24 :-
+	afficherNomTest(testIaDefOff24),
+	afficherDebut('parcoursListePion', true, 'Verifie que le predicat demande bien l ajout d un pion en bas a droite du pion passe en parametre avant de tenter l ajout des pions a droite, puis en haut a droite, puis en haut, puis en haut a gauche, puis a gauche, puis en bas a gauche'),
+	ajouterPion(3, 1, 1),
+	ajouterPion(3, 2, 1),
+	parcoursListePion([ [3, 2] ], 1, ColonneAJouer),
+	( ColonneAJouer =:= 4 -> afficherFin('parcoursListePion', true, 'TEST REUSSI');
+	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+	
+testIaDefOff25 :-
+	afficherNomTest(testIaDefOff25),
+	afficherDebut('parcoursListePion', true, 'Verifie que le predicat demande bien l ajout d un pion a droite du pion passe en parametre lorsque l ajout d autres pions est impossible'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(1, 2, 1),
+	ajouterPion(1, 3, 1),
+	ajouterPion(2, 1, 1),
+	ajouterPion(2, 2, 1),
+	ajouterPion(2, 3, 1),
+	ajouterPion(3, 1, 2),
+	parcoursListePion([ [2, 2] ], 1, ColonneAJouer),
+	( ColonneAJouer =:= 3 -> afficherFin('parcoursListePion', true, 'TEST REUSSI');
+	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+	
+testIaDefOff26 :-
+	afficherNomTest(testIaDefOff26),
+	afficherDebut('parcoursListePion', true, 'Verifie que le predicat demande bien l ajout d un pion en haut a droite du pion passe en parametre lorsque l ajout d autres pions est impossible'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(1, 2, 1),
+	ajouterPion(1, 3, 1),
+	ajouterPion(2, 1, 1),
+	ajouterPion(2, 2, 1),
+	ajouterPion(2, 3, 1),
+	ajouterPion(3, 1, 2),
+	ajouterPion(3, 2, 2),
+	parcoursListePion([ [2, 2] ], 1, ColonneAJouer),
+	( ColonneAJouer =:= 3 -> afficherFin('parcoursListePion', true, 'TEST REUSSI');
+	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+	
+testIaDefOff27 :-
+	afficherNomTest(testIaDefOff27),
+	afficherDebut('parcoursListePion', true, 'Verifie que le predicat demande bien l ajout d un pion en haut du pion passe en parametre lorsque l ajout d autres pions est impossible'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(1, 2, 1),
+	ajouterPion(1, 3, 1),
+	ajouterPion(2, 1, 1),
+	ajouterPion(2, 2, 1),
+	ajouterPion(3, 1, 2),
+	ajouterPion(3, 2, 2),
+	ajouterPion(3, 3, 2),
+	parcoursListePion([ [2, 2] ], 1, ColonneAJouer),
+	( ColonneAJouer =:= 2 -> afficherFin('parcoursListePion', true, 'TEST REUSSI');
+	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+	
+testIaDefOff28 :-
+	afficherNomTest(testIaDefOff28),
+	afficherDebut('parcoursListePion', true, 'Verifie que le predicat demande bien l ajout d un pion en haut a gauche du pion passe en parametre lorsque l ajout d autres pions est impossible'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(1, 2, 1),
+	ajouterPion(2, 1, 1),
+	ajouterPion(2, 2, 1),
+	ajouterPion(2, 3, 1),
+	ajouterPion(3, 1, 2),
+	ajouterPion(3, 2, 2),
+	ajouterPion(3, 3, 2),
+	parcoursListePion([ [2, 2] ], 1, ColonneAJouer),
+	( ColonneAJouer =:= 1 -> afficherFin('parcoursListePion', true, 'TEST REUSSI');
+	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+	
+testIaDefOff29 :-
+	afficherNomTest(testIaDefOff29),
+	afficherDebut('parcoursListePion', true, 'Verifie que le predicat demande bien l ajout d un pion a gauche du pion passe en parametre lorsque l ajout d autres pions est impossible'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(2, 1, 1),
+	ajouterPion(2, 2, 1),
+	ajouterPion(2, 3, 1),
+	ajouterPion(3, 1, 2),
+	ajouterPion(3, 2, 2),
+	ajouterPion(3, 3, 2),
+	parcoursListePion([ [2, 2] ], 1, ColonneAJouer),
+	( ColonneAJouer =:= 1 -> afficherFin('parcoursListePion', true, 'TEST REUSSI');
+	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+	
+testIaDefOff30 :-
+	afficherNomTest(testIaDefOff30),
+	afficherDebut('parcoursListePion', true, 'Verifie que le predicat demande bien l ajout d un pion en bas a gauche du pion passe en parametre lorsque l ajout d autres pions est impossible'),
+	ajouterPion(2, 1, 1),
+	ajouterPion(2, 2, 1),
+	ajouterPion(2, 3, 1),
+	ajouterPion(3, 1, 2),
+	ajouterPion(3, 2, 2),
+	ajouterPion(3, 3, 2),
+	parcoursListePion([ [2, 2] ], 1, ColonneAJouer),
+	( ColonneAJouer =:= 1 -> afficherFin('parcoursListePion', true, 'TEST REUSSI');
+	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+	
+testIaDefOff31 :-
+	afficherNomTest(testIaDefOff31),
+	afficherDebut('parcoursListePion', false, 'Verifie que le predicat renvoie false lorsque l ajout de pions est impossible'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(1, 2, 1),
+	ajouterPion(1, 3, 1),	
+	ajouterPion(2, 1, 1),
+	ajouterPion(2, 2, 1),
+	ajouterPion(2, 3, 1),
+	ajouterPion(3, 1, 2),
+	ajouterPion(3, 2, 2),
+	ajouterPion(3, 3, 2),
+	( parcoursListePion([ [2, 2] ], 1, ColonneAJouer) -> afficherFin('parcoursListePion', true, 'TEST ECHOUE');
+	afficherFin('parcoursListePion', false, 'TEST REUSSI') ),
+	testVidePlateau.
 
 	
 %% Tests du fichier iaMixte.pl
@@ -584,7 +739,7 @@ tests :-
 	testUtil4,
 	testUtil5,
 	afficherNomTest('Fichier : iaDefOff.pl'),
-	/*testIaDefOff1,
+	testIaDefOff1,
 	testIaDefOff2,
 	testIaDefOff3,
 	testIaDefOff4,
@@ -598,10 +753,23 @@ tests :-
 	testIaDefOff13,
 	testIaDefOff14,
 	testIaDefOff15,
-	testIaDefOff16,*/
-	%testIaDefOff17,
-	%testIaDefOff18,
+	testIaDefOff16,
+	testIaDefOff17,
+	testIaDefOff18,
 	testIaDefOff19,
+	testIaDefOff20,
+	testIaDefOff21,
+	testIaDefOff22,
+	testIaDefOff23,
+	testIaDefOff24,
+	testIaDefOff25,
+	testIaDefOff26,
+	testIaDefOff26,
+	testIaDefOff27,
+	testIaDefOff28,
+	testIaDefOff29,
+	testIaDefOff30,
+	testIaDefOff31,
 
 	afficherNomTest('Fichier : jouerCoup.pl'),
 	testJouerCoup1,
@@ -628,100 +796,4 @@ tests :-
 	testFDJ11,
 	testFDJ12,
 
-	afficherTestsFonctionnels.
-/*
-% setup : permet d'effetuer des opérations avant que le test soit
-%         lancé (exemple, remplir le plateau avec initialiserPlateau.
-% cleanup : permet d'effetuer des opérations après que le test se soit
-%           lancé (exemple, vider le plateau de jeu avec testVidePlateau.
-
-% Tests unitaires
-
-:- begin_tests(util).
-
-test('du predicat incrementeX', 
-	[ true(Reponse =:= 2) ]) :-
-	incrementeX(1, Reponse).
-	
-test('du predicat decrementeX', [ true(Reponse =:= 2) ]) :-
-	decrementeX(3, Reponse).
-	
-test('du predicat doubleInc pour incrementer deux variables', 
-	[all(Reponse == [3, 4])]) :-
-	doubleInc(2, 3, NewColonne, NewLigne),
-	(Reponse = NewColonne ; Reponse = NewLigne).
-
-% Apres avoir ajoute quelques pions, test si le plateau se vide
-% correctement en appelant testVidePlateau. Ce test doit echouer.
-test('du predicat testVidePlateau', 
-	[ all(Reponse == []),
-	  cleanup(testVidePlateau) ]) :-
-	assert(pion(1, 1, 1)),
-	assert(pion(1, 2, 2)),
-	testVidePlateau,
-	pion(Colonne, Ligne, Joueur),
-	(Reponse = Colonne ; Reponse = Ligne ; Reponse = Joueur). 
-	
-% Test si il existe un pion a l'endroit ou ajouterPion doit avoir
-% ajoute un pion. Ce test doit reussir.
-test('du predicat ajouterPion',
-	[ cleanup(testVidePlateau) ]) :-
-	ajouterPion(1, 1, 1),
-	pion(1, 1, _).
-	
-% Test si le plateau s initialise correctement 
-test('du predicat initialiserPlateau',
-	[ cleanup(testVidePlateau),
-	  all(Reponse == [1, 0, -10, 2, 0, -10, 3, 0, -10, 4, 0, -10, 5, 0, -10, 6, 0, -10, 7, 0, -10, -10, -10, -10])]) :-
-	initialiserPlateau,
-	%testVidePlateau,
-	pion(Colonne, Ligne, Joueur),
-	(Reponse = Colonne ; Reponse = Ligne ; Reponse = Joueur).
-	
-:- end_tests(util).
-
-:- begin_tests(finDeJeu).
-
-% Le joueur 1 gagne sur la colonne 1
-test('du predicat victoireColonne. Victoire du joueur 1 sur la colonne',
-	[ cleanup(testVidePlateau) ]) :-
-	ajouterPion(1, 1, 1),
-	ajouterPion(1, 2, 1),
-	ajouterPion(1, 3, 1),
-	ajouterPion(1, 4, 1),
-	victoireColonne(1, 4, 1).
-	
-% Le joueur 2 ne gagne pas sur la colonne 1
-test('du predicat victoireColonne. Pas de victoire sur la colonne pour le joueur 2',
-	[ cleanup(testVidePlateau), fail ])
-	ajouterPion(1, 1, 1),
-	ajouterPion(1, 2, 1),
-	ajouterPion(1, 3, 1),
-	ajouterPion(1, 4, 2),
-	victoireColonne(1, 4, 2).
-	
-% On insère un pion à gauche et on vérifie que le predicat
-% gauche le détecte bien.
-% TODO : A FAIRE
-	
-% TODO : FAIRE LE TEST POUR LE PREDICAT droite
-
-% Le joueur 2 gagne sur la ligne 2
-test('du predicat victoireLigne. Victoire du joueur 2 sur la ligne',
-	[ cleanup(testVidePlateau) ]) :-
-	ajouterPion(1, 2, 2),
-	ajouterPion(2, 2, 2),
-	ajouterPion(3, 2, 2),
-	ajouterPion(4, 2, 2),
-	victoireLigne(4, 2, 2).
-	
-% Le joueur 1 ne gagne pas sur la ligne 2
-test('du predicat victoireLigne. Pas de victoire du joueur 1 sur la ligne',
-	[ cleanup(testVidePlateau), fail ]) :-
-	ajouterPion(1, 2, 2),
-	ajouterPion(2, 2, 2),
-	ajouterPion(3, 2, 2),
-	ajouterPion(4, 2, 1),
-	victoireLigne(4, 2, 1).
-	
-:- end_tests(finDeJeu). */
+	afficherFinTestsUnitaires.
