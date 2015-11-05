@@ -74,14 +74,14 @@ testUtil1 :-
 testUtil2 :-
 	afficherNomTest(testUtil2),
 	afficherDebut('decrementeX', true, 'Decrementation d une variable'),
-	decrementeX(3, Reponse),
+	decrementeX(3, Reponse),!,
 	(Reponse =:= 2 -> afficherFin('decrementeX', true, 'TEST REUSSI');
 	afficherFin('decrementeX', false, 'TEST ECHOUE')).
 	
 testUtil3 :-
 	afficherNomTest(testUtil3),
 	afficherDebut('doubleInc', true, 'Incrementation de deux variables'),
-	doubleInc(2, 3, NewColonne, NewLigne),
+	doubleInc(2, 3, NewColonne, NewLigne),!,
 	( (NewColonne =:= 3, NewLigne =:= 4) -> afficherFin('doubleInc', true, 'TEST REUSSI');
 	afficherFin('doubleInc', false, 'TEST ECHOUE')).
 	
@@ -90,14 +90,14 @@ testUtil4 :-
 	afficherDebut('testVidePlateau', false, 'Verifie que le plateau se vide correctement apres l insertion de plusieurs pions'),
 	assert(pion(1, 1, 1)),
 	assert(pion(1, 2, 2)),
-	testVidePlateau,
+	testVidePlateau,!,
 	( pion(Colonne, Ligne, Joueur) -> afficherFin('testVidePlateau', true, 'TEST ECHOUE');
 	afficherFin('testVidePlateau', false, 'TEST REUSSI')).
 
 testUtil5 :-
 	afficherNomTest(testUtil5),
 	afficherDebut('ajouterPion', true, 'Verifie qu un pion a bien ete ajoute'),
-	assert(pion(1, 1, 1)),
+	assert(pion(1, 1, 1)),!,
 	( pion(1, 1, _) -> afficherFin('ajouterPion', true, 'TEST REUSSI');
 	afficherFin('ajouterPion', false, 'TEST ECHOUE')),
 	testVidePlateau.
@@ -115,7 +115,7 @@ testIaDefOff1 :-
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 1, 1),
 	ajouterPion(5, 1, 1),
-	findAll3PathColonne(1, ListeJoueur1),
+	findAll3PathColonne(1, ListeJoueur1),!,
 	%writeln(['Liste trouvee :', ListeJoueur1] ),
 	( list_to_set(ListeJoueur1, [[1, 3]]) -> afficherFin('findAll3PathColonne', true, 'TEST REUSSI');
 	afficherFin('findAll3PathColonne', false, 'TEST ECHOUE')),
@@ -131,7 +131,7 @@ testIaDefOff2 :-
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 1, 1),
 	ajouterPion(5, 1, 1),
-	findAll2PathColonne(1, ListeJoueur1),
+	findAll2PathColonne(1, ListeJoueur1),!,
 	%writeln(['Liste trouvee :', ListeJoueur1] ),
 	( list_to_set(ListeJoueur1, [[1, 2]]) -> afficherFin('findAll2PathColonne', true, 'TEST REUSSI');
 	afficherFin('findAll2PathColonne', false, 'TEST ECHOUE')),
@@ -141,7 +141,7 @@ testIaDefOff3 :-
 	afficherNomTest(testIaDefOff3),
 	afficherDebut('parcoursListeColonne', true, 'Verifie que le predicat renvoie la premiere colonne qui n est pas remplie'),
 	% Une liste représentant le sommet de la colonne 1, le sommet de la colonne 2 et le sommet de la colonne 3
-	parcoursListeColonne([[1, 7], [2, 4],[3, 1]], 1, Colonne),
+	parcoursListeColonne([[1, 7], [2, 4],[3, 1]], 1, Colonne),!,
 	%writeln(['Liste trouvee :', ListeJoueur1] ),
 	( Colonne =:= 2 -> afficherFin('parcoursListeColonne', true, 'TEST REUSSI');
 	afficherFin('parcoursListeColonne', false, 'TEST ECHOUE')),
@@ -871,9 +871,9 @@ tests :-
 	testUtil2,
 	testUtil3,
 	testUtil4,
-	testUtil5.
-zob :-	
-	afficherNomTest('Fichier : iaDefOff.pl'),
+	testUtil5,!.
+	
+zob :-	afficherNomTest('Fichier : iaDefOff.pl'),
 	testIaDefOff1,
 	testIaDefOff2,
 	testIaDefOff3,
