@@ -1,5 +1,3 @@
-/* ----------- Tests ----------- */
-
 
 :- include('pionsFictifs.pl'). 
 :- include('finDeJeu.pl').
@@ -11,6 +9,12 @@
 :- include('evaluation.pl').
 :- include('iaMixte.pl').
 :- use_module(library(lists)).
+
+/* ----------- Tests ----------- */
+/* 
+   POUR LANCER LES TESTS : tests.
+   DANS LA CONSOLE.
+*/
 
 
 %% Affichage dans la console
@@ -274,6 +278,39 @@ testIaDefOff16 :-
 	findAll2PathDiagDroite(1, ListeJoueur1),
 	( list_to_set(ListeJoueur1, [[1,1,2,2]]) -> afficherFin('findAll2PathDiagDroite', true, 'TEST REUSSI');
 	afficherFin('findAll2PathDiagDroite', false, 'TEST ECHOUE')),
+	testVidePlateau.
+	
+testIaDefOff17 :-
+	afficherNomTest(testIaDefOff17),
+	afficherDebut('findAllPion', true, 'Verifie que le predicat trouve tous les pions du joueur 2'),
+	% Liste retournée de la forme [ColonneDuPion, LigneDuPion]
+	ajouterPion(1, 1, 1),
+	ajouterPion(1, 2, 2),
+	ajouterPion(1, 3, 1),
+	ajouterPion(1, 4, 2),
+	ajouterPion(1, 5, 1),
+	findAllPion(2, ListeJoueur2),
+	( list_to_set( ListeJoueur2, [ [1, 2], [1, 4] ] ) -> afficherFin('findAllPion', true, 'TEST REUSSI');
+	afficherFin('findAllPion', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+	
+testIaDefOff18 :-
+	afficherNomTest(testIaDefOff18),
+	afficherDebut('tenteAjoutBG', true, 'Verifie que le predicat demande bien l ajout d un pion en bas a gauche du pion passe en parametre'),
+	ajouterPion(3, 1, 1),
+	ajouterPion(3, 2, 2),
+	tenteAjoutBG([ [3, 2] ], 1, ColonneAJouer),
+	( ColonneAJouer =:= 2 -> afficherFin('tenteAjoutBG', true, 'TEST REUSSI');
+	afficherFin('tenteAjoutBG', false, 'TEST ECHOUE') ),
+	testVidePlateau.
+
+testIaDefOff19 :-
+	afficherNomTest(testIaDefOff19),
+	afficherDebut('tenteAjoutG', true, 'Verifie que le predicat demande bien l ajout d un pion a gauche du pion passe en parametre'),
+	ajouterPion(3, 1, 1),
+	tenteAjoutBG([ [3, 1] ], 1, ColonneAJouer),
+	( ColonneAJouer =:= 2 -> afficherFin('tenteAjoutG', true, 'TEST REUSSI');
+	afficherFin('tenteAjoutG', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 
 
@@ -547,7 +584,7 @@ tests :-
 	testUtil4,
 	testUtil5,
 	afficherNomTest('Fichier : iaDefOff.pl'),
-	testIaDefOff1,
+	/*testIaDefOff1,
 	testIaDefOff2,
 	testIaDefOff3,
 	testIaDefOff4,
@@ -556,15 +593,15 @@ tests :-
 	testIaDefOff7,
 	testIaDefOff8,
 	testIaDefOff9,
-	%testIaDefOff10,
 	testIaDefOff11,
 	testIaDefOff12,
 	testIaDefOff13,
 	testIaDefOff14,
 	testIaDefOff15,
-	testIaDefOff16,
-	testIaDefOff17,
-	testIaDefOff18,
+	testIaDefOff16,*/
+	%testIaDefOff17,
+	%testIaDefOff18,
+	testIaDefOff19,
 
 	afficherNomTest('Fichier : jouerCoup.pl'),
 	testJouerCoup1,
