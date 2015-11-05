@@ -26,8 +26,11 @@ afficherDebut(NomPredicat,SortieAttendue, Objectif) :-
 	
 afficherFin(NomPredicat, Sortie, FailOrNot) :-
 	writeln(['Sortie obtenue : ', Sortie]),
-	writeln(FailOrNot),
-	writeln(['### FIN - Test du predicat ', NomPredicat, ' ###']),
+	( 
+		FailOrNot == 'TEST REUSSI' -> ansi_format([fg(green)], 'TEST REUSSI', []);
+		ansi_format([fg(red)], 'TEST ECHOUE', [])
+	),
+	writeln(['\n### FIN - Test du predicat ', NomPredicat, ' ###']),
 	nl.
 	
 afficherNomTest(NomTest) :-
