@@ -864,14 +864,15 @@ testFDJ12:-
 	testVidePlateau.
 %% Appel des tests
 
-tests :-
+testsUtils :-
 	afficherTestsUnitaires,
 	afficherNomTest('Fichier : util.pl'),
 	testUtil1,
 	testUtil2,
 	testUtil3,
 	testUtil4,
-	testUtil5,!.
+	testUtil5,
+	!.
 	
 zob :-	afficherNomTest('Fichier : iaDefOff.pl'),
 	testIaDefOff1,
