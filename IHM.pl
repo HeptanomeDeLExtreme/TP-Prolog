@@ -35,8 +35,8 @@ testIA2(N) :- isolerColonne(N, Colonne),
 		
 %% Predicat qui représente le tour de la premiere IA
 tourIA1 :-	%ia(N),
-			%iAOffensive(1,N),
-			iaMixte(1,N),
+			iAOffensive(1,N),
+			%iaMixte(1,N),
 			jouerCoup([N,1]),
 			print,
 			sleep(2),

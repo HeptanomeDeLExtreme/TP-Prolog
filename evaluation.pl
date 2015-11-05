@@ -2,10 +2,10 @@
 
 :- use_module(library(statistics)).
 
-initEval :- nb_setval('NBEval',3),
+initEval :- nb_setval('NBEval',50),
 			nb_setval('NBEssaiReel',0).
 
-calculPourcentage(PJ1,PJ2,NBJ1,NBJ2) :- nb_getval('NBEval',N),PJ1 is (100*NBJ1/N),PJ2 is (100*NBJ2/N).
+calculPourcentage(PJ1,PJ2,NBJ1,NBJ2) :- nb_getval('NBEssaiReel',N),PJ1 is (100*NBJ1/N),PJ2 is (100*NBJ2/N).
 moyenneTemps :- nb_getval('timeTable',L),average_easy(L,M),write('Temps moyen d\'execution : '),write(M),writeln(' secondes').
 
 average_easy( List, Avg ) :-
@@ -105,7 +105,7 @@ testIA1Eval1(N) :- isolerColonne(N, Colonne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSO1',X),incrementeX(X,X1),nb_setval('AVSO1',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA2Eval1
 		)
 		).
@@ -115,7 +115,7 @@ testIA2Eval1(N) :- isolerColonne(N, Colonne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSO2',X),incrementeX(X,X1),nb_setval('AVSO2',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA1Eval1
 		)
 		).
@@ -144,7 +144,7 @@ testIA1Eval1b(N) :- isolerColonne(N, Colonne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSO1b',X),incrementeX(X,X1),nb_setval('AVSO1b',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA2Eval1b
 		)
 		).
@@ -154,7 +154,7 @@ testIA2Eval1b(N) :- isolerColonne(N, Colonne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSO2b',X),incrementeX(X,X1),nb_setval('AVSO2b',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA1Eval1b
 		)
 		).
@@ -183,7 +183,7 @@ testIA1Eval2(N) :- isolerColonne(N, Colonne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSD1',X),incrementeX(X,X1),nb_setval('AVSD1',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA2Eval2
 		)
 		).
@@ -193,7 +193,7 @@ testIA2Eval2(N) :- isolerColonne(N, Colonne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSD2',X),incrementeX(X,X1),nb_setval('AVSD2',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA1Eval2
 		)
 		).
@@ -222,7 +222,7 @@ testIA1Eval2b(N) :- isolerColonne(N, Colonne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSD1b',X),incrementeX(X,X1),nb_setval('AVSD1b',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA2Eval2b
 		)
 		).
@@ -232,7 +232,7 @@ testIA2Eval2b(N) :- isolerColonne(N, Colonne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSD2b',X),incrementeX(X,X1),nb_setval('AVSD2b',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA1Eval2b
 		)
 		).
@@ -261,7 +261,7 @@ testIA1Eval3(N) :- isolerColonne(N, Colonne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSM1',X),incrementeX(X,X1),nb_setval('AVSM1',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA2Eval3
 		)
 		).
@@ -271,7 +271,7 @@ testIA2Eval3(N) :- isolerColonne(N, Colonne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSM2',X),incrementeX(X,X1),nb_setval('AVSM2',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA1Eval3
 		)
 		).
@@ -301,7 +301,7 @@ testIA1Eval3b(N) :- isolerColonne(N, Colonne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSM1b',X),incrementeX(X,X1),nb_setval('AVSM1b',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA2Eval3b
 		)
 		).
@@ -311,7 +311,7 @@ testIA2Eval3b(N) :- isolerColonne(N, Colonne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSM2b',X),incrementeX(X,X1),nb_setval('AVSM2b',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA1Eval3b
 		)
 		).
@@ -410,7 +410,7 @@ testIA1Eval5(N) :- isolerColonne(N, Colonne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSD1',X),incrementeX(X,X1),nb_setval('OVSD1',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA2Eval5
 		)
 		).
@@ -420,7 +420,7 @@ testIA2Eval5(N) :- isolerColonne(N, Colonne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSD2',X),incrementeX(X,X1),nb_setval('OVSD2',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA1Eval5
 		)
 		).
@@ -449,7 +449,7 @@ testIA1Eval5b(N) :- isolerColonne(N, Colonne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSD1b',X),incrementeX(X,X1),nb_setval('OVSD1b',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA2Eval5b
 		)
 		).
@@ -459,7 +459,7 @@ testIA2Eval5b(N) :- isolerColonne(N, Colonne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSD2b',X),incrementeX(X,X1),nb_setval('OVSD2b',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA1Eval5b
 		)
 		).
@@ -488,7 +488,7 @@ testIA1Eval6(N) :- isolerColonne(N, Colonne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSM1',X),incrementeX(X,X1),nb_setval('OVSM1',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA2Eval6
 		)
 		).
@@ -498,7 +498,7 @@ testIA2Eval6(N) :- isolerColonne(N, Colonne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSM2',X),incrementeX(X,X1),nb_setval('OVSM2',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA1Eval6
 		)
 		).
@@ -527,7 +527,7 @@ testIA1Eval6b(N) :- isolerColonne(N, Colonne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSM1b',X),incrementeX(X,X1),nb_setval('OVSM1b',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA2Eval6b
 		)
 		).
@@ -537,7 +537,7 @@ testIA2Eval6b(N) :- isolerColonne(N, Colonne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSM2b',X),incrementeX(X,X1),nb_setval('OVSM2b',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA1Eval6b
 		)
 		).
@@ -635,7 +635,7 @@ testIA1Eval8(N) :- isolerColonne(N, Colonne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('DVSM1',X),incrementeX(X,X1),nb_setval('DVSM1',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA2Eval8
 		)
 		).
@@ -645,7 +645,7 @@ testIA2Eval8(N) :- isolerColonne(N, Colonne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('DVSM2',X),incrementeX(X,X1),nb_setval('DVSM2',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA1Eval8
 		)
 		).

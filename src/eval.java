@@ -12,6 +12,6 @@ public class eval {
 	}
 	
 	public static void print(String nbEssai,String J1,String J2){
-		System.out.println("hehe"+nbEssai);
+		System.out.println(nbEssai);
 	}
 }

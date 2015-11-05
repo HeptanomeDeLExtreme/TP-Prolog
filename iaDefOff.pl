@@ -34,6 +34,8 @@ iADefensive(J1,N) :- J is 3-J1,
 		     testInsertionPion(J,N)->stop ;
 		     ia(N)
 		    ).
+		        
+		    
 
 %% on regarde sur les chemins de 3 en colonnes, 
 %% si on peut => on renvoit colonne
