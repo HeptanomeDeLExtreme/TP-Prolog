@@ -146,7 +146,7 @@ testIaDefOff1 :-
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 1, 1),
 	ajouterPion(5, 1, 1),
-	findAll3PathColonne(1, ListeJoueur1),
+	findAll3PathColonne(1, ListeJoueur1),!,
 	%writeln(['Liste trouvee :', ListeJoueur1] ),
 	( list_to_set(ListeJoueur1, [[1, 3]]) -> afficherFin('findAll3PathColonne', true, 'TEST REUSSI');
 	afficherFin('findAll3PathColonne', false, 'TEST ECHOUE')),
@@ -162,7 +162,7 @@ testIaDefOff2 :-
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 1, 1),
 	ajouterPion(5, 1, 1),
-	findAll2PathColonne(1, ListeJoueur1),
+	findAll2PathColonne(1, ListeJoueur1),!,
 	%writeln(['Liste trouvee :', ListeJoueur1] ),
 	( list_to_set(ListeJoueur1, [[1, 2]]) -> afficherFin('findAll2PathColonne', true, 'TEST REUSSI');
 	afficherFin('findAll2PathColonne', false, 'TEST ECHOUE')),
@@ -172,7 +172,7 @@ testIaDefOff3 :-
 	afficherNomTest(testIaDefOff3),
 	afficherDebut('parcoursListeColonne', true, 'Verifie que le predicat renvoie la premiere colonne qui n est pas remplie'),
 	% Une liste représentant le sommet de la colonne 1, le sommet de la colonne 2 et le sommet de la colonne 3
-	parcoursListeColonne([[1, 7], [2, 4],[3, 1]], 1, Colonne),
+	parcoursListeColonne([[1, 7], [2, 4],[3, 1]], 1, Colonne),!,
 	%writeln(['Liste trouvee :', ListeJoueur1] ),
 	( Colonne =:= 2 -> afficherFin('parcoursListeColonne', true, 'TEST REUSSI');
 	afficherFin('parcoursListeColonne', false, 'TEST ECHOUE')),
@@ -180,7 +180,7 @@ testIaDefOff3 :-
 	
 testIaDefOff4 :- 
 	afficherNomTest(testIaDefOff4),
-	afficherDebut('parcoursListeColonne', false, 'Verifie que le predicat renvoie false quand la liste est vide'),
+	afficherDebut('parcoursListeColonne', false, 'Verifie que le predicat renvoie false quand la liste est vide'),!,
 	( parcoursListeColonne([[]], 1, Colonne) -> afficherFin('parcoursListeColonne', true, 'TEST ECHOUE');
 	afficherFin('parcoursListeColonne', false, 'TEST REUSSI')),
 	testVidePlateau.
@@ -196,7 +196,7 @@ testIaDefOff5 :-
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 1, 1),
 	ajouterPion(5, 1, 1),
-	findAll3PathLigne(1, ListeJoueur1),
+	findAll3PathLigne(1, ListeJoueur1),!,
 	%writeln(['Liste trouvee :', ListeJoueur1] ),
 	( list_to_set(ListeJoueur1, [[1, 1, 3]]) -> afficherFin('findAll3PathLigne', true, 'TEST REUSSI');
 	afficherFin('findAll3PathLigne', false, 'TEST ECHOUE')),
@@ -212,7 +212,7 @@ testIaDefOff6 :-
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 1, 1),
 	ajouterPion(5, 1, 1),
-	findAll2PathLigne(1, ListeJoueur1),
+	findAll2PathLigne(1, ListeJoueur1),!,
 	%writeln(['Liste trouvee :', ListeJoueur1] ),
 	( list_to_set(ListeJoueur1, [[1, 1, 2], [1, 2, 3]]) -> afficherFin('findAll2PathLigne', true, 'TEST REUSSI');
 	afficherFin('findAll2PathLigne', false, 'TEST ECHOUE')),
@@ -225,7 +225,7 @@ testIaDefOff7 :-
 	ajouterPion(1, 1, 1),
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 1, 1),
-	tenteAjoutADroite( [[1, 1, 3]], 1, Colonne),
+	tenteAjoutADroite( [[1, 1, 3]], 1, Colonne),!,
 	%writeln( ['Colonne :', Colonne] ),
 	( Colonne =:= 4 ) -> afficherFin('tenteAjoutADroite', true, 'TEST REUSSI');
 	afficherFin('tenteAjoutADroite', false, 'TEST ECHOUE'),
@@ -252,7 +252,7 @@ testIaDefOff9 :-
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 1, 1),
 	ajouterPion(4, 1, 1),
-	parcoursListeLigne([[1, 2, 4]], 1, Colonne),
+	parcoursListeLigne([[1, 2, 4]], 1, Colonne),!,
 	% writeln(['Colonne :', Colonne] ),
 	( Colonne =:= 5 -> afficherFin('parcoursListeLigne', true, 'TEST REUSSI');
 	afficherFin('parcoursListeLigne', false, 'TEST ECHOUE')),
@@ -265,7 +265,7 @@ testIaDefOff11 :-
 	ajouterPion(3, 1, 1),
 	ajouterPion(2, 2, 1),
 	ajouterPion(1, 3, 1),
-	findAll3PathDiagGauche(1, ListeJoueur1),
+	findAll3PathDiagGauche(1, ListeJoueur1),!,
 	( list_to_set(ListeJoueur1, [[1, 3, 3, 1]]) -> afficherFin('findAll3PathDiagGauche', true, 'TEST REUSSI');
 	afficherFin('findAll3PathDiagGauche', false, 'TEST ECHOUE')),
 	testVidePlateau.
@@ -275,7 +275,7 @@ testIaDefOff12 :-
 	afficherDebut('findAll2PathDiagGauche', true, 'Verifie que le predicat trouve tous les chemins de taille 2 en diagonale gauche'),
 	ajouterPion(3, 1, 1),
 	ajouterPion(2, 2, 1),
-	findAll2PathDiagGauche(1, ListeJoueur1),
+	findAll2PathDiagGauche(1, ListeJoueur1),!,
 	( list_to_set(ListeJoueur1, [[2,2,3,1]]) -> afficherFin('findAll2PathDiagGauche', true, 'TEST REUSSI');
 	afficherFin('findAll2PathDiagGauche', false, 'TEST ECHOUE')),
 	testVidePlateau.
@@ -289,7 +289,7 @@ testIaDefOff13 :-
 	ajouterPion(3, 3, 1),
 	ajouterPion(4, 2, 1),
 	findAll2PathDiagGauche(1, ListeJoueur1),
-	parcoursListeDiagGauche(ListeJoueur1,1,N),
+	parcoursListeDiagGauche(ListeJoueur1,1,N),!,
 	( N == 2 -> afficherFin('parcoursListeDiagGauche', true, 'TEST REUSSI');
 	afficherFin('parcoursListeDiagGauche', false, 'TEST ECHOUE')),
 	testVidePlateau.
@@ -300,7 +300,7 @@ testIaDefOff14 :-
 	ajouterPion(3, 3, 1),
 	ajouterPion(4, 2, 1),
 	findAll2PathDiagGauche(1, ListeJoueur1),
-	parcoursListeDiagGauche(ListeJoueur1,1,N),
+	parcoursListeDiagGauche(ListeJoueur1,1,N),!,
 	( N == 5 -> afficherFin('tenteAjoutDiagGauche', true, 'TEST REUSSI');
 	afficherFin('tenteAjoutDiagGauche', false, 'TEST ECHOUE')),
 	testVidePlateau.
@@ -312,7 +312,7 @@ testIaDefOff15 :-
 	ajouterPion(1, 1, 1),
 	ajouterPion(2, 2, 1),
 	ajouterPion(3, 3, 1),
-	findAll3PathDiagDroite(1, ListeJoueur1),
+	findAll3PathDiagDroite(1, ListeJoueur1),!,
 	( list_to_set(ListeJoueur1, [[1,1,3,3]]) -> afficherFin('findAll3PathDiagDroite', true, 'TEST REUSSI');
 	afficherFin('findAll3PathDiagDroite', false, 'TEST ECHOUE')),
 	testVidePlateau.
@@ -322,7 +322,7 @@ testIaDefOff16 :-
 	afficherDebut('findAll2PathDiagDroite', true, 'Verifie que le predicat trouve tous les chemins de taille 2 en diagonale droite'),
 	ajouterPion(1, 1, 1),
 	ajouterPion(2, 2, 1),
-	findAll2PathDiagDroite(1, ListeJoueur1),
+	findAll2PathDiagDroite(1, ListeJoueur1),!,
 	( list_to_set(ListeJoueur1, [[1,1,2,2]]) -> afficherFin('findAll2PathDiagDroite', true, 'TEST REUSSI');
 	afficherFin('findAll2PathDiagDroite', false, 'TEST ECHOUE')),
 	testVidePlateau.
@@ -335,7 +335,7 @@ testIaDefOff17 :-
 	ajouterPion(3, 3, 1),
 	ajouterPion(2, 2, 1),
 	findAll2PathDiagDroite(1, ListeJoueur1),
-	parcoursListeDiagDroite(ListeJoueur1,1,N),
+	parcoursListeDiagDroite(ListeJoueur1,1,N),!,
 	( N == 1 -> afficherFin('parcoursListeDiagDroite', true, 'TEST REUSSI');
 	afficherFin('parcoursListeDiagDroite', false, 'TEST ECHOUE')),
 	testVidePlateau.
@@ -348,7 +348,7 @@ testIaDefOff18 :-
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 2, 1),
 	findAll2PathDiagDroite(1, ListeJoueur1),
-	tenteAjoutDiagDroite(ListeJoueur1,1,N),
+	tenteAjoutDiagDroite(ListeJoueur1,1,N),!,
 	( N == 4 -> afficherFin('tenteAjoutDiagDroite', true, 'TEST REUSSI');
 	afficherFin('tenteAjoutDiagDroite', false, 'TEST ECHOUE')),
 	testVidePlateau.
@@ -364,7 +364,7 @@ testIaDefOff19 :-
 	ajouterPion(1, 3, 1),
 	ajouterPion(1, 4, 2),
 	ajouterPion(1, 5, 1),
-	findAllPion(2, ListeJoueur2),
+	findAllPion(2, ListeJoueur2),!,
 	( list_to_set( ListeJoueur2, [ [1, 2], [1, 4] ] ) -> afficherFin('findAllPion', true, 'TEST REUSSI');
 	afficherFin('findAllPion', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -374,7 +374,7 @@ testIaDefOff20 :-
 	afficherDebut('tenteAjoutBG', true, 'Verifie que le predicat demande bien l ajout d un pion en bas a gauche du pion passe en parametre'),
 	ajouterPion(3, 1, 1),
 	ajouterPion(3, 2, 2),
-	tenteAjoutBG([ [3, 2] ], 1, ColonneAJouer),
+	tenteAjoutBG([ [3, 2] ], 1, ColonneAJouer),!,
 	( ColonneAJouer =:= 2 -> afficherFin('tenteAjoutBG', true, 'TEST REUSSI');
 	afficherFin('tenteAjoutBG', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -383,7 +383,7 @@ testIaDefOff21 :-
 	afficherNomTest(testIaDefOff21),
 	afficherDebut('tenteAjoutG', true, 'Verifie que le predicat demande bien l ajout d un pion a gauche du pion passe en parametre'),
 	ajouterPion(3, 1, 1),
-	tenteAjoutG([ [3, 1] ], 1, ColonneAJouer),
+	tenteAjoutG([ [3, 1] ], 1, ColonneAJouer),!,
 	( ColonneAJouer =:= 2 -> afficherFin('tenteAjoutG', true, 'TEST REUSSI');
 	afficherFin('tenteAjoutG', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -393,7 +393,7 @@ testIaDefOff22 :-
 	afficherDebut('tenteAjoutHG', true, 'Verifie que le predicat demande bien l ajout d un pion en haut a gauche du pion passe en parametre'),
 	ajouterPion(3, 1, 1),
 	ajouterPion(2, 1, 2),
-	tenteAjoutHG([ [3, 1] ], 1, ColonneAJouer),
+	tenteAjoutHG([ [3, 1] ], 1, ColonneAJouer),!,
 	( ColonneAJouer =:= 2 -> afficherFin('tenteAjoutHG', true, 'TEST REUSSI');
 	afficherFin('tenteAjoutHG', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -402,7 +402,7 @@ testIaDefOff23 :-
 	afficherNomTest(testIaDefOff23),
 	afficherDebut('tenteAjoutH', true, 'Verifie que le predicat demande bien l ajout d un pion en haut du pion passe en parametre'),
 	ajouterPion(3, 1, 1),
-	tenteAjoutH([ [3, 1] ], 1, ColonneAJouer),
+	tenteAjoutH([ [3, 1] ], 1, ColonneAJouer),!,
 	( ColonneAJouer =:= 3 -> afficherFin('tenteAjoutH', true, 'TEST REUSSI');
 	afficherFin('tenteAjoutH', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -412,7 +412,7 @@ testIaDefOff24 :-
 	afficherDebut('tenteAjoutHD', true, 'Verifie que le predicat demande bien l ajout d un pion en haut a droite du pion passe en parametre'),
 	ajouterPion(3, 1, 1),
 	ajouterPion(4, 1, 2),
-	tenteAjoutHD([ [3, 1] ], 1, ColonneAJouer),
+	tenteAjoutHD([ [3, 1] ], 1, ColonneAJouer),!,
 	( ColonneAJouer =:= 4 -> afficherFin('tenteAjoutHD', true, 'TEST REUSSI');
 	afficherFin('tenteAjoutHD', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -421,7 +421,7 @@ testIaDefOff25 :-
 	afficherNomTest(testIaDefOff25),
 	afficherDebut('tenteAjoutD', true, 'Verifie que le predicat demande bien l ajout d un pion a droite du pion passe en parametre'),
 	ajouterPion(3, 1, 1),
-	tenteAjoutD([ [3, 1] ], 1, ColonneAJouer),
+	tenteAjoutD([ [3, 1] ], 1, ColonneAJouer),!,
 	( ColonneAJouer =:= 4 -> afficherFin('tenteAjoutD', true, 'TEST REUSSI');
 	afficherFin('tenteAjoutD', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -431,7 +431,7 @@ testIaDefOff26 :-
 	afficherDebut('parcoursListePion', true, 'Verifie que le predicat demande bien l ajout d un pion en bas a droite du pion passe en parametre avant de tenter l ajout des pions a droite, puis en haut a droite, puis en haut, puis en haut a gauche, puis a gauche, puis en bas a gauche'),
 	ajouterPion(3, 1, 1),
 	ajouterPion(3, 2, 1),
-	parcoursListePion([ [3, 2] ], 1, ColonneAJouer),
+	parcoursListePion([ [3, 2] ], 1, ColonneAJouer),!,
 	( ColonneAJouer =:= 4 -> afficherFin('parcoursListePion', true, 'TEST REUSSI');
 	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -446,7 +446,7 @@ testIaDefOff27 :-
 	ajouterPion(2, 2, 1),
 	ajouterPion(2, 3, 1),
 	ajouterPion(3, 1, 2),
-	parcoursListePion([ [2, 2] ], 1, ColonneAJouer),
+	parcoursListePion([ [2, 2] ], 1, ColonneAJouer),!,
 	( ColonneAJouer =:= 3 -> afficherFin('parcoursListePion', true, 'TEST REUSSI');
 	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -462,7 +462,7 @@ testIaDefOff28 :-
 	ajouterPion(2, 3, 1),
 	ajouterPion(3, 1, 2),
 	ajouterPion(3, 2, 2),
-	parcoursListePion([ [2, 2] ], 1, ColonneAJouer),
+	parcoursListePion([ [2, 2] ], 1, ColonneAJouer),!,
 	( ColonneAJouer =:= 3 -> afficherFin('parcoursListePion', true, 'TEST REUSSI');
 	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -478,7 +478,7 @@ testIaDefOff29 :-
 	ajouterPion(3, 1, 2),
 	ajouterPion(3, 2, 2),
 	ajouterPion(3, 3, 2),
-	parcoursListePion([ [2, 2] ], 1, ColonneAJouer),
+	parcoursListePion([ [2, 2] ], 1, ColonneAJouer),!,
 	( ColonneAJouer =:= 2 -> afficherFin('parcoursListePion', true, 'TEST REUSSI');
 	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -494,7 +494,7 @@ testIaDefOff30 :-
 	ajouterPion(3, 1, 2),
 	ajouterPion(3, 2, 2),
 	ajouterPion(3, 3, 2),
-	parcoursListePion([ [2, 2] ], 1, ColonneAJouer),
+	parcoursListePion([ [2, 2] ], 1, ColonneAJouer),!,
 	( ColonneAJouer =:= 1 -> afficherFin('parcoursListePion', true, 'TEST REUSSI');
 	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -509,7 +509,7 @@ testIaDefOff31 :-
 	ajouterPion(3, 1, 2),
 	ajouterPion(3, 2, 2),
 	ajouterPion(3, 3, 2),
-	parcoursListePion([ [2, 2] ], 1, ColonneAJouer),
+	parcoursListePion([ [2, 2] ], 1, ColonneAJouer),!,
 	( ColonneAJouer =:= 1 -> afficherFin('parcoursListePion', true, 'TEST REUSSI');
 	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -523,7 +523,7 @@ testIaDefOff32 :-
 	ajouterPion(3, 1, 2),
 	ajouterPion(3, 2, 2),
 	ajouterPion(3, 3, 2),
-	parcoursListePion([ [2, 2] ], 1, ColonneAJouer),
+	parcoursListePion([ [2, 2] ], 1, ColonneAJouer),!,
 	( ColonneAJouer =:= 1 -> afficherFin('parcoursListePion', true, 'TEST REUSSI');
 	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -539,7 +539,7 @@ testIaDefOff33 :-
 	ajouterPion(2, 3, 1),
 	ajouterPion(3, 1, 2),
 	ajouterPion(3, 2, 2),
-	ajouterPion(3, 3, 2),
+	ajouterPion(3, 3, 2),!,
 	( parcoursListePion([ [2, 2] ], 1, ColonneAJouer) -> afficherFin('parcoursListePion', true, 'TEST ECHOUE');
 	afficherFin('parcoursListePion', false, 'TEST REUSSI') ),
 	testVidePlateau.
@@ -553,7 +553,7 @@ testIaDefOff34:-
 	ajouterPion(4, 1, 2),
 	ajouterPion(4, 2, 2),
 	ajouterPion(5, 1, 1),
-	testInsertion3C(1, ColonneAJouer),
+	testInsertion3C(1, ColonneAJouer),!,
 	( ColonneAJouer =:= 3 -> afficherFin('testInsertion3C', true, 'TEST REUSSI');
 	afficherFin('testInsertion3C', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -567,7 +567,7 @@ testIaDefOff35 :-
 	ajouterPion(4, 1, 1),
 	ajouterPion(4, 2, 2),
 	ajouterPion(5, 1, 1),
-	testInsertion3L(1, ColonneAJouer),
+	testInsertion3L(1, ColonneAJouer),!,
 	%writeln( ['ColonneAJouer :', ColonneAJouer] ),
 	( ColonneAJouer =:= 2 -> afficherFin('testInsertion3L', true, 'TEST REUSSI');
 	afficherFin('testInsertion3L', false, 'TEST ECHOUE') ),
@@ -588,7 +588,7 @@ testIaDefOff36 :-
 	ajouterPion(5, 1, 1),
 	ajouterPion(5, 2, 2),
 	ajouterPion(5, 3, 2),
-	testInsertion3DG(1, ColonneAJouer),
+	testInsertion3DG(1, ColonneAJouer),!,
 	( ColonneAJouer =:= 2 -> afficherFin('testInsertion3DG', true, 'TEST REUSSI');
 	afficherFin('testInsertion3DG', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -608,7 +608,7 @@ testIaDefOff37 :-
 	ajouterPion(4, 1, 2),
 	ajouterPion(4, 2, 2),
 	ajouterPion(4, 3, 2),
-	testInsertion3DD(1, ColonneAJouer),
+	testInsertion3DD(1, ColonneAJouer),!,
 	( ColonneAJouer =:= 4 -> afficherFin('testInsertion3DD', true, 'TEST REUSSI');
 	afficherFin('testInsertion3DD', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -619,7 +619,7 @@ testIaDefOff38 :-
 	ajouterPion(4, 1, 1),
 	ajouterPion(4, 2, 1),
 	ajouterPion(5, 1, 1),
-	testInsertion2C(1, ColonneAJouer),
+	testInsertion2C(1, ColonneAJouer),!,
 	( ColonneAJouer =:= 4 -> afficherFin('testInsertion2C', true, 'TEST REUSSI');
 	afficherFin('testInsertion2C', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -632,7 +632,7 @@ testIaDefOff39 :-
 	ajouterPion(3, 3, 2),
 	ajouterPion(4, 1, 1),
 	ajouterPion(4, 2, 2),
-	testInsertion2L(1, ColonneAJouer),
+	testInsertion2L(1, ColonneAJouer),!,
 	%writeln( ['ColonneAJouer :', ColonneAJouer] ),
 	( ColonneAJouer =:= 2 -> afficherFin('testInsertion2L', true, 'TEST REUSSI');
 	afficherFin('testInsertion2L', false, 'TEST ECHOUE') ),
@@ -649,7 +649,7 @@ testIaDefOff40 :-
 	ajouterPion(5, 1, 1),
 	ajouterPion(5, 2, 2),
 	ajouterPion(5, 3, 2),
-	testInsertion2DG(1, ColonneAJouer),
+	testInsertion2DG(1, ColonneAJouer),!,
 	( ColonneAJouer =:= 3 -> afficherFin('testInsertion2DG', true, 'TEST REUSSI');
 	afficherFin('testInsertion2DG', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -665,7 +665,7 @@ testIaDefOff41 :-
 	ajouterPion(2, 3, 2),
 	ajouterPion(3, 1, 2),
 	ajouterPion(3, 2, 2),
-	testInsertion2DD(1, ColonneAJouer),
+	testInsertion2DD(1, ColonneAJouer),!,
 	( ColonneAJouer =:= 3 -> afficherFin('testInsertion2DD', true, 'TEST REUSSI');
 	afficherFin('testInsertion2DD', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -674,7 +674,7 @@ testIaDefOff42 :-
 	afficherNomTest(testIaDefOff42),
 	afficherDebut('testInsertionPion', true, 'Verifie que le predicat demande l insertion autours d un pion lorsque l insertion en haut a droite d une diagonale de taille 2 est impossible'),
 	ajouterPion(1, 1, 1),
-	testInsertionPion(1, ColonneAJouer),
+	testInsertionPion(1, ColonneAJouer),!,
 	( ColonneAJouer =:= 2 -> afficherFin('testInsertionPion', true, 'TEST REUSSI');
 	afficherFin('testInsertionPion', false, 'TEST ECHOUE') ),
 	testVidePlateau.
@@ -687,7 +687,7 @@ testM1:-
 	afficherDebut('PeutGagnerSurCol', true, 'Verifie que le predicat peutGagnerSurCol vérifie une colonne qui permet la victoire'),
 	ajouterPion(3, 1, 1),
 	ajouterPion(3, 2, 1),
-	ajouterPion(3, 3, 1),
+	ajouterPion(3, 3, 1),!,
 	(peutGagnerSurCol(3,1) -> afficherFin('peutGagnerSurCol', true, 'TEST REUSSI');
 	afficherFin('peutGagnerSurCol', false, 'TEST ECHOUE')),
 	testVidePlateau.
@@ -697,7 +697,7 @@ testM2:-
 	afficherDebut('PeutGagnerSurCol', true, 'Verifie que le predicat peutGagnerSurCol ne vérifie pas une colonne qui ne permet pas la victoire.'),
 	ajouterPion(3, 1, 1),
 	ajouterPion(3, 2, 1),
-	ajouterPion(3, 3, 1),
+	ajouterPion(3, 3, 1),!,
 	(peutGagnerSurCol(4,1) ->afficherFin('peutGagnerSurCol', false, 'TEST ECHOUE');
  	afficherFin('peutGagnerSurCol', true, 'TEST REUSSI')),
 	testVidePlateau.
@@ -711,7 +711,7 @@ testM3:-
 	ajouterPion(4, 1, 1),
 	ajouterPion(4, 2, 1),
 	ajouterPion(4, 3, 1),
-	peutGagner(X,1),
+	peutGagner(X,1),!,
 	(X =:=1 ->afficherFin('checkVictoireColonne', true, 'TEST REUSSI');
  	afficherFin('checkVictoireColonne', false, 'TEST ECHOUE')),
 	testVidePlateau.
@@ -725,7 +725,7 @@ testM4:-
 	ajouterPion(4, 1, 1),
 	ajouterPion(4, 2, 1),
 	ajouterPion(4, 3, 1),
-	peutGagner(X,1),
+	peutGagner(X,1),!,
 	(X =:=1 ->afficherFin('peutGagner', true, 'TEST REUSSI');
  	afficherFin('peutGagner', false, 'TEST ECHOUE')),
 	testVidePlateau.
@@ -736,7 +736,7 @@ testM5:-
 	ajouterPion(1, 1, 2),
 	ajouterPion(1, 2, 2),
 	ajouterPion(1, 3, 2),
-	peutPerdre(X,1),
+	peutPerdre(X,1),!,
 	(X =:=1 ->afficherFin('peutPerdre', true, 'TEST REUSSI');
  	afficherFin('peutPerdre', false, 'TEST ECHOUE')),
 	testVidePlateau.
@@ -750,7 +750,7 @@ testJouerCoup1 :-
     assert(pion(2, 1, 1)),
     assert(pion(2, 2, 1)),
     assert(pion(4, 1, 1)),
-    isolerColonne(2,ColIsol),
+    isolerColonne(2,ColIsol),!,
     ( list_to_set(ColIsol, [pion(2,0,-10), pion(2, 1, 1), pion(2, 2, 1)]) -> afficherFin('isolerColonne', true, 'TEST REUSSI');
       afficherFin('isolerColonne', false, '')),
     testVidePlateau.
@@ -759,7 +759,7 @@ testJouerCoup1 :-
 testJouerCoup2 :-
     afficherNomTest(testJouerCoup2),
     afficherDebut('indexDernierPion', true, 'Verifie que le predicat renvoie le numero de ligne du pion le plus haut de la colonne'),
-    indexDernierPion([pion(2,1,1),pion(2,2,1),pion(2,3,1)],NumLi),
+    indexDernierPion([pion(2,1,1),pion(2,2,1),pion(2,3,1)],NumLi),!,
     ( NumLi == 3 -> afficherFin('indexDernierPion', true, 'TEST REUSSI');
       afficherFin('indexDernierPion', false, '')),
     testVidePlateau.
@@ -768,7 +768,7 @@ testJouerCoup2 :-
 testJouerCoup3 :-
     afficherNomTest(testJouerCoup3),
     afficherDebut('calculProchainepion', true, 'Verifie que le predicat renvoie le numero de ligne suivant'),
-    calculProchainepion(3,NextNumLi),
+    calculProchainepion(3,NextNumLi),!,
     ( NextNumLi == 4 -> afficherFin('calculProchainepion', true, 'TEST REUSSI');
       afficherFin('calculProchainepion', false, '')),
     testVidePlateau.
@@ -781,7 +781,7 @@ testJouerCoup4 :-
     assert(pion(2, 1, 1)),
     assert(pion(2, 2, 1)),
     assert(pion(4, 1, 1)),
-    jouerCoup([2,1]),
+    jouerCoup([2,1]),!,
     ( pion(2,3,1) -> afficherFin('isolerColonne', true, 'TEST REUSSI');
       afficherFin('isolerColonne', false, '')),
     testVidePlateau.
@@ -797,7 +797,7 @@ testIaAleatoire1 :-
     assert(pion(2, 4, 1)),
     assert(pion(2, 5, 1)),
     assert(pion(2, 6, 1)),
-    assert(pion(4, 1, 1)),
+    assert(pion(4, 1, 1)),!,
     (peutJouer(4), not(peutJouer(2)) -> afficherFin('peutJouer', true, 'TEST REUSSI');
       afficherFin('peutJouer', false, '')),
     testVidePlateau.
@@ -813,7 +813,7 @@ testFDJ3:-
 	ajouterPion(2, 1, 2),
 	ajouterPion(2, 2, 2),
 	ajouterPion(2, 3, 2),
-	ajouterPion(2, 4, 1),
+	ajouterPion(2, 4, 1),!,
 	( (victoireColonne(1,4,1), not(victoireColonne(2,4,1)) ) -> afficherFin('victoireColonne', true, 'TEST REUSSI');
 	afficherFin('victoireColonne', false, 'TEST ECHOUE')) ,
 	testVidePlateau.
@@ -830,7 +830,7 @@ testFDJ4:-
 	ajouterPion(3, 2, 2),
 	ajouterPion(4, 2, 2),
 	verifieGauche(4, 1, 1, X1),
-	verifieGauche(4, 2, 2, X2),
+	verifieGauche(4, 2, 2, X2),!,
 	((X1 =:= 4, X2 =:= 2 ) -> afficherFin('verifieDroite', true, 'TEST REUSSI');
 	afficherFin('verifieGauche', false, 'TEST ECHOUE')) ,
 	testVidePlateau.
@@ -847,7 +847,7 @@ testFDJ5:-
 	ajouterPion(3, 2, 2),
 	ajouterPion(4, 2, 2),
 	verifieDroite(1, 1, 1, X1),
-	verifieDroite(1, 2, 2, X2),
+	verifieDroite(1, 2, 2, X2),!,
 	((X1 =:= 4, X2 =:= 1 ) -> afficherFin('verifieDroite', true, 'TEST REUSSI');
 	afficherFin('verifieDroite', false, 'TEST ECHOUE')) ,
 	testVidePlateau.
@@ -862,7 +862,7 @@ testFDJ6:-
 	ajouterPion(1, 2, 2),
 	ajouterPion(2, 2, 2),
 	ajouterPion(3, 2, 2),
-	ajouterPion(4, 2, 1),
+	ajouterPion(4, 2, 1),!,
 	( (victoireLigne(4,1,1), not(victoireColonne(4,2,1)) ) -> afficherFin('victoireLigne', true, 'TEST REUSSI');
 	afficherFin('victoireLigne', false, 'TEST ECHOUE')) ,
 	testVidePlateau.
@@ -874,7 +874,7 @@ testFDJ7:-
 	ajouterPion(2, 3, 1),
 	ajouterPion(3, 2, 1),
 	ajouterPion(4, 1, 1),
-	verifieGaucheHaut(4, 1, 1, X),
+	verifieGaucheHaut(4, 1, 1, X),!,
 	( X =:= 4-> afficherFin('verifieGaucheHaut', true, 'TEST REUSSI');
 	afficherFin('verifieGaucheHaut', false, 'TEST ECHOUE')) ,
 	testVidePlateau.
@@ -886,7 +886,7 @@ testFDJ8:-
 	ajouterPion(2, 3, 1),
 	ajouterPion(3, 2, 1),
 	ajouterPion(4, 1, 1),
-	verifieDroiteBas(1, 4, 1, X),
+	verifieDroiteBas(1, 4, 1, X),!,
 	( X =:= 4-> afficherFin('verifieDroiteBas', true, 'TEST REUSSI');
 	afficherFin('verifieDroiteBas', false, 'TEST ECHOUE')) ,
 	testVidePlateau.
@@ -897,8 +897,7 @@ testFDJ9:-
 	ajouterPion(1, 4, 1),
 	ajouterPion(2, 3, 1),
 	ajouterPion(3, 2, 1),
-	ajouterPion(4, 1, 1),
-	
+	ajouterPion(4, 1, 1),!,
 	( (victoireDiagGauche(1,4,1), victoireDiagGauche(4,1,1))-> afficherFin('victoireDiagGauche', true, 'TEST REUSSI');
 	afficherFin('victoireDiagGauche', false, 'TEST ECHOUE')) ,
 	testVidePlateau.
@@ -910,7 +909,7 @@ testFDJ10:-
 	ajouterPion(2, 2, 1),
 	ajouterPion(3, 3, 1),
 	ajouterPion(4, 4, 1),
-	verifieGaucheBas(4, 4, 1, X),
+	verifieGaucheBas(4, 4, 1, X),!,
 	( X =:= 4-> afficherFin('verifieGaucheBas', true, 'TEST REUSSI');
 	afficherFin('verifieGaucheBas', false, 'TEST ECHOUE')) ,
 	testVidePlateau.
@@ -922,7 +921,7 @@ testFDJ11:-
 	ajouterPion(2, 2, 1),
 	ajouterPion(3, 3, 1),
 	ajouterPion(4, 4, 1),
-	verifieDroiteHaut(1, 1, 1, X),
+	verifieDroiteHaut(1, 1, 1, X),!,
 	( X =:= 4-> afficherFin('verifieDroiteHaut', true, 'TEST REUSSI');
 	afficherFin('verifieDroiteHaut', false, 'TEST ECHOUE')) ,
 	testVidePlateau.
@@ -933,7 +932,7 @@ testFDJ12:-
 	ajouterPion(1, 1, 1),
 	ajouterPion(2, 2, 1),
 	ajouterPion(3, 3, 1),
-	ajouterPion(4, 4, 1),
+	ajouterPion(4, 4, 1),!,
 	((victoireDiagDroite(1,1,1), victoireDiagDroite(4,4,1))-> afficherFin('victoireDiagDroite', true, 'TEST REUSSI');
 	afficherFin('victoireDiagDroite', false, 'TEST ECHOUE')) ,
 	testVidePlateau.
@@ -992,7 +991,8 @@ testsIADefOFF :-
 	testIaDefOff38,
 	testIaDefOff39,
 	testIaDefOff40,
-	%testIaDefOff41,
+	testIaDefOff41,
+	testIaDefOff42,
 	!.
 
 testsJouerCoup :-

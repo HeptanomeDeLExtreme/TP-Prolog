@@ -32,8 +32,8 @@ lancerEval :- moyenneTemps,pourcentage1.
 lancerEval :- writeln('#### Offensive vs Aleatoire (1b) ####'),initEval,initEval1b,eval1b.
 lancerEval :- moyenneTemps,pourcentage1b.
 
-%lancerEval :- writeln('#### Aleatoire vs Defensive (2) ####'),initEval,initEval2, eval2.
-%lancerEval :- pourcentage2.
+lancerEval :- writeln('#### Aleatoire vs Defensive (2) ####'),initEval,initEval2, eval2.
+lancerEval :- pourcentage2.
 
 lancerEval :- writeln('#### Defensive vs Aleatoire (2b) ####'),initEval,initEval2b, eval2b.
 lancerEval :- moyenneTemps,pourcentage2b.
@@ -44,7 +44,7 @@ lancerEval :- pourcentage3.
 lancerEval :- writeln('#### Mixte vs Aleatoire (3b) ####'),initEval,initEval3b, eval3b.
 lancerEval :- moyenneTemps,pourcentage3b.
 
-lancerEval :- writeln('#### Defensive vs Mixte (4) ####'),initEval,initEval8, eval8.
+lancerEval :- writeln('#### Defensive vs Mixte (4) ####'),initEval,write('test'),initEval8, eval8.
 lancerEval :- pourcentage8.
 
 lancerEval :- writeln('#### Mixte vs Defensive (4b) ####'),initEval,initEval8b, eval8b.
@@ -53,8 +53,8 @@ lancerEval :- pourcentage8b.
 lancerEval :- writeln('#### Offensive vs Defensive (5) ####'),initEval,initEval5, eval5.
 lancerEval :- pourcentage5.
 
-%lancerEval :- writeln('#### Defensive vs Offensive (5b) ####'),initEval,initEval5b, eval5b.
-%lancerEval :- pourcentage5b.
+lancerEval :- writeln('#### Defensive vs Offensive (5b) ####'),initEval,initEval5b, eval5b.
+lancerEval :- pourcentage5b.
 
 lancerEval :- writeln('#### Offensive vs Mixte (6) ####'),initEval,initEval6, eval6.
 lancerEval :- pourcentage6.
@@ -62,7 +62,7 @@ lancerEval :- pourcentage6.
 lancerEval :- writeln('#### Mixte vs Offensive (6b) ####'),initEval,initEval6b, eval6b.
 lancerEval :- pourcentage6b.
 
-/* A REVOIR
+/* 
 lancerEval :- writeln('#### Offensive vs Complete (7) ####'),initEval,initEval7, eval7.
 lancerEval :- pourcentage7.
 
@@ -70,7 +70,7 @@ lancerEval :- writeln('#### Offensive vs Complete (7b) ####'),initEval,initEval7
 lancerEval :- pourcentage7.
 */
 
-/* A REVOIR
+/* 
 lancerEval :- writeln('#### Aleatoire vs Complete (8) ####'),initEval,initEval4, eval4.
 lancerEval :- pourcentage4.
 
@@ -104,14 +104,20 @@ testIA1Eval1(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSO1',X),incrementeX(X,X1),nb_setval('AVSO1',X1),testVidePlateau;
-		tourIA2Eval1
+		(
+			matchNull -> true ;
+			tourIA2Eval1
+		)
 		).
 		
 testIA2Eval1(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSO2',X),incrementeX(X,X1),nb_setval('AVSO2',X1),testVidePlateau;
-		tourIA1Eval1
+		(
+			matchNull -> true ;
+			tourIA1Eval1
+		)
 		).
 		
 tourIA1Eval1 :-	statistics(cputime,T1),ia(N),statistics(cputime,T2),nb_getval('timeTable',TimeTable),Temp is T2-T1,append(TimeTable,[Temp],Final),nb_setval('timeTable',Final),
@@ -137,14 +143,20 @@ testIA1Eval1b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSO1b',X),incrementeX(X,X1),nb_setval('AVSO1b',X1),testVidePlateau;
-		tourIA2Eval1b
+		(
+			matchNull -> true ;
+			tourIA2Eval1b
+		)
 		).
 		
 testIA2Eval1b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSO2b',X),incrementeX(X,X1),nb_setval('AVSO2b',X1),testVidePlateau;
-		tourIA1Eval1b
+		(
+			matchNull -> true ;
+			tourIA1Eval1b
+		)
 		).
 		
 tourIA1Eval1b :-	statistics(cputime,T1),iAOffensive(1,N),statistics(cputime,T2),nb_getval('timeTable',TimeTable),Temp is T2-T1,append(TimeTable,[Temp],Final),nb_setval('timeTable',Final),
@@ -170,14 +182,20 @@ testIA1Eval2(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSD1',X),incrementeX(X,X1),nb_setval('AVSD1',X1),testVidePlateau;
-		tourIA2Eval2
+		(
+			matchNull -> true ;
+			tourIA2Eval2
+		)
 		).
 		
 testIA2Eval2(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSD2',X),incrementeX(X,X1),nb_setval('AVSD2',X1),testVidePlateau;
-		tourIA1Eval2
+		(
+			matchNull -> true ;
+			tourIA1Eval2
+		)
 		).
 		
 tourIA1Eval2 :-	ia(N),
@@ -203,14 +221,20 @@ testIA1Eval2b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSD1b',X),incrementeX(X,X1),nb_setval('AVSD1b',X1),testVidePlateau;
-		tourIA2Eval2b
+		(
+			matchNull -> true ;
+			tourIA2Eval2b
+		)
 		).
 		
 testIA2Eval2b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSD2b',X),incrementeX(X,X1),nb_setval('AVSD2b',X1),testVidePlateau;
-		tourIA1Eval2b
+		(
+			matchNull -> true ;
+			tourIA1Eval2b
+		)
 		).
 		
 tourIA1Eval2b :-	statistics(cputime,T1),iADefensive(1,N),statistics(cputime,T2),nb_getval('timeTable',TimeTable),Temp is T2-T1,append(TimeTable,[Temp],Final),nb_setval('timeTable',Final),
@@ -236,14 +260,20 @@ testIA1Eval3(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSM1',X),incrementeX(X,X1),nb_setval('AVSM1',X1),testVidePlateau;
-		tourIA2Eval3
+		(
+			matchNull -> true ;
+			tourIA2Eval3
+		)
 		).
 		
 testIA2Eval3(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSM2',X),incrementeX(X,X1),nb_setval('AVSM2',X1),testVidePlateau;
-		tourIA1Eval3
+		(
+			matchNull -> true ;
+			tourIA1Eval3
+		)
 		).
 		
 tourIA1Eval3 :-	ia(N),
@@ -270,14 +300,20 @@ testIA1Eval3b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSM1b',X),incrementeX(X,X1),nb_setval('AVSM1b',X1),testVidePlateau;
-		tourIA2Eval3b
+		(
+			matchNull -> true ;
+			tourIA2Eval3b
+		)
 		).
 		
 testIA2Eval3b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('AVSM2b',X),incrementeX(X,X1),nb_setval('AVSM2b',X1),testVidePlateau;
-		tourIA1Eval3b
+		(
+			matchNull -> true ;
+			tourIA1Eval3b
+		)
 		).
 		
 tourIA1Eval3b :-	statistics(cputime,T1),iaMixte(1,N),statistics(cputime,T2),nb_getval('timeTable',TimeTable),Temp is T2-T1,append(TimeTable,[Temp],Final),nb_setval('timeTable',Final),
@@ -373,14 +409,20 @@ testIA1Eval5(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSD1',X),incrementeX(X,X1),nb_setval('OVSD1',X1),testVidePlateau;
-		tourIA2Eval5
+		(
+			matchNull -> true ;
+			tourIA2Eval5
+		)
 		).
 		
 testIA2Eval5(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSD2',X),incrementeX(X,X1),nb_setval('OVSD2',X1),testVidePlateau;
-		tourIA1Eval5
+		(
+			matchNull -> true ;
+			tourIA1Eval5
+		)
 		).
 		
 tourIA1Eval5 :-	iAOffensive(1,N),
@@ -406,14 +448,20 @@ testIA1Eval5b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSD1b',X),incrementeX(X,X1),nb_setval('OVSD1b',X1),testVidePlateau;
-		tourIA2Eval5b
+		(
+			matchNull -> true ;
+			tourIA2Eval5b
+		)
 		).
 		
 testIA2Eval5b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSD2b',X),incrementeX(X,X1),nb_setval('OVSD2b',X1),testVidePlateau;
-		tourIA1Eval5b
+		(
+			matchNull -> true ;
+			tourIA1Eval5b
+		)
 		).
 		
 tourIA1Eval5b :-	iADefensive(1,N),
@@ -439,14 +487,20 @@ testIA1Eval6(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSM1',X),incrementeX(X,X1),nb_setval('OVSM1',X1),testVidePlateau;
-		tourIA2Eval6
+		(
+			matchNull -> true ;
+			tourIA2Eval6
+		)
 		).
 		
 testIA2Eval6(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSM2',X),incrementeX(X,X1),nb_setval('OVSM2',X1),testVidePlateau;
-		tourIA1Eval6
+		(
+			matchNull -> true ;
+			tourIA1Eval6
+		)
 		).
 		
 tourIA1Eval6 :-	iAOffensive(1,N),
@@ -472,14 +526,20 @@ testIA1Eval6b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSM1b',X),incrementeX(X,X1),nb_setval('OVSM1b',X1),testVidePlateau;
-		tourIA2Eval6b
+		(
+			matchNull -> true ;
+			tourIA2Eval6b
+		)
 		).
 		
 testIA2Eval6b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('OVSM2b',X),incrementeX(X,X1),nb_setval('OVSM2b',X1),testVidePlateau;
-		tourIA1Eval6b
+		(
+			matchNull -> true ;
+			tourIA1Eval6b
+		)
 		).
 		
 tourIA1Eval6b :-	iaMixte(1,N),
@@ -574,14 +634,20 @@ testIA1Eval8(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('DVSM1',X),incrementeX(X,X1),nb_setval('DVSM1',X1),testVidePlateau;
-		tourIA2Eval8
+		(
+			matchNull -> true ;
+			tourIA2Eval8
+		)
 		).
 		
 testIA2Eval8(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('DVSM2',X),incrementeX(X,X1),nb_setval('DVSM2',X1),testVidePlateau;
-		tourIA1Eval8
+		(
+			matchNull -> true ;
+			tourIA1Eval8
+		)
 		).
 		
 tourIA1Eval8 :-	iADefensive(1,N),
@@ -607,14 +673,20 @@ testIA1Eval8b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('DVSM1b',X),incrementeX(X,X1),nb_setval('DVSM1b',X1),testVidePlateau;
-		tourIA2Eval8b
+		(
+			matchNull -> true ;
+			tourIA2Eval8b
+		)
 		).
 		
 testIA2Eval8b(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('DVSM2b',X),incrementeX(X,X1),nb_setval('DVSM2b',X1),testVidePlateau;
-		tourIA1Eval8b
+		(
+			matchNull -> true ;
+			tourIA1Eval8b
+		)
 		).
 		
 tourIA1Eval8b :-	iaMixte(1,N),

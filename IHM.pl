@@ -5,9 +5,9 @@ init :- jpl_new( 'MainFrame', [], F),nb_setval('FENETRE',F),jpl_call('main',init
 
 %% Lance le coup de l'IA dans le cas d'un combat Humain vs IA
 coupIA :- %ia(N),
-		%iADefensive(2,N),
+		iADefensive(2,N),
 		%iAOffensive(2,N),
-		iaMixte(2,N), %% Offensive d'abord
+		%iaMixte(2,N), 
 		jouerCoup([N,2]),
 		testIA(N).
 		
