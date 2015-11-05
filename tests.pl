@@ -5,7 +5,7 @@
 :- include('IHM.pl').
 :- include('jouerCoup.pl').
 :- include('evaluation.pl').
-:- include('ia2FenouilSec.pl').
+:- include('iaMixte.pl').
 :- use_module(library(lists)).
 
 %% Affichage dans la console
@@ -213,16 +213,43 @@ testM2:-
  	afficherFin('peutGagnerSurCol', true, 'TEST REUSSI')),
 	testVidePlateau.
 
-
 testM3:-
 	afficherNomTest(testM3),
-	afficherDebut('peutGagner', true, 'Verifie que le predicat peutGagner trouve une colonne où une victoire est possible.'),
+	afficherDebut('checkVictoireColonne', true, 'Verifie que le predicat checkVictoireColonne trouve bien la première colonne où une victoire est possible.'),
 	ajouterPion(1, 1, 1),
 	ajouterPion(1, 2, 1),
 	ajouterPion(1, 3, 1),
+	ajouterPion(4, 1, 1),
+	ajouterPion(4, 2, 1),
+	ajouterPion(4, 3, 1),
+	peutGagner(X,1),
+	(X =:=1 ->afficherFin('checkVictoireColonne', true, 'TEST REUSSI');
+ 	afficherFin('checkVictoireColonne', false, 'TEST ECHOUE')),
+	testVidePlateau.
+
+testM4:-
+	afficherNomTest(testM4),
+	afficherDebut('peutGagner', true, 'Verifie que le predicat peutGagner trouve bien la première colonne où une victoire est possible.'),
+	ajouterPion(1, 1, 1),
+	ajouterPion(1, 2, 1),
+	ajouterPion(1, 3, 1),
+	ajouterPion(4, 1, 1),
+	ajouterPion(4, 2, 1),
+	ajouterPion(4, 3, 1),
 	peutGagner(X,1),
 	(X =:=1 ->afficherFin('peutGagner', true, 'TEST REUSSI');
  	afficherFin('peutGagner', false, 'TEST ECHOUE')),
+	testVidePlateau.
+	
+testM5:-
+	afficherNomTest(testM5),
+	afficherDebut('peutPerdre', true, 'Verifie que le predicat peutPerdre trouve bien la première colonne où une victoire est possible.'),
+	ajouterPion(1, 1, 2),
+	ajouterPion(1, 2, 2),
+	ajouterPion(1, 3, 2),
+	peutPerdre(X,1),
+	(X =:=1 ->afficherFin('peutPerdre', true, 'TEST REUSSI');
+ 	afficherFin('peutPerdre', false, 'TEST ECHOUE')),
 	testVidePlateau.
 
 
@@ -432,22 +459,24 @@ tests :-
 	testUtil4,
 	testUtil5,
 	afficherNomTest('Fichier : iaDefOff.pl'),
-	testIaDefOff1,
-	testIaDefOff2,
-	testIaDefOff3,
-	testIaDefOff4,
-	testIaDefOff5,
-	testIaDefOff6,
-	testIaDefOff7,
+	%testIaDefOff1,
+	%testIaDefOff2,
+	%testIaDefOff3,
+	%testIaDefOff4,
+	%testIaDefOff5,
+	%testIaDefOff6,
+	%testIaDefOff7,
 	afficherNomTest('Fichier : jouerCoup.pl'),
 	testJouerCoup1,
 	testJouerCoup2,
 	testJouerCoup3,
 	testJouerCoup4,
-	afficherNomTest('Fichier : ia2FenouilSec.pl'),
+	afficherNomTest('Fichier : iaMixte.pl'),
 	testM1,
 	testM2,
-	% testM3, ça merde à partir d'ici.
+	testM3,
+	testM4,
+	testM5,
 	afficherNomTest('Fichier : iaAleatoire.pl'),
 	testIaAleatoire1,
 	afficherNomTest('Fichier : finDeJeu.pl'),
