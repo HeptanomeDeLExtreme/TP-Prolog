@@ -1,5 +1,12 @@
 /* ----------- Utils ----------- */
 
+matchNull :- pion(1,6,_),
+			pion(2,6,_),
+			pion(3,6,_),
+			pion(4,6,),
+			pion(5,6,_),
+			pion(6,6,_),
+			pion(7,6,_).
 
 %% X1 est unifié à X+1
 incrementeX(X,X1):- X1 is X+1.
