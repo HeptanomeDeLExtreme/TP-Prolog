@@ -27,8 +27,8 @@ afficherDebut(NomPredicat,SortieAttendue, Objectif) :-
 afficherFin(NomPredicat, Sortie, FailOrNot) :-
 	writeln(['Sortie obtenue : ', Sortie]),
 	( 
-		FailOrNot == 'TEST REUSSI' -> ansi_format([fg(green)], 'TEST REUSSI', []);
-		ansi_format([fg(red)], 'TEST ECHOUE', [])
+		FailOrNot == 'TEST REUSSI' -> incrementerTestsReussis, ansi_format([fg(green)], 'TEST REUSSI', []);
+		incrementerTestsEchoues, ansi_format([fg(red)], 'TEST ECHOUE', [])
 	),write('\n'),
 	writeln(['### FIN - Test du predicat ', NomPredicat, ' ###']),
 	nl.
@@ -64,6 +64,34 @@ afficherFinTestsUnitaires :-
 	
 afficherNomTest(N) :-
 	writeln(['Test :', N]).
+	
+	
+	
+%% Comptage des tests réussis et des tests échoués
+initTest :-
+	nb_setval('testsReussis', 0),
+	nb_setval('testsEchoues', 0).
+	
+%% Incrémenter testsReussis
+incrementerTestsReussis :-
+	nb_getval('testsReussis',X),
+	incrementeX(X, Resultat),
+	nb_setval('testsReussis', Resultat).
+	
+%% Incrémenter testsEchoues
+incrementerTestsEchoues :-
+	nb_getval('testsEchoues', X),
+	incrementeX(X, Resultat),
+	nb_setval('testsEchoues', Resultat).
+	
+%% Affichage des variables testsReussis et testsEchoues
+affichageVariablesGloables :-
+	nb_getval('testsReussis', R),
+	nb_getval('testsEchoues', E),
+	nl,
+	writeln(['testsReussis : ', R]),
+	writeln(['testsEchoues : ', E]),
+	nl.
 	
 %% Tests du fichier util.pl
 
@@ -961,10 +989,12 @@ testsFDJ :-
 
 finTests :-	afficherFinTestsUnitaires,!.
 
-tests :- testsUtils,
+tests :- initTest, 
+		testsUtils,
 		testsIADefOFF,
 		testsJouerCoup,
 		testsM,
 		testsAleatoire,
 		testsFDJ,
-		finTests.
+		finTests,
+		affichageVariablesGloables.
