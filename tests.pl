@@ -66,18 +66,18 @@ afficherNomTest(N) :-
 	
 	
 	
-%% Comptage des tests réussis et des tests échoués
+%% Comptage des tests reussis et des tests echoues
 initTest :-
 	nb_setval('testsReussis', 0),
 	nb_setval('testsEchoues', 0).
 	
-%% Incrémenter testsReussis
+%% Incrementer testsReussis
 incrementerTestsReussis :-
 	nb_getval('testsReussis',X),
 	incrementeX(X, Resultat),
 	nb_setval('testsReussis', Resultat).
 	
-%% Incrémenter testsEchoues
+%% Incrementer testsEchoues
 incrementerTestsEchoues :-
 	nb_getval('testsEchoues', X),
 	incrementeX(X, Resultat),
@@ -170,7 +170,7 @@ testIaDefOff2 :-
 testIaDefOff3 :- 
 	afficherNomTest(testIaDefOff3),
 	afficherDebut('parcoursListeColonne', true, 'Verifie que le predicat renvoie la premiere colonne qui n est pas remplie'),
-	% Une liste représentant le sommet de la colonne 1, le sommet de la colonne 2 et le sommet de la colonne 3
+	% Une liste representant le sommet de la colonne 1, le sommet de la colonne 2 et le sommet de la colonne 3
 	parcoursListeColonne([[1, 7], [2, 4],[3, 1]], 1, Colonne),!,
 	%writeln(['Liste trouvee :', ListeJoueur1] ),
 	( Colonne =:= 2 -> afficherFin('parcoursListeColonne', true, 'TEST REUSSI');
@@ -220,7 +220,7 @@ testIaDefOff6 :-
 testIaDefOff7 :-
 	afficherNomTest(testIaDefOff7),
 	afficherDebut('tenteAjoutADroite', true, 'Verifie que le predicat ajoute bien un pion a droite d une ligne'),
-	% Une liste représente [Ligne, PionLePlusAGauche, PionLePlusADroite]
+	% Une liste represente [Ligne, PionLePlusAGauche, PionLePlusADroite]
 	ajouterPion(1, 1, 1),
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 1, 1),
@@ -233,7 +233,7 @@ testIaDefOff7 :-
 testIaDefOff8 :- 
 	afficherNomTest(testIaDefOff8),
 	afficherDebut('parcoursListeLigne', true, 'Verifie que le predicat ajoute bien un pion a gauche d une ligne avant de l ajouter de tenter l ajout a droite'),
-	% Une liste représente [Ligne, PionLePlusAGauche, PionLePlusADroite]
+	% Une liste represente [Ligne, PionLePlusAGauche, PionLePlusADroite]
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 1, 1),
 	ajouterPion(4, 1, 1),
@@ -246,7 +246,7 @@ testIaDefOff8 :-
 testIaDefOff9 :- 
 	afficherNomTest(testIaDefOff9),
 	afficherDebut('parcoursListeLigne', true, 'Verifie que le predicat ajoute bien un pion a droite d une ligne lorsque l ajout a gauche est impossible'),
-	% Une liste représente [Ligne, PionLePlusAGauche, PionLePlusADroite]
+	% Une liste represente [Ligne, PionLePlusAGauche, PionLePlusADroite]
 	ajouterPion(1, 1, 2),
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 1, 1),
@@ -357,7 +357,7 @@ testIaDefOff18 :-
 testIaDefOff19 :-
 	afficherNomTest(testIaDefOff19),
 	afficherDebut('findAllPion', true, 'Verifie que le predicat trouve tous les pions du joueur 2'),
-	% Liste retournée de la forme [ColonneDuPion, LigneDuPion]
+	% Liste retournee de la forme [ColonneDuPion, LigneDuPion]
 	ajouterPion(1, 1, 1),
 	ajouterPion(1, 2, 2),
 	ajouterPion(1, 3, 1),
@@ -683,7 +683,7 @@ testIaDefOff42 :-
 
 testM1:-
 	afficherNomTest(testM1),
-	afficherDebut('PeutGagnerSurCol', true, 'Verifie que le predicat peutGagnerSurCol vérifie une colonne qui permet la victoire'),
+	afficherDebut('PeutGagnerSurCol', true, 'Verifie que le predicat peutGagnerSurCol verifie une colonne qui permet la victoire'),
 	ajouterPion(3, 1, 1),
 	ajouterPion(3, 2, 1),
 	ajouterPion(3, 3, 1),!,
@@ -693,7 +693,7 @@ testM1:-
 
 testM2:-
 	afficherNomTest(testM2),
-	afficherDebut('PeutGagnerSurCol', true, 'Verifie que le predicat peutGagnerSurCol ne vérifie pas une colonne qui ne permet pas la victoire.'),
+	afficherDebut('PeutGagnerSurCol', true, 'Verifie que le predicat peutGagnerSurCol ne verifie pas une colonne qui ne permet pas la victoire.'),
 	ajouterPion(3, 1, 1),
 	ajouterPion(3, 2, 1),
 	ajouterPion(3, 3, 1),!,
@@ -703,7 +703,7 @@ testM2:-
 
 testM3:-
 	afficherNomTest(testM3),
-	afficherDebut('checkVictoireColonne', true, 'Verifie que le predicat checkVictoireColonne trouve bien la première colonne où une victoire est possible.'),
+	afficherDebut('checkVictoireColonne', true, 'Verifie que le predicat checkVictoireColonne trouve bien la premiere colonne où une victoire est possible.'),
 	ajouterPion(1, 1, 1),
 	ajouterPion(1, 2, 1),
 	ajouterPion(1, 3, 1),
@@ -717,7 +717,7 @@ testM3:-
 
 testM4:-
 	afficherNomTest(testM4),
-	afficherDebut('peutGagner', true, 'Verifie que le predicat peutGagner trouve bien la première colonne où une victoire est possible.'),
+	afficherDebut('peutGagner', true, 'Verifie que le predicat peutGagner trouve bien la premiere colonne où une victoire est possible.'),
 	ajouterPion(1, 1, 1),
 	ajouterPion(1, 2, 1),
 	ajouterPion(1, 3, 1),
@@ -731,7 +731,7 @@ testM4:-
 	
 testM5:-
 	afficherNomTest(testM5),
-	afficherDebut('peutPerdre', true, 'Verifie que le predicat peutPerdre trouve bien la première colonne où une victoire est possible.'),
+	afficherDebut('peutPerdre', true, 'Verifie que le predicat peutPerdre trouve bien la premiere colonne où une victoire est possible.'),
 	ajouterPion(1, 1, 2),
 	ajouterPion(1, 2, 2),
 	ajouterPion(1, 3, 2),
@@ -744,7 +744,7 @@ testM5:-
 %% Tests du fichier jouerCoup.pl
 testJouerCoup1 :-
     afficherNomTest(testJouerCoup1),
-    afficherDebut('isolerColonne', true, 'Verifie que le predicat renvoie la liste des pions présents sur la colonne'),
+    afficherDebut('isolerColonne', true, 'Verifie que le predicat renvoie la liste des pions presents sur la colonne'),
     assert(pion(1, 1, 1)),
     assert(pion(2, 1, 1)),
     assert(pion(2, 2, 1)),
@@ -775,7 +775,7 @@ testJouerCoup3 :-
 
 testJouerCoup4 :-
     afficherNomTest(testJouerCoup4),
-    afficherDebut('isolerColonne', true, 'Verifie que le predicat jouerCoup ajoute un pion sur la première ligne vide de la colonne voulue'),
+    afficherDebut('isolerColonne', true, 'Verifie que le predicat jouerCoup ajoute un pion sur la premiere ligne vide de la colonne voulue'),
     assert(pion(1, 1, 1)),
     assert(pion(2, 1, 1)),
     assert(pion(2, 2, 1)),
@@ -804,7 +804,7 @@ testIaAleatoire1 :-
 %% Tests du fichier finDeJeu.pl
 testFDJ3:-
 	afficherNomTest(testFDJ3),
-	afficherDebut('victoireColonne', true, 'Verifie que le predicat victoireColonne détecte une colonne de 4 pions du même joueur.'),
+	afficherDebut('victoireColonne', true, 'Verifie que le predicat victoireColonne detecte une colonne de 4 pions du meme joueur.'),
 	ajouterPion(1, 1, 1),
 	ajouterPion(1, 2, 1),
 	ajouterPion(1, 3, 1),
@@ -819,7 +819,7 @@ testFDJ3:-
 
 testFDJ4:-
 	afficherNomTest(testFDJ4),
-	afficherDebut('verifieGauche', true, 'Verifie que le predicat verifieGauche détecte les pions à Gauche du pion en paramètre (uniquement ceux du joueur actif).'),
+	afficherDebut('verifieGauche', true, 'Verifie que le predicat verifieGauche detecte les pions a Gauche du pion en parametre (uniquement ceux du joueur actif).'),
 	ajouterPion(1, 1, 1),
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 1, 1),
@@ -836,7 +836,7 @@ testFDJ4:-
 
 testFDJ5:-
 	afficherNomTest(testFDJ5),
-	afficherDebut('verifieDroite', true, 'Verifie que le predicat verifieDroite détecte les pions à Droite du pion en paramètre (uniquement ceux du joueur actif).'),
+	afficherDebut('verifieDroite', true, 'Verifie que le predicat verifieDroite detecte les pions a Droite du pion en parametre (uniquement ceux du joueur actif).'),
 	ajouterPion(1, 1, 1),
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 1, 1),
@@ -853,7 +853,7 @@ testFDJ5:-
 
 testFDJ6:-
 	afficherNomTest(testFDJ6),
-	afficherDebut('victoireLigne', true, 'Verifie que le predicat victoireLigne détecte une ligne de 4 pions du même joueur.'),
+	afficherDebut('victoireLigne', true, 'Verifie que le predicat victoireLigne detecte une ligne de 4 pions du meme joueur.'),
 	ajouterPion(1, 1, 1),
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 1, 1),
@@ -868,7 +868,7 @@ testFDJ6:-
 
 testFDJ7:-
 	afficherNomTest(testFDJ7),
-	afficherDebut('verifieGaucheHaut', true, 'Verifie que le prédicat compte bien le nombre de pions du même joueur alignés sur une diagonale Gauche haut.'),
+	afficherDebut('verifieGaucheHaut', true, 'Verifie que le predicat compte bien le nombre de pions du meme joueur alignes sur une diagonale Gauche haut.'),
 	ajouterPion(1, 4, 1),
 	ajouterPion(2, 3, 1),
 	ajouterPion(3, 2, 1),
@@ -880,7 +880,7 @@ testFDJ7:-
 
 testFDJ8:-
 	afficherNomTest(testFDJ8),
-	afficherDebut('verifieDroiteBas', true, 'Verifie que le prédicat compte bien le nombre de pions du même joueur alignés sur une droite bas.'),
+	afficherDebut('verifieDroiteBas', true, 'Verifie que le predicat compte bien le nombre de pions du meme joueur alignes sur une droite bas.'),
 	ajouterPion(1, 4, 1),
 	ajouterPion(2, 3, 1),
 	ajouterPion(3, 2, 1),
@@ -892,7 +892,7 @@ testFDJ8:-
 
 testFDJ9:-
 	afficherNomTest(testFDJ9),
-	afficherDebut('victoireDiagGauche', true, 'Verifie que le prédicat détecte une diagonale Gauche Haut/ Droite Bas de 4 pions du même joueur.'),
+	afficherDebut('victoireDiagGauche', true, 'Verifie que le predicat detecte une diagonale Gauche Haut/ Droite Bas de 4 pions du meme joueur.'),
 	ajouterPion(1, 4, 1),
 	ajouterPion(2, 3, 1),
 	ajouterPion(3, 2, 1),
@@ -903,7 +903,7 @@ testFDJ9:-
 
 testFDJ10:-
 	afficherNomTest(testFDJ10),
-	afficherDebut('verifieGaucheBas', true, 'Verifie que le prédicat compte bien le nombre de pions du même joueur alignés sur une diagonale Gauche bas.'),
+	afficherDebut('verifieGaucheBas', true, 'Verifie que le predicat compte bien le nombre de pions du meme joueur alignes sur une diagonale Gauche bas.'),
 	ajouterPion(1, 1, 1),
 	ajouterPion(2, 2, 1),
 	ajouterPion(3, 3, 1),
@@ -915,7 +915,7 @@ testFDJ10:-
 
 testFDJ11:-
 	afficherNomTest(testFDJ11),
-	afficherDebut('verifieDroiteHaut', true, 'Verifie que le prédicat compte bien le nombre de pions du même joueur alignés sur une diagonale droiteHaut.'),
+	afficherDebut('verifieDroiteHaut', true, 'Verifie que le predicat compte bien le nombre de pions du meme joueur alignes sur une diagonale droiteHaut.'),
 	ajouterPion(1, 1, 1),
 	ajouterPion(2, 2, 1),
 	ajouterPion(3, 3, 1),
@@ -927,7 +927,7 @@ testFDJ11:-
 
 testFDJ12:-
 	afficherNomTest(testFDJ12),
-	afficherDebut('victoireDiagDroite', true, 'Verifie que le prédicat détecte une diagonale Gauche Bas/ Droite Haut de 4 pions du même joueur.'),
+	afficherDebut('victoireDiagDroite', true, 'Verifie que le predicat detecte une diagonale Gauche Bas/ Droite Haut de 4 pions du meme joueur.'),
 	ajouterPion(1, 1, 1),
 	ajouterPion(2, 2, 1),
 	ajouterPion(3, 3, 1),
