@@ -34,20 +34,20 @@ retirerPion(Col) :- isolerColonne(Col, Colonne),
 		    retract(pion(Col,NumeroLigne,_)).
 
 % Predicat qui renvoit true si on peut gagner sur la colonne Col
-peutGagnerSurCol(Col) :- jouerCoup([Col,1]),
+peutGagnerSurCol(Col, J) :- jouerCoup([Col,J]),
 	    isolerColonne(Col,P),
 	    indexDernierPion(P,L),
-	    (gagne(Col,L,1) -> retirerPion(Col) ;
+	    (gagne(Col,L,J) -> retirerPion(Col) ;
             retirerPion(Col),!,false).
 
 % Predicat qui renvoit true si le joueur J peut gagner sur la colonne Col 
-checkVictoireColonne(Col,J) :- peutGagnerSurCol(1), Col is 1.
-checkVictoireColonne(Col,J) :- peutGagnerSurCol(2), Col is 2.
-checkVictoireColonne(Col,J) :- peutGagnerSurCol(3), Col is 3.
-checkVictoireColonne(Col,J) :- peutGagnerSurCol(4), Col is 4.
-checkVictoireColonne(Col,J) :- peutGagnerSurCol(5), Col is 5.
-checkVictoireColonne(Col,J) :- peutGagnerSurCol(6), Col is 6.
-checkVictoireColonne(Col,J) :- peutGagnerSurCol(7), Col is 7.
+checkVictoireColonne(Col,J) :- peutGagnerSurCol(1, J), Col is 1.
+checkVictoireColonne(Col,J) :- peutGagnerSurCol(2, J), Col is 2.
+checkVictoireColonne(Col,J) :- peutGagnerSurCol(3, J), Col is 3.
+checkVictoireColonne(Col,J) :- peutGagnerSurCol(4, J), Col is 4.
+checkVictoireColonne(Col,J) :- peutGagnerSurCol(5, J), Col is 5.
+checkVictoireColonne(Col,J) :- peutGagnerSurCol(6, J), Col is 6.
+checkVictoireColonne(Col,J) :- peutGagnerSurCol(7, J), Col is 7.
 
 % Predicat qui unifie Col avec la colonne qui fait gagner le joueur J
 peutGagner(Col,J) :- checkVictoireColonne(Col,J),!.
