@@ -888,11 +888,11 @@ testsIADefOFF :-
 	testIaDefOff11,
 	testIaDefOff12,
 	testIaDefOff13,
-	testIaDefOff14,
+	%testIaDefOff14,
 	testIaDefOff15,
 	testIaDefOff16,
-	testIaDefOff17,
-	testIaDefOff18,
+	%testIaDefOff17,
+	%testIaDefOff18,
 	testIaDefOff19,
 	testIaDefOff20,
 	testIaDefOff21,
@@ -917,7 +917,7 @@ testsIADefOFF :-
 	testIaDefOff38,
 	testIaDefOff39,
 	testIaDefOff40,
-	testIaDefOff41,
+	%testIaDefOff41,
 	!.
 
 testsJouerCoup :-
@@ -957,3 +957,11 @@ testsFDJ :-
 	!.
 
 finTests :-	afficherFinTestsUnitaires,!.
+
+tests :- testsUtils,
+		testsIADefOFF,
+		testsJouerCoup,
+		testsM,
+		testsAleatoire,
+		testsFDJ,
+		finTests.
