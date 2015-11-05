@@ -217,7 +217,7 @@ testIaDefOff9 :-
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 1, 1),
 	ajouterPion(4, 1, 1),
-	parcoursListeLigne([[1, 1, 2], [1, 2, 3]], 1, Colonne),
+	parcoursListeLigne([[1, 2, 4]], 1, Colonne),
 	% writeln(['Colonne :', Colonne] ),
 	( Colonne =:= 5 -> afficherFin('parcoursListeLigne', true, 'TEST REUSSI');
 	afficherFin('parcoursListeLigne', false, 'TEST ECHOUE')),
