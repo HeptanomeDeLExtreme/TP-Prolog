@@ -248,7 +248,7 @@ tourIA1Eval3 :-	ia(N),
 		jouerCoup([N,1]),
 		testIA1Eval3(N),!.
 			
-tourIA2Eval3 :-	iaFS(2,M),
+tourIA2Eval3 :-	iaMixte(2,M),
 		jouerCoup([M,2]),
 		testIA2Eval3(M),!.  
 			
@@ -278,7 +278,7 @@ testIA2Eval3b(N) :- isolerColonne(N, Colonne),
 		tourIA1Eval3b
 		).
 		
-tourIA1Eval3b :-	statistics(cputime,T1),iaFS(1,N),statistics(cputime,T2),nb_getval('timeTable',TimeTable),Temp is T2-T1,append(TimeTable,[Temp],Final),nb_setval('timeTable',Final),
+tourIA1Eval3b :-	statistics(cputime,T1),iaMixte(1,N),statistics(cputime,T2),nb_getval('timeTable',TimeTable),Temp is T2-T1,append(TimeTable,[Temp],Final),nb_setval('timeTable',Final),
 		jouerCoup([N,1]),
 		testIA1Eval3b(N),!.
 			
@@ -451,7 +451,7 @@ tourIA1Eval6 :-	iAOffensive(1,N),
 		jouerCoup([N,1]),
 		testIA1Eval6(N),!.
 			
-tourIA2Eval6 :-	iaFS(2,M),
+tourIA2Eval6 :-	iaMixte(2,M),
 		jouerCoup([M,2]),
 		testIA2Eval6(M),!.  
 			
@@ -480,7 +480,7 @@ testIA2Eval6b(N) :- isolerColonne(N, Colonne),
 		tourIA1Eval6b
 		).
 		
-tourIA1Eval6b :-	iaFS(1,N),
+tourIA1Eval6b :-	iaMixte(1,N),
 		jouerCoup([N,1]),
 		testIA1Eval6b(N),!.
 			
@@ -586,7 +586,7 @@ tourIA1Eval8 :-	iADefensive(1,N),
 		jouerCoup([N,1]),
 		testIA1Eval8(N),!.
 			
-tourIA2Eval8 :-	iaFS(2,M),
+tourIA2Eval8 :-	iaMixte(2,M),
 		jouerCoup([M,2]),
 		testIA2Eval8(M),!.  
 			
@@ -615,7 +615,7 @@ testIA2Eval8b(N) :- isolerColonne(N, Colonne),
 		tourIA1Eval8b
 		).
 		
-tourIA1Eval8b :-	iaFS(1,N),
+tourIA1Eval8b :-	iaMixte(1,N),
 		jouerCoup([N,1]),
 		testIA1Eval8b(N),!.
 			

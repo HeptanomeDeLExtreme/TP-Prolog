@@ -53,4 +53,4 @@ checkVictoireColonne(Col,J) :- peutGagnerSurCol(7, J), Col is 7.
 peutGagner(Col,J) :- checkVictoireColonne(Col,J),!.
 
 % Predicat qui unifie Col avec la colonne qui fait perdre le joueur J
-peutPerdre(Col,J) :- checkVictoireColonne(Col,3-J),!.
+peutPerdre(Col,J) :- J1 is 3-J,checkVictoireColonne(Col,J1),!.
