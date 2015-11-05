@@ -6,7 +6,7 @@ init :- jpl_new( 'MainFrame', [], F),nb_setval('FENETRE',F),jpl_call('main',init
 coupIA :- ia(N),
 		%iADefensive(1,N),
 		%iAOffensive(2,N),
-		%iaFS(1,N), %% Offensive d'abord
+		%iaMixte(1,N), %% Offensive d'abord
 		jouerCoup([N,2]),
 		testIA(N).
 		
@@ -29,7 +29,7 @@ testIA2(N) :- isolerColonne(N, Colonne),
 %% Predicat qui représente le tour de la premiere IA
 tourIA1 :-	%ia(N),
 			%iAOffensive(1,N),
-			iaFS(1,N),
+			iaMixte(1,N),
 			jouerCoup([N,1]),
 			print,
 			sleep(2),
@@ -38,7 +38,7 @@ tourIA1 :-	%ia(N),
 %% Predicat qui représente le tour de la deuxieme IA			
 tourIA2 :-	%ia(M),
 			%iADefensive(2,M),
-			iaFS(2,M),
+			iaMixte(2,M),
 			jouerCoup([M,2]),
 			print,
 			sleep(2),
