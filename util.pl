@@ -3,7 +3,7 @@
 matchNull :- pion(1,6,_),
 			pion(2,6,_),
 			pion(3,6,_),
-			pion(4,6,),
+			pion(4,6,_),
 			pion(5,6,_),
 			pion(6,6,_),
 			pion(7,6,_).

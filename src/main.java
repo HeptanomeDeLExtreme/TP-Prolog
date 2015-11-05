@@ -29,6 +29,10 @@ public class main {
 		Querifier.maFenetre.victoire();
 	}
 	
+	public static void nul(){
+		Querifier.maFenetre.nul();
+	}
+	
 	public static void print(){
 		Querifier.maFenetre.print();
 	}

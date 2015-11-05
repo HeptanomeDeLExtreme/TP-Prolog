@@ -184,6 +184,12 @@ public  class MainFrame extends JFrame{
 		this.disableButton();
 	}
 	
+	public void nul(){
+		System.out.println("NUL");
+		panel.nul();
+		this.disableButton();
+	}
+	
 	public void printMessage(String s){
 		panel.changeToPrint(s);
 		System.out.println(s);

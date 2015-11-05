@@ -9,7 +9,9 @@
 :- include('jouerCoup.pl').
 :- include('evaluation.pl').
 :- include('iaMixte.pl').
+:- include('pionsFictifs.pl').
 :- use_module(library(lists)).
+
 
 %% Affichage dans la console
 

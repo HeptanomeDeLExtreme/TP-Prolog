@@ -14,7 +14,13 @@ coupIA :- ia(N),
 %% Test si l'IA a gagné dans le cas d'un combat Humain vs IA
 testIA(N) :- isolerColonne(N, Colonne),
 		indexDernierPion(Colonne, NumeroLigne),
-		(gagne(N,NumeroLigne,2)->echec;finTour).
+		(
+			gagne(N,NumeroLigne,2)->echec;
+			(
+				matchNull -> finMatchNul ;
+				finTour
+			)
+		).
 		
 		
 %% Test si la premiere IA à gagner
@@ -60,4 +66,5 @@ victoire :- jpl_call( 'main', victoire, [], _).
 %% Predicat a appeler en cas d'echec
 echec :- jpl_call( 'main', echec, [], _).
 
-  
+%% Predicat a appeler en cas de match nul
+finMatchNul :- jpl_call('main',nul,[],_).

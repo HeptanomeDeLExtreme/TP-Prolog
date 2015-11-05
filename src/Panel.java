@@ -13,6 +13,7 @@ public class Panel extends JPanel {
 	private List<Pion> mesPions;
 	private boolean victoire = false;
 	private boolean echec = false;
+	private boolean nul = false;
 	private String toPrint="";
 	
 	public Panel(){
@@ -33,6 +34,11 @@ public class Panel extends JPanel {
 		   g.setColor(Color.BLACK);
 		   g.setFont(fnt1);
 		   g.drawString("PERDU !",370/Querifier.coef,390/Querifier.coef);
+	   }
+	   else if(nul){
+		   g.setColor(Color.BLACK);
+		   g.setFont(fnt1);
+		   g.drawString("EGALITE !",370/Querifier.coef,390/Querifier.coef);
 	   }
 	   g.setColor(Color.BLACK);
 	   g.setFont(fnt1);
@@ -79,6 +85,11 @@ public class Panel extends JPanel {
    
    public void victoire(){
 	   victoire = true;
+	   this.repaint();
+   }
+   
+   public void nul(){
+	   nul = true;
 	   this.repaint();
    }
    
