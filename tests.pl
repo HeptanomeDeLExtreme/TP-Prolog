@@ -1,3 +1,6 @@
+/* ----------- Tests ----------- */
+
+
 :- include('finDeJeu.pl').
 :- include('iaAleatoire.pl').
 :- include('iaDefOff.pl').

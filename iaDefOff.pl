@@ -1,3 +1,6 @@
+/* ----------- IA DefOff ----------- */
+
+
 stop :- true.
 
 %% Predicat qui unifie N à la colonne sur laquelle jouer

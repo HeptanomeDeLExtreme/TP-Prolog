@@ -1,4 +1,4 @@
-/* ----------- Ophelie et Cedric ----------- */
+/* ----------- Jouer Coup ----------- */
 
 %% Met tout les pions de la colonne NumeroColonne dans la liste Colonne
 isolerColonne(NumeroColonne, Colonne) :-

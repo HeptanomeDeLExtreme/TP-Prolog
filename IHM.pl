@@ -1,4 +1,5 @@
 /* ----------- IHM ----------- */
+
 %% Initialise l'IHM et la communication avec Java
 init :- jpl_new( 'MainFrame', [], F),nb_setval('FENETRE',F),jpl_call('main',init,[F],_).
 

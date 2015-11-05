@@ -1,3 +1,6 @@
+/* ----------- IA Mixte ----------- */
+
+
 % peutGagner est vrai si ce pion entraine la victoire du joueur J
 % Unifie Col à la colonne sur laquelle jouer
 iaMixte(J,Col) :- peutGagner(Col,J).
@@ -24,9 +27,6 @@ iaMixte(J,Col) :- J1 is 3-J,(
  		  testInsertionPion(J1,Col)->stop ;
  		  ia(Col)).
 
-
-%%%%%%%%%%%%%%%%%%%% Sous-prédicats %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Retire le dernier pion de la colonne Col
 retirerPion(Col) :- isolerColonne(Col, Colonne),

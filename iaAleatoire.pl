@@ -1,4 +1,4 @@
-/* IA aleatoire */
+/* ----------- IA aleatoire ----------- */
 
 %% Unifie M à une valeur aleatoire sur laquelle jouer
 ia(M):- repeat, N is random(7),M is N+1, peutJouer(M),!.

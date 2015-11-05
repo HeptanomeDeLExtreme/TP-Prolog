@@ -1,3 +1,5 @@
+/* ----------- IA complete ----------- */
+
 % P is profondeur
 iaComplet(J,X) :- minmax(5, J, _, X).
 

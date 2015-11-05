@@ -1,3 +1,5 @@
+/* ----------- Pions fictifs ----------- */
+
 :- dynamic pion/3.
 %% pion(c,l,j).
 

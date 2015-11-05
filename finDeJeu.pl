@@ -1,4 +1,5 @@
 /* -------- Fin Jeu ------------*/
+
 %% Predicat qui renvoit true sur le pion situé en X,Y fait 
 %% gagné le joueur J
 gagne(X,Y,J) :- victoireColonne(X,Y,J).

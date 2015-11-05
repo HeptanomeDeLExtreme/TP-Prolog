@@ -1,4 +1,5 @@
-/* FONCTIONS UTILITAIRES */
+/* ----------- Utils ----------- */
+
 
 %% X1 est unifié à X+1
 incrementeX(X,X1):- X1 is X+1.
