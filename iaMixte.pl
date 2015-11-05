@@ -15,16 +15,16 @@ iaMixte(J,Col) :- peutPerdre(Col,J).
 %  rallonger ses propres chemins, et répete le même procédé pour les
 % pions unitaires
 iaMixte(J,Col) :- J1 is 3-J,(
- 		  testInsertion2C(J,Col)->stop ;
- 		  testInsertion2L(J,Col)->stop ;
- 		  testInsertion2DG(J,Col)->stop ;
-		  testInsertion2DD(J,Col)->stop ;
  		  testInsertion2C(J1,Col)->stop ;
  		  testInsertion2L(J1,Col)->stop ;
  		  testInsertion2DG(J1,Col)->stop ;
 		  testInsertion2DD(J1,Col)->stop ;
+ 		  testInsertion2C(J,Col)->stop ;
+ 		  testInsertion2L(J,Col)->stop ;
+ 		  testInsertion2DG(J,Col)->stop ;
+		  testInsertion2DD(J,Col)->stop ;
+		  testInsertionPion(J1,Col)->stop ;
  		  testInsertionPion(J,Col)->stop ;
- 		  testInsertionPion(J1,Col)->stop ;
  		  ia(Col)).
 
 
