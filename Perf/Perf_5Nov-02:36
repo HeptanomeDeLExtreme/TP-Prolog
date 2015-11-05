@@ -1,0 +1,51 @@
+#### Aleatoire vs Offensive (1) ####
+Temps moyen d'execution : 1.281627802406328e-5 secondes
+Nombre essai : 300
+J1 : 8.666666666666666%       J2 : 91.33333333333333%
+
+#### Offensive vs Aleatoire (1b) ####
+Temps moyen d'execution : 0.00011336325189263261 secondes
+Nombre essai : 300
+J1 : 96.66666666666667%       J2 : 3.3333333333333335%
+
+#### Aleatoire vs Defensive (2) ####
+Nombre essai : 300
+J1 : 8.333333333333334%       J2 : 91.66666666666667%
+
+#### Defensive vs Aleatoire (2b) ####
+Temps moyen d'execution : 9.344177128004947e-5 secondes
+Nombre essai : 300
+J1 : 97%       J2 : 3%
+
+#### Aleatoire vs Mixte (3) ####
+Nombre essai : 300
+J1 : 1.3333333333333333%       J2 : 98.66666666666667%
+
+#### Mixte vs Aleatoire (3b) ####
+Temps moyen d'execution : 0.000951568894133507 secondes
+Nombre essai : 300
+J1 : 97%       J2 : 3%
+
+#### Defensive vs Mixte (4) ####
+Nombre essai : 300
+J1 : 31%       J2 : 69%
+
+#### Mixte vs Defensive (4b) ####
+Nombre essai : 300
+J1 : 74%       J2 : 26%
+
+#### Offensive vs Defensive (5) ####
+Nombre essai : 300
+J1 : 70.33333333333333%       J2 : 29.666666666666668%
+
+#### Defensive vs Offensive (5b) ####
+Nombre essai : 300
+J1 : 71.33333333333333%       J2 : 28.666666666666668%
+
+#### Offensive vs Mixte (6) ####
+Nombre essai : 300
+J1 : 33.666666666666664%       J2 : 66.33333333333333%
+
+#### Mixte vs Offensive (6b) ####
+Nombre essai : 300
+J1 : 76.33333333333333%       J2 : 23.666666666666668%
