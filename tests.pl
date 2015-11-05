@@ -115,7 +115,7 @@ testIaDefOff1 :-
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 1, 1),
 	ajouterPion(5, 1, 1),
-	findAll3PathColonne(1, ListeJoueur1),!,
+	findAll3PathColonne(1, ListeJoueur1),
 	%writeln(['Liste trouvee :', ListeJoueur1] ),
 	( list_to_set(ListeJoueur1, [[1, 3]]) -> afficherFin('findAll3PathColonne', true, 'TEST REUSSI');
 	afficherFin('findAll3PathColonne', false, 'TEST ECHOUE')),
@@ -131,7 +131,7 @@ testIaDefOff2 :-
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 1, 1),
 	ajouterPion(5, 1, 1),
-	findAll2PathColonne(1, ListeJoueur1),!,
+	findAll2PathColonne(1, ListeJoueur1),
 	%writeln(['Liste trouvee :', ListeJoueur1] ),
 	( list_to_set(ListeJoueur1, [[1, 2]]) -> afficherFin('findAll2PathColonne', true, 'TEST REUSSI');
 	afficherFin('findAll2PathColonne', false, 'TEST ECHOUE')),
@@ -141,7 +141,7 @@ testIaDefOff3 :-
 	afficherNomTest(testIaDefOff3),
 	afficherDebut('parcoursListeColonne', true, 'Verifie que le predicat renvoie la premiere colonne qui n est pas remplie'),
 	% Une liste représentant le sommet de la colonne 1, le sommet de la colonne 2 et le sommet de la colonne 3
-	parcoursListeColonne([[1, 7], [2, 4],[3, 1]], 1, Colonne),!,
+	parcoursListeColonne([[1, 7], [2, 4],[3, 1]], 1, Colonne),
 	%writeln(['Liste trouvee :', ListeJoueur1] ),
 	( Colonne =:= 2 -> afficherFin('parcoursListeColonne', true, 'TEST REUSSI');
 	afficherFin('parcoursListeColonne', false, 'TEST ECHOUE')),
@@ -280,8 +280,8 @@ testIaDefOff16 :-
 	afficherFin('findAll2PathDiagDroite', false, 'TEST ECHOUE')),
 	testVidePlateau.
 	
-testIaDefOff17 :-
-	afficherNomTest(testIaDefOff17),
+testIaDefOff19 :-
+	afficherNomTest(testIaDefOff19),
 	afficherDebut('findAllPion', true, 'Verifie que le predicat trouve tous les pions du joueur 2'),
 	% Liste retournée de la forme [ColonneDuPion, LigneDuPion]
 	ajouterPion(1, 1, 1),
@@ -294,8 +294,8 @@ testIaDefOff17 :-
 	afficherFin('findAllPion', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff18 :-
-	afficherNomTest(testIaDefOff18),
+testIaDefOff20 :-
+	afficherNomTest(testIaDefOff20),
 	afficherDebut('tenteAjoutBG', true, 'Verifie que le predicat demande bien l ajout d un pion en bas a gauche du pion passe en parametre'),
 	ajouterPion(3, 1, 1),
 	ajouterPion(3, 2, 2),
@@ -304,8 +304,8 @@ testIaDefOff18 :-
 	afficherFin('tenteAjoutBG', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 
-testIaDefOff19 :-
-	afficherNomTest(testIaDefOff19),
+testIaDefOff21 :-
+	afficherNomTest(testIaDefOff21),
 	afficherDebut('tenteAjoutG', true, 'Verifie que le predicat demande bien l ajout d un pion a gauche du pion passe en parametre'),
 	ajouterPion(3, 1, 1),
 	tenteAjoutG([ [3, 1] ], 1, ColonneAJouer),
@@ -313,8 +313,8 @@ testIaDefOff19 :-
 	afficherFin('tenteAjoutG', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff20 :-
-	afficherNomTest(testIaDefOff20),
+testIaDefOff22 :-
+	afficherNomTest(testIaDefOff22),
 	afficherDebut('tenteAjoutHG', true, 'Verifie que le predicat demande bien l ajout d un pion en haut a gauche du pion passe en parametre'),
 	ajouterPion(3, 1, 1),
 	ajouterPion(2, 1, 2),
@@ -323,8 +323,8 @@ testIaDefOff20 :-
 	afficherFin('tenteAjoutHG', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff21 :-
-	afficherNomTest(testIaDefOff21),
+testIaDefOff23 :-
+	afficherNomTest(testIaDefOff23),
 	afficherDebut('tenteAjoutH', true, 'Verifie que le predicat demande bien l ajout d un pion en haut du pion passe en parametre'),
 	ajouterPion(3, 1, 1),
 	tenteAjoutH([ [3, 1] ], 1, ColonneAJouer),
@@ -332,8 +332,8 @@ testIaDefOff21 :-
 	afficherFin('tenteAjoutH', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff22 :-
-	afficherNomTest(testIaDefOff22),
+testIaDefOff24 :-
+	afficherNomTest(testIaDefOff24),
 	afficherDebut('tenteAjoutHD', true, 'Verifie que le predicat demande bien l ajout d un pion en haut a droite du pion passe en parametre'),
 	ajouterPion(3, 1, 1),
 	ajouterPion(4, 1, 2),
@@ -342,8 +342,8 @@ testIaDefOff22 :-
 	afficherFin('tenteAjoutHD', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff23 :-
-	afficherNomTest(testIaDefOff23),
+testIaDefOff25 :-
+	afficherNomTest(testIaDefOff25),
 	afficherDebut('tenteAjoutD', true, 'Verifie que le predicat demande bien l ajout d un pion a droite du pion passe en parametre'),
 	ajouterPion(3, 1, 1),
 	tenteAjoutD([ [3, 1] ], 1, ColonneAJouer),
@@ -351,8 +351,8 @@ testIaDefOff23 :-
 	afficherFin('tenteAjoutD', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff24 :-
-	afficherNomTest(testIaDefOff24),
+testIaDefOff26 :-
+	afficherNomTest(testIaDefOff26),
 	afficherDebut('parcoursListePion', true, 'Verifie que le predicat demande bien l ajout d un pion en bas a droite du pion passe en parametre avant de tenter l ajout des pions a droite, puis en haut a droite, puis en haut, puis en haut a gauche, puis a gauche, puis en bas a gauche'),
 	ajouterPion(3, 1, 1),
 	ajouterPion(3, 2, 1),
@@ -361,8 +361,8 @@ testIaDefOff24 :-
 	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff25 :-
-	afficherNomTest(testIaDefOff25),
+testIaDefOff27 :-
+	afficherNomTest(testIaDefOff27),
 	afficherDebut('parcoursListePion', true, 'Verifie que le predicat demande bien l ajout d un pion a droite du pion passe en parametre lorsque l ajout d autres pions est impossible'),
 	ajouterPion(1, 1, 1),
 	ajouterPion(1, 2, 1),
@@ -376,8 +376,8 @@ testIaDefOff25 :-
 	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff26 :-
-	afficherNomTest(testIaDefOff26),
+testIaDefOff28 :-
+	afficherNomTest(testIaDefOff28),
 	afficherDebut('parcoursListePion', true, 'Verifie que le predicat demande bien l ajout d un pion en haut a droite du pion passe en parametre lorsque l ajout d autres pions est impossible'),
 	ajouterPion(1, 1, 1),
 	ajouterPion(1, 2, 1),
@@ -392,8 +392,8 @@ testIaDefOff26 :-
 	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff27 :-
-	afficherNomTest(testIaDefOff27),
+testIaDefOff29 :-
+	afficherNomTest(testIaDefOff29),
 	afficherDebut('parcoursListePion', true, 'Verifie que le predicat demande bien l ajout d un pion en haut du pion passe en parametre lorsque l ajout d autres pions est impossible'),
 	ajouterPion(1, 1, 1),
 	ajouterPion(1, 2, 1),
@@ -408,8 +408,8 @@ testIaDefOff27 :-
 	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff28 :-
-	afficherNomTest(testIaDefOff28),
+testIaDefOff30 :-
+	afficherNomTest(testIaDefOff30),
 	afficherDebut('parcoursListePion', true, 'Verifie que le predicat demande bien l ajout d un pion en haut a gauche du pion passe en parametre lorsque l ajout d autres pions est impossible'),
 	ajouterPion(1, 1, 1),
 	ajouterPion(1, 2, 1),
@@ -424,8 +424,8 @@ testIaDefOff28 :-
 	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff29 :-
-	afficherNomTest(testIaDefOff29),
+testIaDefOff31 :-
+	afficherNomTest(testIaDefOff31),
 	afficherDebut('parcoursListePion', true, 'Verifie que le predicat demande bien l ajout d un pion a gauche du pion passe en parametre lorsque l ajout d autres pions est impossible'),
 	ajouterPion(1, 1, 1),
 	ajouterPion(2, 1, 1),
@@ -439,8 +439,8 @@ testIaDefOff29 :-
 	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff30 :-
-	afficherNomTest(testIaDefOff30),
+testIaDefOff32 :-
+	afficherNomTest(testIaDefOff32),
 	afficherDebut('parcoursListePion', true, 'Verifie que le predicat demande bien l ajout d un pion en bas a gauche du pion passe en parametre lorsque l ajout d autres pions est impossible'),
 	ajouterPion(2, 1, 1),
 	ajouterPion(2, 2, 1),
@@ -453,8 +453,8 @@ testIaDefOff30 :-
 	afficherFin('parcoursListePion', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff31 :-
-	afficherNomTest(testIaDefOff31),
+testIaDefOff33 :-
+	afficherNomTest(testIaDefOff33),
 	afficherDebut('parcoursListePion', false, 'Verifie que le predicat renvoie false lorsque l ajout de pions est impossible'),
 	ajouterPion(1, 1, 1),
 	ajouterPion(1, 2, 1),
@@ -469,8 +469,8 @@ testIaDefOff31 :-
 	afficherFin('parcoursListePion', false, 'TEST REUSSI') ),
 	testVidePlateau.
 	
-testIaDefOff32 :-
-	afficherNomTest(testIaDefOff32),
+testIaDefOff34:-
+	afficherNomTest(testIaDefOff34),
 	afficherDebut('testInsertion3C', true, 'Verifie que le predicat demande l insertion d abord dans un chemin en colonne de longueur 3 quand c est possible'),
 	ajouterPion(3, 1, 1),
 	ajouterPion(3, 2, 1),
@@ -483,8 +483,8 @@ testIaDefOff32 :-
 	afficherFin('testInsertion3C', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 
-testIaDefOff33 :-
-	afficherNomTest(testIaDefOff33),
+testIaDefOff35 :-
+	afficherNomTest(testIaDefOff35),
 	afficherDebut('testInsertion3L', true, 'Verifie que le predicat demande l insertion dans un chemin en ligne de longueur 3 quand l insertion en colonne n est pas possible (colonne de taille 3)'),
 	ajouterPion(3, 1, 1),
 	ajouterPion(3, 2, 2),
@@ -498,8 +498,8 @@ testIaDefOff33 :-
 	afficherFin('testInsertion3L', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff34 :-
-	afficherNomTest(testIaDefOff34),
+testIaDefOff36 :-
+	afficherNomTest(testIaDefOff36),
 	afficherDebut('testInsertion3DG', true, 'Verifie que le predicat demande l insertion en haut a gauche dans un chemin en diagonal de longueur 3 quand l insertion en ligne n est pas possible (ligne de taille 3)'),
 	ajouterPion(2, 1, 2),
 	ajouterPion(2, 2, 2),
@@ -518,8 +518,8 @@ testIaDefOff34 :-
 	afficherFin('testInsertion3DG', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff35 :-
-	afficherNomTest(testIaDefOff35),
+testIaDefOff37 :-
+	afficherNomTest(testIaDefOff37),
 	afficherDebut('testInsertion3DD', true, 'Verifie que le predicat demande l insertion en haut a droite dans un chemin en diagonal de longueur 3 quand l insertion en haut a gauche d une diagonal de longueur 3 n est pas possible'),
 	ajouterPion(1, 1, 1),
 	ajouterPion(1, 2, 2),
@@ -538,8 +538,8 @@ testIaDefOff35 :-
 	afficherFin('testInsertion3DD', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff36 :-
-	afficherNomTest(testIaDefOff36),
+testIaDefOff38 :-
+	afficherNomTest(testIaDefOff38),
 	afficherDebut('testInsertion2C', true, 'Verifie que le predicat demande l insertion sur une colonne de taille 2 lorsque l insertion en faut a droite dans un chemin en diagonal de longueur 3 est impossible'),
 	ajouterPion(4, 1, 1),
 	ajouterPion(4, 2, 1),
@@ -549,8 +549,8 @@ testIaDefOff36 :-
 	afficherFin('testInsertion2C', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff37 :-
-	afficherNomTest(testIaDefOff37),
+testIaDefOff39 :-
+	afficherNomTest(testIaDefOff39),
 	afficherDebut('testInsertion2L', true, 'Verifie que le predicat demande sur une ligne de taille 2 lorsque l insertion sur une colonne de taille 2 est impossible'),
 	ajouterPion(3, 1, 1),
 	ajouterPion(3, 2, 2),
@@ -563,8 +563,8 @@ testIaDefOff37 :-
 	afficherFin('testInsertion2L', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff38 :-
-	afficherNomTest(testIaDefOff38),
+testIaDefOff40 :-
+	afficherNomTest(testIaDefOff40),
 	afficherDebut('testInsertion2DG', true, 'Verifie que le predicat demande l insertion en haut a gauche d une diagonale si l insertion sur une ligne de taille 2 est impossible'),
 	ajouterPion(3, 1, 2),
 	ajouterPion(3, 2, 2),
@@ -579,8 +579,8 @@ testIaDefOff38 :-
 	afficherFin('testInsertion2DG', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff39 :-
-	afficherNomTest(testIaDefOff39),
+testIaDefOff41 :-
+	afficherNomTest(testIaDefOff41),
 	afficherDebut('testInsertion2DD', true, 'Verifie que le predicat demande l insertion en haut a droite d une diagonale de taille 2 lorsque l insertion en haut a gauche d une diagonale de taille 2 est impossible'),
 	ajouterPion(1, 1, 1),
 	ajouterPion(1, 2, 2),
@@ -595,8 +595,8 @@ testIaDefOff39 :-
 	afficherFin('testInsertion2DD', false, 'TEST ECHOUE') ),
 	testVidePlateau.
 	
-testIaDefOff40 :-
-	afficherNomTest(testIaDefOff40),
+testIaDefOff42 :-
+	afficherNomTest(testIaDefOff42),
 	afficherDebut('testInsertionPion', true, 'Verifie que le predicat demande l insertion autours d un pion lorsque l insertion en haut a droite d une diagonale de taille 2 est impossible'),
 	ajouterPion(1, 1, 1),
 	testInsertionPion(1, ColonneAJouer),
