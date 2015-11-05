@@ -874,7 +874,8 @@ testsUtils :-
 	testUtil5,
 	!.
 	
-zob :-	afficherNomTest('Fichier : iaDefOff.pl'),
+testsIADefOFF :-
+	afficherNomTest('Fichier : iaDefOff.pl'),
 	testIaDefOff1,
 	testIaDefOff2,
 	testIaDefOff3,
@@ -917,20 +918,31 @@ zob :-	afficherNomTest('Fichier : iaDefOff.pl'),
 	testIaDefOff39,
 	testIaDefOff40,
 	testIaDefOff41,
+	!.
 
+testsJouerCoup :-
 	afficherNomTest('Fichier : jouerCoup.pl'),
 	testJouerCoup1,
 	testJouerCoup2,
 	testJouerCoup3,
 	testJouerCoup4,
+	!.
+	
+testsM :-
 	afficherNomTest('Fichier : iaMixte.pl'),
 	testM1,
 	testM2,
 	testM3,
 	testM4,
 	testM5,
+	!.
+
+testsAleatoire :-
 	afficherNomTest('Fichier : iaAleatoire.pl'),
 	testIaAleatoire1,
+	!.
+	
+testsFDJ :-
 	afficherNomTest('Fichier : finDeJeu.pl'),
 	testFDJ3,
 	testFDJ4,
@@ -942,5 +954,6 @@ zob :-	afficherNomTest('Fichier : iaDefOff.pl'),
 	testFDJ10,
 	testFDJ11,
 	testFDJ12,
+	!.
 
-	afficherFinTestsUnitaires.
+finTests :-	afficherFinTestsUnitaires,!.
