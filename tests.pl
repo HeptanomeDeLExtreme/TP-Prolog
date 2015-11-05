@@ -67,7 +67,7 @@ afficherNomTest(N) :-
 testUtil1 :-
 	afficherNomTest(testUtil1),
 	afficherDebut('incrementeX', true, 'Incrementation d une variable'),
-	incrementeX(1, Reponse),
+	incrementeX(1, Reponse),!,  %% ICI
 	(Reponse =:= 2 -> afficherFin('incrementeX', true, 'TEST REUSSI');
 	afficherFin('incrementeX', false, 'TEST ECHOUE')).
 	
@@ -871,9 +871,10 @@ tests :-
 	testUtil2,
 	testUtil3,
 	testUtil4,
-	testUtil5,
+	testUtil5.
+zob :-	
 	afficherNomTest('Fichier : iaDefOff.pl'),
-testIaDefOff1,
+	testIaDefOff1,
 	testIaDefOff2,
 	testIaDefOff3,
 	testIaDefOff4,
