@@ -4,7 +4,7 @@ initEval :- nb_setval('NBEval',10),
 			nb_setval('NBEssaiReel',0).
 
 calculPourcentage(PJ1,PJ2,NBJ1,NBJ2) :- nb_getval('NBEval',N),PJ1 is (100*NBJ1/N),PJ2 is (100*NBJ2/N).
-moyenneTemps :- nb_getval('timeTable',L),average_easy(L,M),write('Temps moyen d\'execution : '),write(M),writeln(' secondes\n').
+moyenneTemps :- nb_getval('timeTable',L),average_easy(L,M),write('Temps moyen d\'execution : '),write(M),writeln(' secondes').
 
 average_easy( List, Avg ) :-
     sum_( List, Sum ),
@@ -21,26 +21,26 @@ length_( [_|B], L ):-
     length_( B, Ln ),
     L is Ln+1.
 
-printToEval(NBEssai,PJ1,PJ2) :- write('Nombre essai : '),writeln(NBEssai),write('J1 : '),write(PJ1),write('%       J2 : '),write(PJ2),writeln('%').
+printToEval(NBEssai,PJ1,PJ2) :- write('Nombre essai : '),writeln(NBEssai),write('J1 : '),write(PJ1),write('%       J2 : '),write(PJ2),writeln('%\n').
 
 % #### Lancement de l'evaluation ####
 lancerEval :- writeln('#### Aleatoire vs Offensive (1) ####'),initEval,initEval1,eval1.
-lancerEval :- pourcentage1,moyenneTemps.
+lancerEval :- moyenneTemps,pourcentage1.
 
 lancerEval :- writeln('#### Offensive vs Aleatoire (1b) ####'),initEval,initEval1b,eval1b.
-lancerEval :- pourcentage1b,moyenneTemps.
+lancerEval :- moyenneTemps,pourcentage1b.
 
 lancerEval :- writeln('#### Aleatoire vs Defensive (2) ####'),initEval,initEval2, eval2.
 lancerEval :- pourcentage2.
 
 lancerEval :- writeln('#### Defensive vs Aleatoire (2b) ####'),initEval,initEval2b, eval2b.
-lancerEval :- pourcentage2b,moyenneTemps.
+lancerEval :- moyenneTemps,pourcentage2b.
 
 lancerEval :- writeln('#### Aleatoire vs Mixte (3) ####'),initEval,initEval3, eval3.
 lancerEval :- pourcentage3.
 
 lancerEval :- writeln('#### Mixte vs Aleatoire (3b) ####'),initEval,initEval3b, eval3b.
-lancerEval :- pourcentage3b,moyenneTemps.
+lancerEval :- moyenneTemps,pourcentage3b.
 
 lancerEval :- writeln('#### Defensive vs Mixte (4) ####'),initEval,initEval8, eval8.
 lancerEval :- pourcentage8.

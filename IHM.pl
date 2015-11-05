@@ -3,10 +3,10 @@
 init :- jpl_new( 'MainFrame', [], F),nb_setval('FENETRE',F),jpl_call('main',init,[F],_).
 
 %% Lance le coup de l'IA dans le cas d'un combat Humain vs IA
-coupIA :- %ia(N),
+coupIA :- ia(N),
 		%iADefensive(1,N),
 		%iAOffensive(2,N),
-		iaFS(1,N),
+		%iaFS(1,N), %% Offensive d'abord
 		jouerCoup([N,2]),
 		testIA(N).
 		
@@ -29,19 +29,19 @@ testIA2(N) :- isolerColonne(N, Colonne),
 %% Predicat qui représente le tour de la premiere IA
 tourIA1 :-	%ia(N),
 			%iAOffensive(1,N),
-			iaFS(N),
+			iaFS(1,N),
 			jouerCoup([N,1]),
 			print,
-			sleep(1),
+			sleep(2),
 			testIA1(N).
 
 %% Predicat qui représente le tour de la deuxieme IA			
 tourIA2 :-	%ia(M),
-			%iADefensive(1,M),
-			iaFS(M),
+			%iADefensive(2,M),
+			iaFS(2,M),
 			jouerCoup([M,2]),
 			print,
-			sleep(1),
+			sleep(2),
 			testIA2(M).  
 
 %% Envoie à l'IHM un message
@@ -59,6 +59,4 @@ victoire :- jpl_call( 'main', victoire, [], _).
 %% Predicat a appeler en cas d'echec
 echec :- jpl_call( 'main', echec, [], _).
 
-%% Met les pions du joueur X et de la colonne I dans la liste Colonne
-isolerColonneIJoueurX(I,X, Colonne) :- findall(pion(I, Y, X), pion(I, Y, X), Colonne).
-    
+  
