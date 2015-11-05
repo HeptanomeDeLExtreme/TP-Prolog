@@ -1,6 +1,7 @@
 /* ----------- Tests ----------- */
 
 
+:- include('pionsFictifs.pl'). 
 :- include('finDeJeu.pl').
 :- include('iaAleatoire.pl').
 :- include('iaDefOff.pl').
@@ -9,7 +10,6 @@
 :- include('jouerCoup.pl').
 :- include('evaluation.pl').
 :- include('iaMixte.pl').
-:- include('pionsFictifs.pl').
 :- use_module(library(lists)).
 
 
@@ -190,27 +190,14 @@ testIaDefOff7 :-
 	ajouterPion(1, 1, 1),
 	ajouterPion(2, 1, 1),
 	ajouterPion(3, 1, 1),
-	tenteAjoutADroite([[1, 1, 3]],1,Colonne),
-	writeln(['Colonne :', Colonne] ),
-	( Colonne =:= 4) -> afficherFin('tenteAjoutADroite', true, 'TEST REUSSI');
+	tenteAjoutADroite( [[1, 1, 3]], 1, Colonne),
+	%writeln( ['Colonne :', Colonne] ),
+	( Colonne =:= 4 ) -> afficherFin('tenteAjoutADroite', true, 'TEST REUSSI');
 	afficherFin('tenteAjoutADroite', false, 'TEST ECHOUE'),
 	testVidePlateau.
 	
-testIaDefOff8 :-
+testIaDefOff8 :- 
 	afficherNomTest(testIaDefOff8),
-	afficherDebut('tenteAjoutADroite', true, 'Verifie que le predicat renvoie false lorsqu il ne peut pas ajouter a droite d une ligne'),
-	% Une liste représente [Ligne, PionLePlusAGauche, PionLePlusADroite]
-	ajouterPion(1, 1, 1),
-	ajouterPion(2, 1, 1),
-	ajouterPion(3, 1, 1),
-	ajouterPion(4, 1, 2),
-	( tenteAjoutADroite([[1, 1, 3]],1,Colonne) ) -> afficherFin('tenteAjoutADroite', false, 'TEST REUSSI');
-	afficherFin('tenteAjoutADroite', true, 'TEST ECHOUE'),
-	testVidePlateau.
-	
-	
-testIaDefOff9 :- 
-	afficherNomTest(testIaDefOff9),
 	afficherDebut('parcoursListeLigne', true, 'Verifie que le predicat ajoute bien un pion a gauche d une ligne avant de l ajouter de tenter l ajout a droite'),
 	% Une liste représente [Ligne, PionLePlusAGauche, PionLePlusADroite]
 	ajouterPion(2, 1, 1),
@@ -222,8 +209,8 @@ testIaDefOff9 :-
 	afficherFin('parcoursListeLigne', false, 'TEST ECHOUE')),
 	testVidePlateau.
 	
-testIaDefOff10 :- 
-	afficherNomTest(testIaDefOff10),
+testIaDefOff9 :- 
+	afficherNomTest(testIaDefOff9),
 	afficherDebut('parcoursListeLigne', true, 'Verifie que le predicat ajoute bien un pion a droite d une ligne lorsque l ajout a gauche est impossible'),
 	% Une liste représente [Ligne, PionLePlusAGauche, PionLePlusADroite]
 	ajouterPion(1, 1, 2),
@@ -235,6 +222,7 @@ testIaDefOff10 :-
 	( Colonne =:= 5 -> afficherFin('parcoursListeLigne', true, 'TEST REUSSI');
 	afficherFin('parcoursListeLigne', false, 'TEST ECHOUE')),
 	testVidePlateau.
+
 
 testIaDefOff11 :-
 	afficherNomTest(testIaDefOff11),
@@ -289,8 +277,9 @@ testIaDefOff16 :-
 	testVidePlateau.
 
 
+	
+%% Tests du fichier iaMixte.pl
 
-%% Tests du fichier ia2FenouilSec.pl
 
 testM1:-
 	afficherNomTest(testM1),
@@ -564,9 +553,10 @@ tests :-
 	%testIaDefOff4,
 	%testIaDefOff5,
 	%testIaDefOff6,
-	testIaDefOff7,
-	/*testIaDefOff8,
+	%testIaDefOff7,
+	%testIaDefOff8,
 	testIaDefOff9,
+<<<<<<< HEAD
 	testIaDefOff10,*/
 	testIaDefOff11,
 	%testIaDefOff12,
@@ -576,6 +566,8 @@ tests :-
 	%testIaDefOff16,
 	%testIaDefOff17,
 	%testIaDefOff18,
+=======
+>>>>>>> 0462764b27c6145759aa58693cd378ff457013fb
 	afficherNomTest('Fichier : jouerCoup.pl'),
 	testJouerCoup1,
 	testJouerCoup2,

@@ -10,6 +10,8 @@
 :- include('evaluation.pl').
 :- include('iaMixte').
 
+:- include('iaComplete2.pl').
+
 %% Predicat appelé par l'IHM lorsqu'on demande un combat IA vs Ia
 combatIA :- tourIA1.
 
