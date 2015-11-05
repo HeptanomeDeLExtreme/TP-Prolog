@@ -6,7 +6,7 @@
 :- include('IHM.pl').
 :- include('jouerCoup.pl').
 :- include('evaluation.pl').
-:- include('ia2FenouilSec').
+:- include('iaMixte').
 
 %% Predicat appelé par l'IHM lorsqu'on demande un combat IA vs Ia
 combatIA :- tourIA1.
