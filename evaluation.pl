@@ -2,7 +2,7 @@
 
 :- use_module(library(statistics)).
 
-initEval :- nb_setval('NBEval',300),
+initEval :- nb_setval('NBEval',3),
 			nb_setval('NBEssaiReel',0).
 
 calculPourcentage(PJ1,PJ2,NBJ1,NBJ2) :- nb_getval('NBEval',N),PJ1 is (100*NBJ1/N),PJ2 is (100*NBJ2/N).
@@ -32,8 +32,8 @@ lancerEval :- moyenneTemps,pourcentage1.
 lancerEval :- writeln('#### Offensive vs Aleatoire (1b) ####'),initEval,initEval1b,eval1b.
 lancerEval :- moyenneTemps,pourcentage1b.
 
-lancerEval :- writeln('#### Aleatoire vs Defensive (2) ####'),initEval,initEval2, eval2.
-lancerEval :- pourcentage2.
+%lancerEval :- writeln('#### Aleatoire vs Defensive (2) ####'),initEval,initEval2, eval2.
+%lancerEval :- pourcentage2.
 
 lancerEval :- writeln('#### Defensive vs Aleatoire (2b) ####'),initEval,initEval2b, eval2b.
 lancerEval :- moyenneTemps,pourcentage2b.
@@ -53,8 +53,8 @@ lancerEval :- pourcentage8b.
 lancerEval :- writeln('#### Offensive vs Defensive (5) ####'),initEval,initEval5, eval5.
 lancerEval :- pourcentage5.
 
-lancerEval :- writeln('#### Defensive vs Offensive (5b) ####'),initEval,initEval5b, eval5b.
-lancerEval :- pourcentage5b.
+%lancerEval :- writeln('#### Defensive vs Offensive (5b) ####'),initEval,initEval5b, eval5b.
+%lancerEval :- pourcentage5b.
 
 lancerEval :- writeln('#### Offensive vs Mixte (6) ####'),initEval,initEval6, eval6.
 lancerEval :- pourcentage6.
