@@ -674,7 +674,7 @@ testIA1Eval8b(N) :- isolerColonne(N, Colonne),
 		(
 		 gagne(N,NumeroLigne,1) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('DVSM1b',X),incrementeX(X,X1),nb_setval('DVSM1b',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA2Eval8b
 		)
 		).
@@ -684,7 +684,7 @@ testIA2Eval8b(N) :- isolerColonne(N, Colonne),
 		(
 		gagne(N,NumeroLigne,2) -> nb_getval('NBEssaiReel',Y),incrementeX(Y,Y1),nb_setval('NBEssaiReel',Y1),nb_getval('DVSM2b',X),incrementeX(X,X1),nb_setval('DVSM2b',X1),testVidePlateau;
 		(
-			matchNull -> true ;
+			matchNull -> testVidePlateau ;
 			tourIA1Eval8b
 		)
 		).
